@@ -1,4 +1,5 @@
 Homework: Develop UML Model for Project
+=============================================
 - Domain Model (UML Class Diagram) 
 
 - User Interface Model (User Interface Screens Mockup) 
@@ -14,6 +15,7 @@ more than a week, you need to break it down into a story.
 lets say a story is 5 or less. 
 
 - Prioritize your stories, using drag and drop on the product planning page
+
 - Pick one of your stories, and schedule it into a sprint from the Sprint  Planning Page add your 
 user story to your first Sprint (drag and drop).  From the Detailed Planning sub-page, create 
 development tasks under this story.  Each task is no more than 8 hours for the Detailed Estimate. 
