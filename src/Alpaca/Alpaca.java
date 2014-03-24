@@ -18,33 +18,40 @@ public class Alpaca {
 	private TestTracker tracker; 
 
 	// --------------------------------------------------
-	public Alpaca (String name)
+	public Alpaca (String name, int ID)
 	{
+		this.ID   = ID;
 		this.name = name;
+		System.out.println ("Alpaca: " + name + ", with ID: " + ID);
 	}
 	
 	// --------------------------------------------------
+	/* Returns the name of the alpaca */
 	public String getName ()
 	{
 		return name;
 	}
 	
 	// --------------------------------------------------
+	/* Returns the body temperature of the alpaca */
 	public float getBodyTemperature ()
 	{
 		return tracker.bodyTemperature ();
 	}
 	
 	// --------------------------------------------------
+	/* Returns a boolean indicating whether the alpaca
+	 * is laying down or not. */
 	public boolean isLayingDown ()
 	{
 		return tracker.isLayingDown ();
 	}
 	
 	// --------------------------------------------------
+	/* Returns the alpacas location in terms of latitude,
+	 * longitude, and altitude, in that order. */
 	public float [] location ()
 	{
 		return tracker.location ();
 	}
-
 }
