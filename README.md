@@ -22,6 +22,4 @@ and so on.
 
 
 
-
-
-This document uses Markdown for styling. Find more info (here)[http://help.github.com/articles/markdown-basics] and (here)[http://help.github.com/articles/github-flavored-markdown]
+This document uses Markdown for styling. Find more info [here](http://help.github.com/articles/markdown-basics) and [here](http://help.github.com/articles/github-flavored-markdown).
