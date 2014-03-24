@@ -12,6 +12,9 @@ I've created the first commit through Eclipse using EGit. The basic workflow aft
 * Do work
 * Commit and push changes
 
+I think I want the program to be structured in a way that's similar to Unity. That is, there are
+Update, Init, and Exit methods, and a class that controls program flow that implements these.
+
 #####Clay
 
 #####Sylvia
