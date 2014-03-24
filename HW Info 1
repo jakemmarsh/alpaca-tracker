@@ -1,25 +1,25 @@
 Homework: Develop UML Model for Project
 =============================================
-- Domain Model (UML Class Diagram) 
+* Domain Model (UML Class Diagram) 
 
-- User Interface Model (User Interface Screens Mockup) 
+* User Interface Model (User Interface Screens Mockup) 
 
-- Get into VersionOne and use Training Videos to learn the basics
+* Get into VersionOne and use Training Videos to learn the basics
 
-- In VersionOne, create 10-15 User Stories/Epics in the form 
+* In VersionOne, create 10-15 User Stories/Epics in the form 
 As a <ROLE>, I need to <GOAL>, so that <REASON>, Done When_______.  Remember, an epic is bigger 
 than you can get done in one iteration.  Your iterations are one week long.  So if the work is 
 more than a week, you need to break it down into a story.
 
-- Size your stories using story points (use Fibonacci numbers: 1,2,3,5,8,13,21) and for 1 week, 
+* Size your stories using story points (use Fibonacci numbers: 1,2,3,5,8,13,21) and for 1 week, 
 lets say a story is 5 or less. 
 
-- Prioritize your stories, using drag and drop on the product planning page
+* Prioritize your stories, using drag and drop on the product planning page
 
-- Pick one of your stories, and schedule it into a sprint from the Sprint  Planning Page add your 
+* Pick one of your stories, and schedule it into a sprint from the Sprint  Planning Page add your 
 user story to your first Sprint (drag and drop).  From the Detailed Planning sub-page, create 
 development tasks under this story.  Each task is no more than 8 hours for the Detailed Estimate. 
 Put a person’s name on the task and an estimate in hours for the task to be done.
 
-- Implement your story and mark your tasks as inProgress when started and Done when finished. Do 
+* Implement your story and mark your tasks as inProgress when started and Done when finished. Do 
 this on the Detailed Tracking page as you finish them.
