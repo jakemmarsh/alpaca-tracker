@@ -12,14 +12,17 @@ public class GPSDataImpl implements SensorData, GPSData {
 	/*
 	 * * protected constructor
 	 */
-	public GPSDataImpl( ) {
+	public GPSDataImpl () 
+	{
+		
 	}
 	
 	/* (non-Javadoc)
 	 * @see com.pacatraca.GPSData#getLatitudeDecimalDegrees()
 	 */
 	@Override
-	public Float getLatitudeDecimalDegrees() {
+	public Float getLatitudeDecimalDegrees() 
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -28,7 +31,8 @@ public class GPSDataImpl implements SensorData, GPSData {
 	 * @see com.pacatraca.GPSData#getLongitudeDecimalDegrees()
 	 */
 	@Override
-	public Float getLongitudeDecimalDegrees() {
+	public Float getLongitudeDecimalDegrees() 
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}

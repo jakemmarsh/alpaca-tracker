@@ -3,8 +3,9 @@ package Alpaca;
 /**
  * 
  * @author clayton peterson
- * This class contains the information pertaining to an 
- * individual alpaca. 
+ * This class contains information pertaining to an 
+ * individual alpaca, retrieved from the alpaca's tracker 
+ * device. 
  */
 public class Alpaca {
 
@@ -15,43 +16,51 @@ public class Alpaca {
 	private String name;
 	
 	// The tracker mounted on the alpaca
-	private TestTracker tracker; 
+	private Tracker tracker; 
 
-	// --------------------------------------------------
+	// -----------------------------------------------------------
 	public Alpaca (String name, int ID)
 	{
 		this.ID   = ID;
 		this.name = name;
+		this.tracker = new Tracker (ID);
 		System.out.println ("Alpaca: " + name + ", with ID: " + ID);
 	}
 	
-	// --------------------------------------------------
+	// -----------------------------------------------------------
+	/* Returns the alpaca's ID which corresponds with it's tracker
+	 * ID */
+	public int getID ()
+	{
+		return ID;
+	}
+	
+	// -----------------------------------------------------------
 	/* Returns the name of the alpaca */
 	public String getName ()
 	{
 		return name;
 	}
 	
-	// --------------------------------------------------
+	// -----------------------------------------------------------
 	/* Returns the body temperature of the alpaca */
 	public float getBodyTemperature ()
 	{
-		return tracker.bodyTemperature ();
+		return tracker.getTemperature ();
 	}
 	
-	// --------------------------------------------------
-	/* Returns a boolean indicating whether the alpaca
-	 * is laying down or not. */
-	public boolean isLayingDown ()
+	// -----------------------------------------------------------
+	/* Returns the alpaca's location in terms of longitude,
+	 * latitude, and altitude, in that order. */
+	public float[] getLocation ()
 	{
-		return tracker.isLayingDown ();
+		return tracker.getLocation ();
 	}
 	
-	// --------------------------------------------------
-	/* Returns the alpacas location in terms of latitude,
-	 * longitude, and altitude, in that order. */
-	public float [] location ()
+	// -----------------------------------------------------------
+	/* Returns the alpaca's movement speed */
+	public float getSpeed ()
 	{
-		return tracker.location ();
+		return tracker.getSpeed ();
 	}
 }

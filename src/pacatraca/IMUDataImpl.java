@@ -18,7 +18,7 @@ public class IMUDataImpl implements IMUData, SensorData{
 	}
 
 	@Override
-	public Boolean ConnectToSensor(Integer sensorID) {
+	public Boolean ConnectToSensor (Integer sensorID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -54,7 +54,7 @@ public class IMUDataImpl implements IMUData, SensorData{
 	}
 
 	@Override
-	public void setSeaLevelPressure(Float pressure) {
+	public void setSeaLevelPressure (Float pressure) {
 		// TODO Auto-generated method stub
 		
 	}
