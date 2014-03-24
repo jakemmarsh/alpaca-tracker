@@ -8,9 +8,9 @@ alpaca-tracker
 #####Jon
 
 I've created the first commit through Eclipse using EGit. The basic workflow after configuration is:
-*Pull from repository
-*Do work
-*Commit and push changes
+* Pull from repository
+* Do work
+* Commit and push changes
 
 #####Clay
 

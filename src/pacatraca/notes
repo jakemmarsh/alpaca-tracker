@@ -1,0 +1,8 @@
+From the teacher:
+This is the current version of the PracaTraca Interface, including a skeleton implementation. 
+I am still creating a Factory that will build instances of these sensor classes.  You should
+plan to implement your own version of these sensor classes to use in your unit tests so you 
+can hard-wire data in the getter methods that you can test with.  Then the Factory I create 
+will be able to return instances of your sensor test data classes as well as return instances 
+of the real data classes and eventually, even the emulated data classes the graduate students 
+will build. 
