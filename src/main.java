@@ -6,11 +6,11 @@ import pacatraca.*;
  */
 public class main {
 
-	public static void main(String[] args) {
+	public static void main (String[] args) 
+	{
 		Program pacaclient = new Program();
-		pacaclient.Init();
-		pacaclient.BeginUpdateLoop();
-		pacaclient.Exit();
+		pacaclient.Init ();
+		pacaclient.BeginUpdateLoop ();
+		pacaclient.Exit ();
 	}
-
 }
