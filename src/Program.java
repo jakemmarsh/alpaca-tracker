@@ -11,7 +11,7 @@ public class Program {
 	int numberOfAlpacas = 1;
 	private HashMap <Integer, Alpaca> alpacas;
 	
-	//True if running, false to disable the program.
+	//True if running, false to close the program.
 	private boolean isRunning;
 	
 	public Program()
