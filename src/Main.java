@@ -1,10 +1,9 @@
 import pacatraca.*;
 
 /**
- * @author jon
  * This is our big main class. All program flow should begin here.
  */
-public class main {
+public class Main {
 
 	public static void main (String[] args) 
 	{

@@ -3,7 +3,6 @@ import java.util.HashMap;
 import Alpaca.Alpaca;
 
 /**
- * @author jon
  * Handles program flow.
  */
 public class Program {
