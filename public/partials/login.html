@@ -11,6 +11,7 @@
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" name="password" ng-model="user.password" placeholder="Password" required />
                 </div>
+                <h5 class="text-danger" ng-bind="loginError"></h5>
                 <button type="submit" class="btn btn-default" ng-disabled="loginForm.$invalid">Login</button>
             </form>
         </div>

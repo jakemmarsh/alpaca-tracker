@@ -6,5 +6,6 @@
 define([
     'controllers/login-ctrl',
     'controllers/inner-ctrl',
-    'controllers/home-ctrl'
+    'controllers/home-ctrl',
+    'services/auth'
 ], function () {});
