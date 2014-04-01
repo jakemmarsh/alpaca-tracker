@@ -1,9 +1,9 @@
 import java.util.HashMap;
 
-import Alpaca.Alpaca;
+import alpaca.Alpaca;
 
 /**
- * Handles program flow.
+ * Handles program flow and initializes base-level code.
  */
 public class Program {
 	
@@ -15,24 +15,18 @@ public class Program {
 	
 	public Program()
 	{
+		Init();
 		alpacas = new HashMap <Integer, Alpaca> ();
 		addAlpaca ("Jeff");
 	}
-	
-	private void addAlpaca (String name)
-	{
-		Alpaca a = new Alpaca (name, numberOfAlpacas);
-		alpacas.put (numberOfAlpacas, a);
-		numberOfAlpacas ++;
-	}
-	
 	
 	/**
 	 * Initialize program before update loop
 	 */
 	public void Init()
 	{
-		isRunning = true;
+		//Create and initialize the main window.
+//		isRunning = true;
 	}
 	
 	/**
@@ -40,10 +34,10 @@ public class Program {
 	 */
 	public void BeginUpdateLoop()
 	{
-		while(isRunning)
-		{
-			Update();
-		}
+//		while(isRunning)
+//		{
+//			Update();
+//		}
 	}
 	
 	/**
@@ -58,5 +52,12 @@ public class Program {
 	 */
 	public void Exit(){
 		
+	}
+	
+	private void addAlpaca (String name)
+	{
+		Alpaca a = new Alpaca (name, numberOfAlpacas);
+		alpacas.put (numberOfAlpacas, a);
+		numberOfAlpacas ++;
 	}
 }
