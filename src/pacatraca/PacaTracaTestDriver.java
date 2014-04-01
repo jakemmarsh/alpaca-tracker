@@ -1,6 +1,8 @@
 package pacatraca;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author Bryan Wells
@@ -11,8 +13,8 @@ import java.util.HashMap;
 public class PacaTracaTestDriver {
 
 	private HashMap< String, PacaTraca > m_sensors = new HashMap< String, PacaTraca >( );
-	private String m_sensor1ID = "sensor1-ID";
-	private String m_sensor2ID = "sensor2-ID";
+	private PacaTracaFactory factory = new PacaTracaHardwareFactory();
+	public List<String> sensorNames = new ArrayList<String>();
 
 	/**
 	 * the main module
@@ -31,19 +33,28 @@ public class PacaTracaTestDriver {
 	 * verify the created sensors
 	 */
 	public void runTests( ) {
-		PacaTracaFactory factory = new PacaTracaHardwareFactory( );
-		this.createTestSensors( factory );
+		this.createTestSensor(factory, "Alpaca 1");
+		this.createTestSensor(factory, "Alpaca 2");
 		this.verifySensors(  );
 	}
 		
+//	/**
+//	 * @author Bryan Wells
+//	 * ask the factory to create our sensors (any kind will be fine)
+//	 * and then put these sensors into a hash map for safe keeping
+//	 */
+//	public void createTestSensors( PacaTracaFactory factory ) {
+//		m_sensors.put( m_sensor1ID, factory.createPacaTraca( m_sensor1ID ) );
+//		m_sensors.put( m_sensor2ID, factory.createPacaTraca( m_sensor2ID ) );
+//	}
+	
 	/**
-	 * @author Bryan Wells
-	 * ask the factory to create our sensors (any kind will be fine)
-	 * and then put these sensors into a hash map for safe keeping
+	 * Creates a new PacaTracaHardware and stores it in the factory.
+	 * The ID is stored into sensorNames.
 	 */
-	public void createTestSensors( PacaTracaFactory factory ) {
-		m_sensors.put( m_sensor1ID, factory.createPacaTraca( m_sensor1ID ) );
-		m_sensors.put( m_sensor2ID, factory.createPacaTraca( m_sensor2ID ) );
+	public void createTestSensor( PacaTracaFactory factory, String ID){
+		m_sensors.put(ID, factory.createPacaTraca(ID));
+		sensorNames.add(ID);
 	}
 	
 	/**
@@ -53,7 +64,13 @@ public class PacaTracaTestDriver {
 	 * print these string sensor values out and return
 	 */
 	public void verifySensors( ) {
-		System.out.println("Sensor 1: " + m_sensors.get( m_sensor1ID ).toString( ) );
-		System.out.println("Sensor 2: " + m_sensors.get( m_sensor2ID ).toString( ) );
+		int index = 0;
+		for(String s : sensorNames){
+			System.out.println("Sensor " + Integer.toString(index));
+			System.out.println(m_sensors.get(s).toString());
+			index++;
+		}
+		//System.out.println("Sensor 1: " + m_sensors.get( m_sensor1ID ).toString( ) );
+		//System.out.println("Sensor 2: " + m_sensors.get( m_sensor2ID ).toString( ) );
 	}
 }

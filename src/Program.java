@@ -1,14 +1,15 @@
 import java.util.HashMap;
-
 import alpaca.Alpaca;
+import pacatraca.*;
 
 /**
  * Handles program flow and initializes base-level code.
  */
 public class Program {
 	
-	int numberOfAlpacas = 1;
-	private HashMap <Integer, Alpaca> alpacas;
+	//int numberOfAlpacas = 1;
+	//private HashMap <Integer, Alpaca> alpacas;
+	PacaTracaTestDriver testDriver = new PacaTracaTestDriver();
 	
 	//True if running, false to close the program.
 	private boolean isRunning;
@@ -16,8 +17,9 @@ public class Program {
 	public Program()
 	{
 		Init();
-		alpacas = new HashMap <Integer, Alpaca> ();
-		addAlpaca ("Jeff");
+		
+		//alpacas = new HashMap <Integer, Alpaca> ();
+		//addAlpaca ("Jeff");
 	}
 	
 	/**
@@ -54,10 +56,10 @@ public class Program {
 		
 	}
 	
-	private void addAlpaca (String name)
-	{
-		Alpaca a = new Alpaca (name, numberOfAlpacas);
-		alpacas.put (numberOfAlpacas, a);
-		numberOfAlpacas ++;
-	}
+//	private void addAlpaca (String name)
+//	{
+//		Alpaca a = new Alpaca (name, numberOfAlpacas);
+//		alpacas.put (numberOfAlpacas, a);
+//		numberOfAlpacas ++;
+//	}
 }

@@ -10,6 +10,18 @@ package pacatraca;
 public class PacaTracaHardware implements PacaTraca {
 	
 	private String m_sensorID;
+	private float longitude = 0;
+	private float latitude;
+	private float speed;
+	private float course;
+	private int numSatellites;
+	private float heading;
+	private float pitch;
+	private float roll;
+	private float altitude;
+	private int signalQuality;
+	private float temperature;
+	private boolean fix;
 	
 	/*
 	 * protected default constructor
@@ -17,11 +29,11 @@ public class PacaTracaHardware implements PacaTraca {
 	protected PacaTracaHardware( ) {
 	}
 	
-	/*
+	/**
 	 * constructor taking an AlpacaID
 	 */
 	public PacaTracaHardware( String sensorID ) {
-		this.setSensorID( sensorID );
+		this.setSensorID( sensorID ); // set the value of this sensor's ID
 		//System.out.println("PacaTracaHardware constructor was called");
 	}
 
@@ -30,125 +42,175 @@ public class PacaTracaHardware implements PacaTraca {
 	 */
 	@Override
 	public String toString( ) {
-		return this.m_sensorID;
+		//return this.m_sensorID;
+		return getFullStatus();
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.pacatraca.PacaTraca#getLatitudeDecimalDegrees()
-	 */
-	@Override
-	public Float getLatitudeDecimalDegrees() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getFullStatus(){
+		String outStr = "";
+		outStr += "ID: " + getSensorID().toString() + "\n";
+		outStr += "Signal: " + getSignalQuality().toString() + "\n";
+		outStr += "Latitude: " + getLatitudeDecimalDegrees().toString() + "\n";
+		outStr += "Longitude: " + getLongitudeDecimalDegrees().toString() + "\n";
+		outStr += "Altitude: " + getAltitude().toString()  + "\n";
+		outStr += "Course: " + getCourse().toString() + "\n";
+		outStr += "Temperature (F): " + getTemperature().toString() + "\n";
+		outStr += "Speed: " + getSpeed().toString() + "\n";
+		outStr += "Has satellite fix: " + haveFix().toString() + "\n";
+		outStr += "Heading: " + getCompassHeading().toString() + "\n";
+		outStr += "Pitch: " + getPitch().toString() + "\n";
+		outStr += "Roll: " + getRoll() + "\n";
+		outStr += "Has satellite fix: " + haveFix().toString() + "\n";
+		outStr += "Detected satellites: " + getNumSatellites() + "\n";
+		
+		return outStr;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Returns the sensor ID for this hardware
 	 * @see com.pacatraca.getSensorID()
 	 */
 	@Override
 	public String getSensorID( ) {
+		// return the ID of this sensor/collar
 		// TODO Auto-generated method stub
-		return null;
+		return m_sensorID;
 	}
 	
-	/* (non-Javadoc)
+	/**
 	 * @see com.pacatraca.getSensorID()
 	 */
-	
 	@Override
 	public void setSensorID( String id ) {
 		// TODO Auto-generated method stub
 		this.m_sensorID = id;
 	}
+	
+	/**
+	 * negative == South
+	 * @see com.pacatraca.PacaTraca#getLatitudeDecimalDegrees()
+	 */
+	@Override
+	public Float getLatitudeDecimalDegrees() {
+		// TODO Auto-generated method stub
+		return latitude;
+	}
 
-	/* (non-Javadoc)
+	/**
+	 * negative == West
 	 * @see com.pacatraca.PacaTraca#getLongitudeDecimalDegrees()
 	 */
 	@Override
 	public Float getLongitudeDecimalDegrees() {
 		// TODO Auto-generated method stub
-		return null;
+		return longitude;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * feet per second
 	 * @see com.pacatraca.PacaTraca#getSpeed()
 	 */
 	@Override
 	public Float getSpeed() {
 		// TODO Auto-generated method stub
-		return null;
+		return speed;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * decimal degrees
 	 * @see com.pacatraca.PacaTraca#getCourse()
 	 */
 	@Override
 	public Float getCourse() {
 		// TODO Auto-generated method stub
-		return null;
+		return course;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * @return feet from sea level
 	 * @see com.pacatraca.PacaTraca#getAltitude()
 	 */
 	@Override
 	public Float getAltitude() {
 		// TODO Auto-generated method stub
-		return null;
+		return altitude;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * @return number of satellites GPS found
 	 * @see com.pacatraca.PacaTraca#getNumSatellites()
 	 */
 	@Override
 	public Integer getNumSatellites() {
+		// number of satellites GPS found
 		// TODO Auto-generated method stub
-		return null;
+		return numSatellites;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * true if GPS has a fix on at least one satellite
 	 * @see com.pacatraca.PacaTraca#haveFix()
 	 */
 	@Override
 	public Boolean haveFix() {
 		// TODO Auto-generated method stub
-		return null;
+		return fix;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Returns a signal quality of 1-5. 5 is the best quality.
 	 * @see com.pacatraca.PacaTraca#getSignalQuality()
 	 */
 	@Override
 	public Integer getSignalQuality() {
 		// TODO Auto-generated method stub
-		return null;
+		return signalQuality;
 	}
 	
 	@Override
+	/**
+	 * @return The temperature in Fahrenheit
+	 */
 	public Float getTemperature() {
 		// TODO Auto-generated method stub
-		return null;
+		return temperature;
 	}
 
 	@Override
+	/**
+	 * Returns the motion sensor's roll reading
+	 * -rotate about y (-90 to 90 degrees)
+	 */
 	public Float getRoll() {
 		// TODO Auto-generated method stub
-		return null;
+		return roll;
 	}
 
 	@Override
+	/**
+	 * Returns the motion sensor's pitch reading
+	 * -rotate about x degrees (0-180 degrees)
+	 */
 	public Float getPitch() {
 		// TODO Auto-generated method stub
-		return null;
+		return pitch;
 	}
 
 	@Override
+	/**
+	 * Returns the motion sensor's heading reading
+	 * -heading 0-360 degrees
+	 */
 	public Float getCompassHeading() {
 		// TODO Auto-generated method stub
-		return null;
+		return heading;
 	}
 
 	@Override
+	/**
+	 * I have no idea
+	 * sensor pressure at sea level in hPa
+	 */
 	public void setSeaLevelPressure(Float pressure) {
 		// TODO Auto-generated method stub
 		
