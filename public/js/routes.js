@@ -13,6 +13,12 @@ define(['./app'], function (app) {
             controller: 'loginCtrl',
             title: 'Login'
         })
+        .state('register', {
+            url: '/register',
+            templateUrl: 'partials/register.html',
+            controller: 'registerCtrl',
+            title: 'Register'
+        })
         .state('inner', {
             templateUrl: 'partials/inner.html',
             controller: 'innerCtrl'

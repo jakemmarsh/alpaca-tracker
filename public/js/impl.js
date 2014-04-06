@@ -5,6 +5,7 @@
  */
 define([
     'controllers/login-ctrl',
+    'controllers/register-ctrl',
     'controllers/inner-ctrl',
     'controllers/home-ctrl',
     'controllers/detail-ctrl',

@@ -4,11 +4,11 @@ define(['./index'], function (controllers) {
         $scope.login = function(user) {
             authService.login(user).then(function (data) {
                 $scope.loginError = null;
-                $rootScope.username = user.username;
+                $rootScope.user = data;
                 $location.path('/home');
             },
-            function () {
-                $scope.loginError = "That user does not exist.";
+            function (errorMessage) {
+                $scope.loginError = errorMessage;
             });
         };
     }]);

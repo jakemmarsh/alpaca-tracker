@@ -18,7 +18,8 @@ require.config({
         'angular-ui-event' : './lib/angular/event',
         'bootstrap-js' : './lib/bootstrap.min',
         'jquery' : './lib/jquery-2.0.3.min',
-        'jquery-ui' : './lib/jquery-ui'
+        'jquery-ui' : './lib/jquery-ui',
+        'cryptoJS' : './lib/pbkdf2'
     },
 
     shim: {
