@@ -1,4 +1,4 @@
-package pacatraca;
+package HardwareComponents;
 
 public interface IMUData {
 	public Float Temperature( ); //fahrenheit

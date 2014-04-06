@@ -1,6 +1,7 @@
 import java.util.HashMap;
-import alpaca.Alpaca;
-import pacatraca.*;
+
+import PacaTraca.*;
+import TestDriversAndFactories.PacaTracaTestDriver;
 
 /**
  * Handles program flow and initializes base-level code.

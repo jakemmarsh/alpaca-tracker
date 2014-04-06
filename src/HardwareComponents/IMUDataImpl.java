@@ -1,4 +1,5 @@
-package pacatraca;
+package HardwareComponents;
+
 
 public class IMUDataImpl implements IMUData, SensorData{
 

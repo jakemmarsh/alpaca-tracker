@@ -1,4 +1,4 @@
-package pacatraca;
+package PacaTraca;
 
 /**
  * @author Bryan Wells

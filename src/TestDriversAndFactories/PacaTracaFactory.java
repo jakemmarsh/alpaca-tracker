@@ -1,4 +1,6 @@
-package pacatraca;
+package TestDriversAndFactories;
+
+import PacaTraca.PacaTraca;
 
 /**
  * @author Bryan Wells

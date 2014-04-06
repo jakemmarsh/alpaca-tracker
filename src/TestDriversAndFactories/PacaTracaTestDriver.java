@@ -1,8 +1,10 @@
-package pacatraca;
+package TestDriversAndFactories;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import PacaTraca.PacaTraca;
 
 /**
  * @author Bryan Wells
@@ -15,7 +17,7 @@ public class PacaTracaTestDriver {
 	private HashMap< String, PacaTraca > m_sensors = new HashMap< String, PacaTraca >( );
 	private PacaTracaFactory factory = new PacaTracaHardwareFactory();
 	public List<String> sensorNames = new ArrayList<String>();
-
+	
 	/**
 	 * the main module
 	 * @param args

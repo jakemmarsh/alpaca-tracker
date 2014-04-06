@@ -1,4 +1,4 @@
-package pacatraca;
+package HardwareComponents;
 
 public interface  SensorData {
 	public  Boolean setSensorID( Integer sensorID ); // pass in sensor ID

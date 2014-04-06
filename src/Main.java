@@ -1,4 +1,4 @@
-import pacatraca.*;
+import PacaTraca.*;
 
 /**
  * This is our big main class. All program flow should begin here.

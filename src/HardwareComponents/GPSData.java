@@ -1,4 +1,4 @@
-package pacatraca;
+package HardwareComponents;
 
 // interface to GPS data for a given Alpaca
 public interface GPSData {

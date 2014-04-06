@@ -1,4 +1,7 @@
-package pacatraca;
+package TestDriversAndFactories;
+
+import PacaTraca.PacaTraca;
+import PacaTraca.PacaTracaHardware;
 
 public class PacaTracaHardwareFactory implements PacaTracaFactory {
 
