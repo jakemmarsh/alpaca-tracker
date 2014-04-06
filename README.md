@@ -1,6 +1,8 @@
 alpaca-tracker
 ==============
 
+An application created as a class project for COS420 (Software Engineering) at the University of Maine. Intended to serve as both a frontend and backend application used to manage and track alpaca herds.
+
 ##Notes
 
 #####General
@@ -21,11 +23,16 @@ Update, Init, and Exit methods, and a class that controls program flow that impl
 
 #####Jake
 
-##Style
+##Firebase
 
-I suggest we use Pascal Casing for consistency in this project. Look it up for more information, 
-but the basics are that variables are lower case and method/interface names are upper case for
-the first letter:
+This application utilizes [Firebase](https://www.firebase.com/) to maintain data between the frontend and backend, as well as update in real-time. The frontend utilizes the [AngularFire](https://github.com/firebase/angularFire) library. The following guides describe the use of Firebase:
+
+- [Using the Java SDK](https://www.firebase.com/docs/java-quickstart.html)
+- [Using AngularFire](https://www.firebase.com/quickstart/angularjs.html)
+
+##Code Style
+
+Pascal and Camel Casing are used for consistency in this project. More details can be found [here](http://msdn.microsoft.com/en-us/library/x2dbyw72(v=vs.71).aspx),  but the basics are that variables are lower case and method/interface names are upper case for the first letter:
 
 ```java
 public int variable;
