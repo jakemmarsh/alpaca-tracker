@@ -7,7 +7,7 @@ package PacaTraca;
  * Provides a concrete implementation for an GPS Sensor
  * to service requests for GPS Data
  */
-public class PacaTracaHardware implements PacaTraca {
+public class PacaTracaImpl implements PacaTraca {
 	
 	private String m_sensorID;
 	private float longitude;
@@ -26,13 +26,13 @@ public class PacaTracaHardware implements PacaTraca {
 	/*
 	 * protected default constructor
 	 */
-	protected PacaTracaHardware( ) {
+	protected PacaTracaImpl( ) {
 	}
 	
 	/**
 	 * constructor taking an AlpacaID
 	 */
-	public PacaTracaHardware( String sensorID ) {
+	public PacaTracaImpl( String sensorID ) {
 		this.setSensorID( sensorID ); // set the value of this sensor's ID
 		//System.out.println("PacaTracaHardware constructor was called");
 	}

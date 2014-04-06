@@ -1,16 +1,13 @@
 package alpaca;
+import PacaTraca.PacaTracaImpl;
 
 public class Alpaca {
 	
-	private String name;
+	public PacaTracaImpl hardware;
 	
-	public Alpaca ()
+	public Alpaca (String SensorID)
 	{
-		this.name = "Luda";
+		hardware = new PacaTracaImpl(SensorID);
 	}
 	
-	public String getName ()
-	{
-		return name;
-	}
 }
