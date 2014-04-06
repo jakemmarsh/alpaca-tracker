@@ -10,7 +10,7 @@ package PacaTraca;
 public class PacaTracaHardware implements PacaTraca {
 	
 	private String m_sensorID;
-	private float longitude = 0;
+	private float longitude;
 	private float latitude;
 	private float speed;
 	private float course;
