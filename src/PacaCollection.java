@@ -1,6 +1,8 @@
 
 import java.util.HashMap;
 
+import alpaca.Alpaca;
+
 public class PacaCollection {
 	
 	private HashMap <String, Alpaca> alpacaCollection; 
