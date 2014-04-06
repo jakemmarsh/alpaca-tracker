@@ -12,7 +12,8 @@ public class PacaCollection {
 	public PacaCollection ()
 	{
 		 ref = new Firebase ("https://crackling-fire-2064.firebaseio.com/alpacas");
-		 System.out.println (ref);
+		 ref.push ().setValue (new Alpaca ());
+		 System.out.println (":)");
 	}
 	
 	public void add (String key, Alpaca alpaca)
