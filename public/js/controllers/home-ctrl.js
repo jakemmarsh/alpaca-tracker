@@ -77,7 +77,6 @@ define(['./index'], function (controllers) {
         };
 
         $scope.mapLoaded = function() {
-            $scope.seedAlpacas();
             $scope.$watch('alpacas', function() {
                 $scope.placeAlpacas($scope.alpacas);
             });
