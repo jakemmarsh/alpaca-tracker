@@ -10,6 +10,7 @@ require.config({
         'async': './lib/async',
         'domReady': './lib/requirejs/domReady',
         'angular': './lib/angular/angular.min',
+        'angular-fire': './lib/angular/angularfire.min',
         'angular-sanitize' : './lib/angular/angular-sanitize.min',
         'angular-ui-bootstrap' : './lib/angular/ui-bootstrap-0.6.0.min',
         'angular-ui-router' : './lib/angular/angular-ui-router.min',
@@ -24,6 +25,10 @@ require.config({
         'angular': {
             exports: 'angular',
             deps: ['bootstrap-js']
+        },
+        'angular-fire': {
+            exports: 'angular-fire',
+            deps: ['angular', 'https://cdn.firebase.com/js/client/1.0.11/firebase.js']
         },
         'angular-sanitize': {
             deps: ['angular']

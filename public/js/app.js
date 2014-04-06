@@ -1,5 +1,6 @@
 define([
     'angular',
+    'angular-fire',
     'angular-sanitize',
     'angular-ui-bootstrap',
     'angular-ui-router',
@@ -12,6 +13,7 @@ define([
     'use strict';
 
     return ng.module('app', [
+        'firebase',
         'app.services',
         'app.controllers',
         'app.filters',

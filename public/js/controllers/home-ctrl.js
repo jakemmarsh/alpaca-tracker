@@ -1,7 +1,9 @@
 define(['./index'], function (controllers) {
     'use strict';
-    controllers.controller('homeCtrl', ['$scope', function ($scope, $rootScope, $location) {
-
+    controllers.controller('homeCtrl', ['$scope', '$rootScope', '$location', '$firebase', function ($scope, $rootScope, $location, $firebase) {
+        var alpacaRef = new Firebase('https://crackling-fire-2064.firebaseio.com/');
+        $scope.testAlpacas = $firebase(alpacaRef);
+        console.log($scope.testAlpacas);
         var alpacaMarkers = [];
 
         $scope.mapOptions = {
@@ -12,7 +14,8 @@ define(['./index'], function (controllers) {
                 disableDoubleClickZoom: false,
                 draggable: true,
                 scrollwheel: true,
-                panControl: true
+                panControl: true,
+                streetViewControl: false
             };
 
         $scope.placeAlpacas = function(alpacas) {
