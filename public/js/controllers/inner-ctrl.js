@@ -3,7 +3,7 @@ define(['./index'], function (controllers) {
     controllers.controller('innerCtrl', ['$scope', '$rootScope', '$location', function ($scope, $rootScope, $location) {
 
         $scope.logout = function() {
-            $rootScope.username = null;
+            $rootScope.user = null;
             $location.path('/');
         };
 
