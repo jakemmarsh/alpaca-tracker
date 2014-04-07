@@ -26,7 +26,7 @@ public class PacaTracaImpl implements PacaTraca {
 	/*
 	 * protected default constructor
 	 */
-	protected PacaTracaImpl( ) {
+	public PacaTracaImpl( ) {
 	}
 	
 	/**
