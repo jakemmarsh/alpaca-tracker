@@ -11,38 +11,17 @@ define(['./app'], function (app) {
             url: '/',
             templateUrl: 'partials/login.html',
             controller: 'loginCtrl',
-            title: 'Login',
-            resolve: {
-                checkLogin: ['$rootScope', '$location', function($rootScope, $location){
-                    if($rootScope.user) {
-                        $location.path('/home');
-                    }
-                }]
-            }
+            title: 'Login'
         })
         .state('register', {
             url: '/register',
             templateUrl: 'partials/register.html',
             controller: 'registerCtrl',
-            title: 'Register',
-            resolve: {
-                checkLogin: ['$rootScope', '$location', function($rootScope, $location){
-                    if($rootScope.user) {
-                        $location.path('/home');
-                    }
-                }]
-            }
+            title: 'Register'
         })
         .state('inner', {
             templateUrl: 'partials/inner.html',
-            controller: 'innerCtrl',
-            resolve: {
-                checkLogin: ['$rootScope', '$location', function($rootScope, $location){
-                    if(!$rootScope.user) {
-                        $location.path('/login');
-                    }
-                }]
-            }
+            controller: 'innerCtrl'
         })
         .state('inner.home', {
             url: '/home',
