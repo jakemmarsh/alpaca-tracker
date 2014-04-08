@@ -28,10 +28,10 @@ define(['./index', 'cryptoJS'], function (services) {
                 };
 
             // save new user in database
-            usersDB.$add(newUser).then(function() {
-                deferred.resolve();
-                return deferred.promise;
-            })
+            usersDB[newUser.username] = newUser;
+            usersDB.$save(newUser.username).then(function(ref) {
+                deferred.resolve(ref);
+            });
 
             return deferred.promise;
         },
