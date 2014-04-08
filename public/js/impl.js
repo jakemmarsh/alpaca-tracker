@@ -9,6 +9,7 @@ define([
     'controllers/inner-ctrl',
     'controllers/home-ctrl',
     'controllers/detail-ctrl',
+    'controllers/add-ctrl',
     'services/auth',
     'services/alpacas'
 ], function () {});

@@ -28,6 +28,13 @@ define(['./app'], function (app) {
             templateUrl: 'partials/home.html',
             controller: 'homeCtrl',
             title: 'Home'
+        })
+        .state('inner.add', {
+            url: '/add',
+            templateUrl: 'partials/add.html',
+            controller: 'addCtrl',
+            title: 'Add New Alpaca'
+        })
         });
 
         $urlRouterProvider.otherwise("/");

@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h2 class="text-center">Add a New Alpaca</h2>
+        <form class="form-horizontal well" name="addAlpacaForm" ng-submit="addAlpaca(alpaca)" ng-hide="alpacaAdded">
+            <div class="form-group">
+                <label for="alpacaName" class="col-sm-2 control-label">Alpaca Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="alpacaName" name="alpacaName" ng-model="alpaca.name" placeholder="Name" required autofocus />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="trackerID" class="col-sm-2 control-label">Tracker ID</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="trackerID" name="trackerID" ng-model="alpaca.trackerID" placeholder="Tracker ID" required />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default" ng-disabled="addAlpacaForm.$invalid">Add Alpaca</button>
+                </div>
+            </div>
+        </form>
+        <div class="well text-center" ng-show="alpacaAdded">
+            <h2 class="text-success text-center"><span ng-bind="alpaca.name"></span> is now being tracked!</h2>
+            <a href="/home">Return home</a>
+        </div>
+    </div>
+</div>
