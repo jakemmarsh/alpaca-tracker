@@ -9,14 +9,13 @@ define(['./index'], function (controllers) {
             var names = ["Ted", "Chris", "Fred"];
 
             for(var i = 0; i < names.length; i++) {
-                $scope.alpacas.$add(
-                    {
-                        name: names[i],
-                        trackerID: i,
-                        lat: 44.89+(i*0.01),
-                        lng: -68.67+(i*0.01)
-                    }
-                );
+                $scope.alpacas[i] = {
+                    name: names[i],
+                    trackerID: i,
+                    lat: 44.89+(i*0.01),
+                    lng: -68.67+(i*0.01)
+                };
+                $scope.alpacas.$save(i);
             }
 
             $scope.placeAlpacas($scope.alpacas);
