@@ -20,6 +20,13 @@ define([
             }
         });
 
+        $rootScope.isActivePage = function(currentPath) {
+            if ($location.path().substr(0, currentPath.length) === currentPath) {
+              return true;
+            }
+            return false;
+        };
+
     }]);
 
     require(['domReady!'], function (document) {
