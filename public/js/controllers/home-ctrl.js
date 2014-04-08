@@ -12,6 +12,7 @@ define(['./index'], function (controllers) {
                 $scope.alpacas.$add(
                     {
                         name: names[i],
+                        trackerID: i,
                         lat: 44.89+(i*0.01),
                         lng: -68.67+(i*0.01)
                     }
