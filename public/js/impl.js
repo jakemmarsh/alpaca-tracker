@@ -9,6 +9,7 @@ define([
     'controllers/inner-ctrl',
     'controllers/home-ctrl',
     'controllers/detail-ctrl',
+    'controllers/alerts-ctrl',
     'controllers/add-ctrl',
     'controllers/settings-ctrl',
     'services/auth',

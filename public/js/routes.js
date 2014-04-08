@@ -29,6 +29,12 @@ define(['./app'], function (app) {
             controller: 'homeCtrl',
             title: 'Home'
         })
+        .state('inner.alerts', {
+            url: '/alerts',
+            templateUrl: 'partials/alerts.html',
+            controller: 'alertsCtrl',
+            title: 'Alerts'
+        })
         .state('inner.add', {
             url: '/add',
             templateUrl: 'partials/add.html',
