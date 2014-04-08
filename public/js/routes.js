@@ -35,6 +35,11 @@ define(['./app'], function (app) {
             controller: 'addCtrl',
             title: 'Add New Alpaca'
         })
+        .state('inner.settings', {
+            url: '/settings',
+            templateUrl: 'partials/settings.html',
+            controller: 'settingsCtrl',
+            title: 'Settings'
         });
 
         $urlRouterProvider.otherwise("/");
