@@ -82,12 +82,26 @@ public class PacaTracaTestDriver {
 		}
 	}
 	
+	/**
+	 * @param ID
+	 * @return a random longitude coordinate between -68 and -69, roughly in Orono
+	 */
 	private float GetRandomLongitude(String ID) {
-		return rand.nextInt(359) + rand.nextFloat() - 180;
+		int floor = 68;
+		int ceiling = 69;
+		
+		return rand.nextFloat() * (ceiling - floor) + floor;
 	}
 	
+	/**
+	 * @param ID
+	 * @return a random latitude coordinate between 44 and 45, roughly in Orono
+	 */
 	private float GetRandomLatitude(String ID) {
-		return rand.nextInt(179) + rand.nextFloat() - 90;
+		int floor = 44;
+		int ceiling = 45;
+		
+		return rand.nextFloat() * (ceiling - floor) + floor;
 	}
 	
 	private float GetRandomSpeed(String ID) {
