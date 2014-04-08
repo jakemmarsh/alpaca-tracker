@@ -6,7 +6,8 @@ package alpaca;
  */
 public class PacaAnalyzer {
 
-	public PacaAnalyzer(){
+	public PacaAnalyzer()
+	{
 		
 	}
 	

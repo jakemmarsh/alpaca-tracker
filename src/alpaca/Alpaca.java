@@ -3,19 +3,30 @@ import PacaTraca.PacaTracaImpl;
 
 public class Alpaca {
 	
-	public PacaTracaImpl hardware;
+	private PacaTracaImpl hardware;
+	private int trackerID;
+	private String name;
 	private float longitude;
 	private float latitude;
-	private String id;
 	
 	public Alpaca ()
 	{
 		hardware = new PacaTracaImpl ();
 	}
 	
-	public void setID (String id)
+	public void setName (String name)
 	{
-		this.id = id;
+		this.name = name;
+	}
+	
+	public void setTrackerID (double id)
+	{
+		this.trackerID = (int) id;
+	}
+	
+	public void Update ()
+	{
+		System.out.println (name);
 	}
 	
 	public void setLongitude (float longitude)
@@ -28,9 +39,9 @@ public class Alpaca {
 		this.latitude = latitude;
 	}
 	
-	public String getID ()
+	public int getTrackerID ()
 	{
-		return this.id;
+		return this.trackerID;
 	}
 	
 	public float getLongitude ()
