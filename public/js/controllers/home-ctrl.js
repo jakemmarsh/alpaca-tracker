@@ -1,7 +1,10 @@
 define(['./index'], function (controllers) {
     'use strict';
-    controllers.controller('homeCtrl', ['$scope', '$rootScope', '$location', 'alpacaService', function ($scope, $rootScope, $location, alpacaService) {
-        var alpacaMarkers = [];
+    controllers.controller('homeCtrl', ['$scope', '$rootScope', '$location', 'alpacaService', 'userService', function ($scope, $rootScope, $location, alpacaService, userService) {
+        var alpacaMarkers = [],
+            user = userService.user,
+            alpacasPlaced = false,
+            boundariesDrawn = false;
 
         $scope.alpacas = alpacaService;
 
@@ -45,7 +48,7 @@ define(['./index'], function (controllers) {
             streetViewControl: false
         };
 
-        $scope.placeAlpacas = function(alpacas) {
+        var placeAlpacas = function(alpacas) {
             var keys = alpacas.$getIndex();
 
             for(var i = 0; i < keys.length; i++) {
@@ -74,12 +77,41 @@ define(['./index'], function (controllers) {
 
                 marker.setMap($scope.alpacaMap);
             }
+        },
+        drawFarmBoundaries = function(boundaries) {
+            var pathCoords = [],
+                farmPolygon;
+
+            for(var i = 0; i < boundaries.length; i++) {
+                pathCoords.push(new google.maps.LatLng(boundaries[i].lat, boundaries[i].lng));
+            }
+
+            farmPolygon = new google.maps.Polygon({
+                paths: pathCoords,
+                strokeColor: '#FF0000',
+                strokeOpacity: 0.5,
+                strokeWeight: 2,
+                fillColor: '#FF0000',
+                fillOpacity: 0.25
+            });
+
+            farmPolygon.setMap($scope.alpacaMap);
         };
 
         $scope.mapLoaded = function() {
+            // place alpacas on map as they are added
             $scope.$watch('alpacas', function() {
-                $scope.placeAlpacas($scope.alpacas);
+                if(!alpacasPlaced) {
+                    placeAlpacas($scope.alpacas);
+                    alpacasPlaced = true;
+                }
             });
+
+            // draw boundary polygon if coordinates exist
+            if(user.farmBoundaries && !boundariesDrawn) {
+                drawFarmBoundaries(user.farmBoundaries);
+                boundariesDrawn = true;
+            }
         };
 
         $scope.focusAlpaca = function(alpacaName) {

@@ -1,1 +1,53 @@
-Settings
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h2 class="">Settings</h2>
+        <form class="form-horizontal well" name="settingsForm" ng-submit="saveSettings(user)">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Username</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" ng-bind="user.username"></p>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="form-group" ng-repeat="point in boundaries">
+                <label class="col-sm-2 control-label">
+                    <span ng-show="$index === 0">Farm Boundaries</span>
+                </label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" style="width:49.2%;float:left;margin-right:10px;" ng-model="point.lat" placeholder="Latitude" />
+                    <input type="text" class="form-control" style="width:49.2%;float:left;" ng-model="point.lng" placeholder="Longitude" />
+                    <div class="row" ng-show="$index === (boundaries.length - 1)">
+                        <div class="col-sm-9">
+                            <span class="help-block">At least three coordinate points must be added in order to save farm boundaries.</span>
+                        </div>
+                        <div class="col-sm-3 text-right">
+                            <button type="button" class="btn btn-link" ng-click="addPointEntry(boundaries)" ng-disabled="lastEntryEmpty(boundaries)">
+                                <span class="glyphicon glyphicon-plus-sign"></span> Add New Point
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="form-group">
+                <label for="newPassword" class="col-sm-2 control-label">New Password</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="newPassword" name="newPassword" ng-model="new.password" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-10 text-right">
+                    <h5 class="text-success" ng-show="changesSaved">Changes saved!</h5>
+                </div>
+                <div class="col-sm-2 text-right">
+                    <button type="submit" class="btn btn-primary" ng-disabled="invalidFarmBoundaries(boundaries)">Save Changes</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -48,13 +48,10 @@ define(['./index', 'cryptoJS'], function (services) {
                     var passKeyHash = CryptoJS.PBKDF2(user.password, usersDB[keys[i]].salt, { keySize: 512/32, iterations: 1000 }).toString(CryptoJS.enc.Base64);
                     // hash password and check for match
                     if(passKeyHash === usersDB[keys[i]].hash) {
-                        var validUser = angular.copy(usersDB[keys[i]]);
-                        delete validUser.salt;
-                        delete validUser.hash;
+                        this.user = usersDB[keys[i]];
 
-                        this.user = validUser;
+                        deferred.resolve(usersDB[keys[i]]);
 
-                        deferred.resolve(validUser);
                         return deferred.promise;
                     }
                     else {
@@ -66,8 +63,25 @@ define(['./index', 'cryptoJS'], function (services) {
             deferred.reject("That user does not exist.");
             return deferred.promise;
         },
-        updateUser: function(user) {
-            var deferred = $q.defer();
+        changePassword: function(newPassword) {
+            var deferred = $q.defer(),
+                salt = CryptoJS.lib.WordArray.random(128/8),
+                passKeyHash = CryptoJS.PBKDF2(newPassword, salt, { keySize: 512/32, iterations: 1000 }).toString(CryptoJS.enc.Base64);
+
+            usersDB.$child(this.user.username).$update({ salt: salt, hash: passKeyHash }).then(function() {
+                deferred.resolve();
+            });
+
+            return deferred.promise;
+        },
+        updateUser: function(updatedUser) {
+            var deferred = $q.defer(),
+                that = this;
+
+            usersDB.$child(that.user.username).$update(updatedUser).then(function() {
+                that.user = usersDB.$child(that.user.username);
+                deferred.resolve(that.user);
+            });
 
             return deferred.promise;
         }
