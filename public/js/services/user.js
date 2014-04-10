@@ -1,11 +1,12 @@
 define(['./index', 'cryptoJS'], function (services) {
   'use strict';
   // expand input and show post button on focus
-  services.service('authService', ['$q', '$http', '$firebase', function($q, $http, $firebase) {
+  services.factory('userService', ['$q', '$http', '$firebase', function($q, $http, $firebase) {
     var ref = new Firebase('https://crackling-fire-2064.firebaseio.com/auth'),
         usersDB = $firebase(ref);
 
     return {
+        user: null,
         register: function(user) {
             var deferred = $q.defer(),
                 keys = usersDB.$getIndex();
@@ -51,6 +52,8 @@ define(['./index', 'cryptoJS'], function (services) {
                         delete validUser.salt;
                         delete validUser.hash;
 
+                        this.user = validUser;
+
                         deferred.resolve(validUser);
                         return deferred.promise;
                     }
@@ -61,6 +64,11 @@ define(['./index', 'cryptoJS'], function (services) {
             }
 
             deferred.reject("That user does not exist.");
+            return deferred.promise;
+        },
+        updateUser: function(user) {
+            var deferred = $q.defer();
+
             return deferred.promise;
         }
     };

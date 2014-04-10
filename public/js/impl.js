@@ -12,6 +12,6 @@ define([
     'controllers/alerts-ctrl',
     'controllers/add-ctrl',
     'controllers/settings-ctrl',
-    'services/auth',
+    'services/user',
     'services/alpacas'
 ], function () {});
