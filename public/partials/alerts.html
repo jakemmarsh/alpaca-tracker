@@ -3,8 +3,9 @@
         <h2 class="">Alerts</h2>
         <div class="well">
             <ul>
-                <li ng-repeat="alert in alerts" ng-bind="alert.message" ng-click="markAsRead(alert)"></li>
+                <li ng-repeat="alert in displayAlerts" ng-bind="alert.message" ng-click="markAsRead(alert)"></li>
             </ul>
+            <h2 class="text-success text-center" ng-hide="displayAlerts">There are no unread alerts!</h2>
         </div>
     </div>
 </div>

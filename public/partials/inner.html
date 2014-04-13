@@ -14,7 +14,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-right" id="navbar-collapse-8">
             <ul class="nav navbar-nav">
-                <li ng-class="{true:'active', false:''}[isActivePage('/alerts')]"><a href="/alerts">Alerts <span class="badge alert-danger" ng-show="alerts.length > 0" ng-bind="alerts.length"></span></a></li>
+                <li ng-class="{true:'active', false:''}[isActivePage('/alerts')]"><a href="/alerts">Alerts <span class="badge alert-danger" ng-show="numAlerts > 0" ng-bind="numAlerts"></span></a></li>
                 <li ng-class="{true:'active', false:''}[isActivePage('/add')]"><a href="/add">Add New Alpaca</a></li>
                 <li ng-class="{true:'active', false:''}[isActivePage('/settings')]"><a href="/settings">Settings</a></li>
                 <li><a href ng-click="logout()">Logout</a></li>
