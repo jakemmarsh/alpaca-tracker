@@ -53,20 +53,32 @@ public class PacaCollection {
 			{
 				ArrayList snap = (ArrayList) snapshot.getValue ();
 				
-				
 				for (int i = 0; i < snap.size (); i ++)
 				{
 					HashMap qualities = (HashMap) snap.get (i);
-
+										
 					Alpaca newAlpaca = new Alpaca ();
 					newAlpaca.setName      ((String) qualities.get ("name"));
-					newAlpaca.setLatitude  ((Double) qualities.get ("lat"));
-					newAlpaca.setLongitude ((Double) qualities.get ("lng"));
-					newAlpaca.setTrackerID ((Long)   qualities.get ("trackerID"));
+					newAlpaca.setLatitude  (String.valueOf (qualities.get ("lat")));
+					newAlpaca.setLongitude (String.valueOf (qualities.get ("lng")));
+					newAlpaca.setTrackerID (String.valueOf (qualities.get ("trackerID")));
 					newAlpaca.setDBRef     (url, i);
-					
-					alpacas.add (newAlpaca);
-					System.out.println ("Retrieving alpaca: " + newAlpaca.name);
+			    	
+					if (alpacas.size() == 0)
+					{
+						alpacas.add (newAlpaca);
+					}
+					else 
+					{
+						boolean in = false;
+						for (int x = 0; x < alpacas.size (); x++)
+						{
+							if (newAlpaca.name == alpacas.get (x).name)
+								in = true;
+						}
+						if (in == false)
+							alpacas.add (newAlpaca);
+					}
 				}
 			}
 
@@ -83,7 +95,6 @@ public class PacaCollection {
 	{
 		for (int i = 0; i < alpacas.size (); i ++)
 		{
-		//	System.out.println (i);
 			alpacas.get (i).updateDB ();	
 		}
 	}

@@ -7,21 +7,20 @@ import TestDriversAndFactories.PacaTracaTestDriver;
  */
 public class Program {
 	
+	// An update speed in seconds
+	private int updateSpeed; 
+	
 	// The collection of alpacas
 	private PacaCollection collection;
 
 	public Program ()
 	{
 		System.out.println ("Starting alpaca tracker");
-		collection = new PacaCollection ();
-	}
-    
-	/* This call starts the programs update function */
-	public void StartUpdate ()
-	{	
+		updateSpeed = 2;
+		collection  = new PacaCollection ();
 		update ();
 	}
-	
+
 	/* This function updates each of the alpaca's statistics in 
 	 * one second intervals. 
 	 */
@@ -29,11 +28,13 @@ public class Program {
 	{
 		while (true)
 		{
-			collection.update ();
 			try 
-			{
-			    Thread.sleep(1000);
-			} catch (InterruptedException e) 
+			{			
+				System.out.println ("Update");
+				collection.update ();
+			    Thread.sleep (updateSpeed * 1000);
+			} 
+			catch (InterruptedException e) 
 			{
 			    e.printStackTrace();
 			}
