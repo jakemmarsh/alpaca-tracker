@@ -55,7 +55,9 @@ define(['./index'], function (controllers) {
             };
 
         $rootScope.user = userService.user;
+
         $scope.alpacas = alpacaService;
+
         $scope.mapOptions = {
             center: new google.maps.LatLng(44.89, -68.67),
             zoom: 12,

@@ -27,8 +27,6 @@ define([
             return false;
         };
 
-        $rootScope.alerts = [1, 2, 3];
-
     }]);
 
     require(['domReady!'], function (document) {
