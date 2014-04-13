@@ -1,6 +1,6 @@
 define(['./index'], function (controllers) {
     'use strict';
-    controllers.controller('homeCtrl', ['$scope', '$rootScope', '$location', 'alpacaService', 'userService', 'farmService', function ($scope, $rootScope, $location, alpacaService, userService, farmService) {
+    controllers.controller('homeCtrl', ['$scope', '$rootScope', '$location', 'alpacaService', 'userService', 'farmService', 'alertService', function ($scope, $rootScope, $location, alpacaService, userService, farmService, alertService) {
         var alpacaMarkers = [],
             alpacasPlaced = false,
             boundariesDrawn = false,
@@ -106,8 +106,8 @@ define(['./index'], function (controllers) {
             });
 
             // draw boundary polygon if coordinates exist
-            if(user.farmBoundaries && !boundariesDrawn) {
-                drawFarmBoundaries(user.farmBoundaries);
+            if(farmService.getBoundaries().length > 0 && !boundariesDrawn) {
+                drawFarmBoundaries(farmService.getBoundaries());
                 boundariesDrawn = true;
             }
         };

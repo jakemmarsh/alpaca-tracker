@@ -14,4 +14,5 @@ define([
     'controllers/settings-ctrl',
     'services/user',
     'services/alpacas'
+    'services/farm',
 ], function () {});
