@@ -2,7 +2,7 @@ package alpaca;
 import java.util.*;
 
 /**
- * @author Sylvia Allain
+ * @author Sylvia Allain, Jonathan Cole
  * 
  * Holds information about the environment the alpacas reside in.
  * High/Low tolerances for temperature, fence boundaries, etc.
@@ -12,6 +12,7 @@ import java.util.*;
  */
 public class PacaWorld {
 	
+	public List<PacaEvent> alerts = new ArrayList<PacaEvent>();
 	private float longitudeFloor = -180f;
 	private float longitudeCeiling = 180f;
 	private int numSatellites = 100;
@@ -22,6 +23,17 @@ public class PacaWorld {
 
 	public PacaWorld() {
 		
+	}
+	
+	/**
+	 * Creates an event and passes it to both the list of events and FireBase.
+	 * @param alp
+	 * @param type
+	 */
+	public void CreateAlert(Alpaca alp, PacaEvent.EventType type){
+		PacaEvent e = new PacaEvent(alp, type);
+		alerts.add(e);
+		//Add to firebase
 	}
 	
 	public void setLongitudeFloor(float floor) { this.longitudeFloor = floor; }
