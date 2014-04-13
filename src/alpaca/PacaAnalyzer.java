@@ -1,5 +1,7 @@
 package alpaca;
 
+import java.util.ArrayList;
+
 /**
  * @author Sylvia Allain
  * 
@@ -12,6 +14,10 @@ public class PacaAnalyzer {
 	public PacaAnalyzer(PacaWorld pacaWorld)
 	{
 		this.pacaWorld = pacaWorld;
+	}
+	
+	public void analyze (ArrayList alpacas)
+	{
 	}
 	
 	/**
@@ -30,7 +36,7 @@ public class PacaAnalyzer {
 	 */
 	public String analyzeSpeed(float speed){
 		
-		float alpacaSpeedCeiling = 20f;
+		float alpacaSpeedCeiling    = 20f;
 		float alpacaRunningSpeedMin = 10f;
 		float alpacaWalkingSpeedMin = 2f;
 		

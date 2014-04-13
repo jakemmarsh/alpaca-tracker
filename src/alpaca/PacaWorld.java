@@ -17,7 +17,7 @@ import com.firebase.client.FirebaseError;
  */
 public class PacaWorld {
 	
-	public List<PacaEvent> alerts = new ArrayList<PacaEvent>();
+	public List<PacaAlert> alerts = new ArrayList<PacaAlert>();
 	private float longitudeFloor = -180f;
 	private float longitudeCeiling = 180f;
 	private int numSatellites = 100;
@@ -36,9 +36,9 @@ public class PacaWorld {
 	 * @param alp
 	 * @param type
 	 */
-	public void CreateAlert(Alpaca alp, PacaEvent.EventType type){
+	public void CreateAlert(Alpaca alp, PacaAlert.EventType type){
 		Firebase alertRef = new Firebase("https://crackling-fire-2064.firebaseio.com/alerts").push();
-		PacaEvent e = new PacaEvent(alp, type);
+		PacaAlert e = new PacaAlert(alp, type);
 		
 		// build hashmap of alert to store in Firebase
 		alert.put("alpacaID", alp.getTrackerID());

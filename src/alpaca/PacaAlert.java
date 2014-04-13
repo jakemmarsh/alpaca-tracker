@@ -4,7 +4,7 @@ package alpaca;
  * @author Jonathan Cole
  *
  */
-public class PacaEvent {
+public class PacaAlert {
 	public boolean readByUser = false;
 	public Alpaca alpaca;
 	public static enum EventPriority{ Normal, Warning, Critical };
@@ -19,12 +19,12 @@ public class PacaEvent {
 	};
 	public EventType type;
 	
-	public PacaEvent(Alpaca alp, EventType t){
+	public PacaAlert(Alpaca alp, EventType t){
 		alpaca = alp;
 		type = t;
 	}
 
-	public PacaEvent(Alpaca alp, EventPriority p, EventType t){
+	public PacaAlert(Alpaca alp, EventPriority p, EventType t){
 		alpaca = alp;
 		priority = p;
 		type = t;
