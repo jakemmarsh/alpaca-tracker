@@ -16,41 +16,16 @@ import org.junit.Test;
  * Class which creates dummy alpacas, stores them in a HashMap,
  * updates their data, and runs tests on methods of the program
  */
-//Herro
+
 public class PacaTracaTestDriver {
 
 	private HashMap< String, PacaTracaTestHardware > m_sensors = new HashMap< String, PacaTracaTestHardware >( );
 	private PacaTracaTestHardwareFactory factory = new PacaTracaTestHardwareFactory();
 	public List<String> sensorNames = new ArrayList<String>();
 	Random rand = new Random();
-	
-	private PacaAnalyzerTest pacaAnalyzerTester = new PacaAnalyzerTest();
 
-	/**
-	 * the main module
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		PacaTracaTestDriver testCase = new PacaTracaTestDriver( );
-		testCase.runTests();
-	}
-	
-	/**
-	 * @author Bryan Wells
-	 * Create a factory (a hardware factory in this case)
-	 * create some test sensors using the factory
-	 * verify the created sensors
-	 */
-	@Test
-	public void runTests( ) {
-		//this.createFaultyTestSensors(factory);
-		PacaTracaTestHardware hardware = addAlpaca(factory, "Alpaca 1");
-
-	}
-	
 	//Random Alpaca Data
-	public PacaTracaTestHardware addAlpaca( PacaTracaTestHardwareFactory factory, String ID ) {
+	public PacaTracaTestHardware createAlpacaHardware( String ID ) {
 		PacaTracaTestHardware hardware = factory.createPacaTraca(ID);
 		m_sensors.put(ID, hardware);
 		sensorNames.add(ID);
