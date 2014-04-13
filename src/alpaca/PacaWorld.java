@@ -5,6 +5,7 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 /**
  * @author Sylvia Allain, Jonathan Cole
@@ -18,6 +19,7 @@ import com.firebase.client.FirebaseError;
 public class PacaWorld {
 	
 	public List<PacaAlert> alerts = new ArrayList<PacaAlert>();
+	public ArrayList<float[]> farmCoordinates;
 	private float longitudeFloor = -180f;
 	private float longitudeCeiling = 180f;
 	private int numSatellites = 100;
@@ -28,7 +30,27 @@ public class PacaWorld {
 	private HashMap alert;
 
 	public PacaWorld() {
-		alert = new HashMap();
+		farmCoordinates = new ArrayList<float[]>();
+		String farmUrl = "https://crackling-fire-2064.firebaseio.com/farm/boundaries";
+		Firebase farmRef = new Firebase(farmUrl);
+		farmRef.addValueEventListener(new ValueEventListener() {
+		    @Override
+		    public void onDataChange(DataSnapshot snapshot) {
+		    	ArrayList coordinates = (ArrayList) snapshot.getValue();
+		    	for(int i = 0; i < coordinates.size(); i++) {
+		    		HashMap coordinatePair = (HashMap) coordinates.get(i);
+		    		
+		    		float [] tuple = new float [2];
+		    		tuple [0] = Float.parseFloat (coordinatePair.get("lat").toString());
+		    		tuple [1] = Float.parseFloat (coordinatePair.get("lng").toString());
+		    		farmCoordinates.add(tuple);
+		    	}
+		    }
+
+			@Override
+			public void onCancelled(FirebaseError arg0) 
+			{}
+		});
 	}
 	
 	/**
