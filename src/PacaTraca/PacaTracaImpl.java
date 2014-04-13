@@ -12,8 +12,8 @@ import java.util.Random;
 public class PacaTracaImpl implements PacaTraca {
 	
 	private String m_sensorID;
-	private float longitude;
-	private float latitude;
+	private float longitude = 0;
+	private float latitude = 0;
 	private float speed;
 	private float course;
 	private int numSatellites;

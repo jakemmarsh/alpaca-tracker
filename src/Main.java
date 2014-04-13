@@ -7,8 +7,7 @@ public class Main {
 
 	public static void main (String[] args) 
 	{
-		Program pacaclient = new Program();
-		pacaclient.BeginUpdateLoop ();
+		Program pacaclient = new Program ();
 		pacaclient.Exit ();
 	}
 }

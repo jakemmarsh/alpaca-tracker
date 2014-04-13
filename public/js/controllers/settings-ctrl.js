@@ -1,11 +1,11 @@
 define(['./index'], function (controllers) {
     'use strict';
-    controllers.controller('settingsCtrl', ['$rootScope', '$scope', 'userService', function ($scope, $rootScope, userService) {
+    controllers.controller('settingsCtrl', ['$rootScope', '$scope', 'userService', 'farmService', function ($scope, $rootScope, userService, farmService) {
 
         $scope.user = userService.user;
         $scope.changesSaved = false;
         $scope.new = {};
-        $scope.boundaries = $scope.user.farmBoundaries ? $scope.user.farmBoundaries : [
+        $scope.boundaries = (farmService.getBoundaries().length > 0) ? farmService.getBoundaries() : [
             {
                 lat: null,
                 lng: null
@@ -39,13 +39,14 @@ define(['./index'], function (controllers) {
                 userService.changePassword($scope.new.password);
             }
 
-            // convert all boundaries to integers before storing
+            // convert all boundaries to floats before storing
             for(var i = 0; i < $scope.boundaries.length; i++) {
                 $scope.boundaries[i].lat = parseFloat($scope.boundaries[i].lat);
                 $scope.boundaries[i].lng = parseFloat($scope.boundaries[i].lng);
             }
 
-            user.farmBoundaries = $scope.boundaries;
+            // update farm with the boundaries
+            farmService.updateFarm({ 'boundaries': $scope.boundaries });
 
             userService.updateUser(user).then(function (data) {
                 $rootScope.user = data;

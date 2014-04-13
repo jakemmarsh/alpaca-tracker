@@ -4,7 +4,6 @@ define(['./index'], function (controllers) {
         $scope.login = function(user) {
             userService.login(user).then(function (data) {
                 $scope.loginError = null;
-                $rootScope.user = data;
                 $location.path('/home');
             },
             function (errorMessage) {
