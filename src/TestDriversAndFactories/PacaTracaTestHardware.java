@@ -3,7 +3,7 @@ package TestDriversAndFactories;
 import PacaTraca.PacaTraca;
 
 /**
- * @author Bryan Wells
+ * @author Sylvia Allain
  *
  * implementation of the GPS Sensor Data class
  * Provides a concrete implementation for an GPS Sensor
