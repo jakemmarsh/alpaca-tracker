@@ -1,5 +1,7 @@
 package PacaTraca;
 
+import java.util.Random;
+
 /**
  * @author Bryan Wells
  *
@@ -22,6 +24,8 @@ public class PacaTracaImpl implements PacaTraca {
 	private int signalQuality;
 	private float temperature;
 	private boolean fix;
+	
+	Random rand = new Random();
 	
 	/*
 	 * protected default constructor
@@ -93,6 +97,7 @@ public class PacaTracaImpl implements PacaTraca {
 	@Override
 	public Float getLatitudeDecimalDegrees() {
 		// TODO Auto-generated method stub
+		latitude = getRandomLatitude();
 		return latitude;
 	}
 
@@ -103,6 +108,7 @@ public class PacaTracaImpl implements PacaTraca {
 	@Override
 	public Float getLongitudeDecimalDegrees() {
 		// TODO Auto-generated method stub
+		longitude = getRandomLongitude();
 		return longitude;
 	}
 
@@ -113,6 +119,7 @@ public class PacaTracaImpl implements PacaTraca {
 	@Override
 	public Float getSpeed() {
 		// TODO Auto-generated method stub
+		speed = getRandomSpeed();
 		return speed;
 	}
 
@@ -123,6 +130,7 @@ public class PacaTracaImpl implements PacaTraca {
 	@Override
 	public Float getCourse() {
 		// TODO Auto-generated method stub
+		course = getRandomCourse();
 		return course;
 	}
 
@@ -133,6 +141,7 @@ public class PacaTracaImpl implements PacaTraca {
 	@Override
 	public Float getAltitude() {
 		// TODO Auto-generated method stub
+		altitude = getRandomAltitude();
 		return altitude;
 	}
 
@@ -144,6 +153,7 @@ public class PacaTracaImpl implements PacaTraca {
 	public Integer getNumSatellites() {
 		// number of satellites GPS found
 		// TODO Auto-generated method stub
+		numSatellites = getRandomNumSatellites();
 		return numSatellites;
 	}
 
@@ -154,6 +164,7 @@ public class PacaTracaImpl implements PacaTraca {
 	@Override
 	public Boolean haveFix() {
 		// TODO Auto-generated method stub
+		fix = getRandomFix();
 		return fix;
 	}
 
@@ -164,6 +175,7 @@ public class PacaTracaImpl implements PacaTraca {
 	@Override
 	public Integer getSignalQuality() {
 		// TODO Auto-generated method stub
+		signalQuality = getRandomSignalQuality();
 		return signalQuality;
 	}
 	
@@ -173,6 +185,7 @@ public class PacaTracaImpl implements PacaTraca {
 	 */
 	public Float getTemperature() {
 		// TODO Auto-generated method stub
+		temperature = getRandomTemperature();
 		return temperature;
 	}
 
@@ -183,6 +196,7 @@ public class PacaTracaImpl implements PacaTraca {
 	 */
 	public Float getRoll() {
 		// TODO Auto-generated method stub
+		roll = getRandomRoll();
 		return roll;
 	}
 
@@ -193,6 +207,7 @@ public class PacaTracaImpl implements PacaTraca {
 	 */
 	public Float getPitch() {
 		// TODO Auto-generated method stub
+		pitch = getRandomPitch();
 		return pitch;
 	}
 
@@ -203,6 +218,7 @@ public class PacaTracaImpl implements PacaTraca {
 	 */
 	public Float getCompassHeading() {
 		// TODO Auto-generated method stub
+		heading = getRandomHeading();
 		return heading;
 	}
 
@@ -215,4 +231,66 @@ public class PacaTracaImpl implements PacaTraca {
 		// TODO Auto-generated method stub
 		
 	}	
+	
+	/**
+	 * @param ID
+	 * @return a random longitude coordinate between -68 and -69, roughly in Orono
+	 */
+	private float getRandomLongitude() {
+		int floor = 68;
+		int ceiling = 69;
+		
+		return rand.nextFloat() * (ceiling - floor) + floor;
+	}
+	
+	/**
+	 * @param ID
+	 * @return a random latitude coordinate between 44 and 45, roughly in Orono
+	 */
+	private float getRandomLatitude() {
+		int floor = 44;
+		int ceiling = 45;
+		
+		return rand.nextFloat() * (ceiling - floor) + floor;
+	}
+	
+	private float getRandomSpeed() {
+		return rand.nextFloat() * 15;
+	}
+	
+	private float getRandomCourse() {
+		return rand.nextFloat() * 360;
+	}
+	
+	private int getRandomNumSatellites() {
+		return rand.nextInt(5);
+	}
+	
+	private float getRandomHeading() {
+		return rand.nextFloat() * 360;
+	}
+	
+	private float getRandomPitch() {
+		return rand.nextFloat() * 180;
+	}
+	
+	private float getRandomRoll() {
+		return rand.nextFloat() * 180 - 90;
+	}
+	
+	private float getRandomAltitude() {
+		return rand.nextFloat() * 1000;
+	}
+	
+	private int getRandomSignalQuality() {
+		return rand.nextInt(5);
+	}
+	
+	private float getRandomTemperature() {
+		return rand.nextFloat() * 105;
+	}
+	
+	private boolean getRandomFix() {
+		return true;
+	}
 }
