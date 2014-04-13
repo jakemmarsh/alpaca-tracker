@@ -240,7 +240,7 @@ public class PacaTracaImpl implements PacaTraca {
 		int floor = 68;
 		int ceiling = 69;
 		
-		return rand.nextFloat() * (ceiling - floor) + floor;
+		return -(rand.nextFloat() * (ceiling - floor) + floor);
 	}
 	
 	/**
