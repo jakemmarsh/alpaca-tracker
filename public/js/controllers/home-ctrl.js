@@ -1,12 +1,72 @@
 define(['./index'], function (controllers) {
     'use strict';
-    controllers.controller('homeCtrl', ['$scope', '$rootScope', '$location', 'alpacaService', 'userService', function ($scope, $rootScope, $location, alpacaService, userService) {
+    controllers.controller('homeCtrl', ['$scope', '$rootScope', '$location', 'alpacaService', 'userService', 'farmService', function ($scope, $rootScope, $location, alpacaService, userService, farmService) {
         var alpacaMarkers = [],
-            user = userService.user,
             alpacasPlaced = false,
-            boundariesDrawn = false;
+            boundariesDrawn = false,
+            placeAlpacas = function(alpacas) {
+                var keys = alpacas.$getIndex();
 
+                for(var i = 0; i < keys.length; i++) {
+                    var alpaca = alpacas[keys[i]],
+                        marker = new google.maps.Marker({
+                            title: alpaca.name,
+                            position: new google.maps.LatLng(alpaca.lat, alpaca.lng),
+                            icon: 'http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png'
+                        }),
+                        contentString = '<h5>' + alpaca.name + '</h5>',
+                        infowindow = new google.maps.InfoWindow({
+                            content: contentString
+                        });
+
+                    // focus on corresponding alpaca when marker is clicked
+                    (function (_marker) {
+                        google.maps.event.addListener(_marker, 'click', function() {
+                            $scope.focusAlpaca(_marker.title);
+                        });
+                    })(marker);
+
+                    alpacaMarkers.push({
+                        marker: marker,
+                        infowindow: infowindow
+                    });
+
+                    marker.setMap($scope.alpacaMap);
+                }
+            },
+            drawFarmBoundaries = function(boundaries) {
+                var pathCoords = [],
+                    farmPolygon;
+
+                for(var i = 0; i < boundaries.length; i++) {
+                    pathCoords.push(new google.maps.LatLng(boundaries[i].lat, boundaries[i].lng));
+                }
+
+                farmPolygon = new google.maps.Polygon({
+                    paths: pathCoords,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 0.65,
+                    strokeWeight: 4,
+                    fillColor: '#FF0000',
+                    fillOpacity: 0
+                });
+
+                farmPolygon.setMap($scope.alpacaMap);
+            };
+
+        $rootScope.user = userService.user;
         $scope.alpacas = alpacaService;
+        $scope.mapOptions = {
+            center: new google.maps.LatLng(44.89, -68.67),
+            zoom: 12,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            disableDefaultUI: false,
+            disableDoubleClickZoom: false,
+            draggable: true,
+            scrollwheel: true,
+            panControl: true,
+            streetViewControl: false
+        };
 
         $scope.seedAlpacas = function() {
             var names = ["Ted", "Chris", "Fred"];
@@ -21,7 +81,7 @@ define(['./index'], function (controllers) {
                 $scope.alpacas.$save(i);
             }
 
-            $scope.placeAlpacas($scope.alpacas);
+            placeAlpacas($scope.alpacas);
         };
 
         $scope.clearAlpacas = function() {
@@ -34,68 +94,6 @@ define(['./index'], function (controllers) {
                 alpacaMarkers[markersLength].marker.setMap(null);
                 alpacaMarkers.splice(markersLength, 1);
             }
-        };
-
-        $scope.mapOptions = {
-            center: new google.maps.LatLng(44.89, -68.67),
-            zoom: 12,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            disableDefaultUI: false,
-            disableDoubleClickZoom: false,
-            draggable: true,
-            scrollwheel: true,
-            panControl: true,
-            streetViewControl: false
-        };
-
-        var placeAlpacas = function(alpacas) {
-            var keys = alpacas.$getIndex();
-
-            for(var i = 0; i < keys.length; i++) {
-                var alpaca = alpacas[keys[i]],
-                    marker = new google.maps.Marker({
-                        title: alpaca.name,
-                        position: new google.maps.LatLng(alpaca.lat, alpaca.lng),
-                        icon: 'http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png'
-                    }),
-                    contentString = '<h5>' + alpaca.name + '</h5>',
-                    infowindow = new google.maps.InfoWindow({
-                        content: contentString
-                    });
-
-                // focus on corresponding alpaca when marker is clicked
-                (function (_marker) {
-                    google.maps.event.addListener(_marker, 'click', function() {
-                        $scope.focusAlpaca(_marker.title);
-                    });
-                })(marker);
-
-                alpacaMarkers.push({
-                    marker: marker,
-                    infowindow: infowindow
-                });
-
-                marker.setMap($scope.alpacaMap);
-            }
-        },
-        drawFarmBoundaries = function(boundaries) {
-            var pathCoords = [],
-                farmPolygon;
-
-            for(var i = 0; i < boundaries.length; i++) {
-                pathCoords.push(new google.maps.LatLng(boundaries[i].lat, boundaries[i].lng));
-            }
-
-            farmPolygon = new google.maps.Polygon({
-                paths: pathCoords,
-                strokeColor: '#FF0000',
-                strokeOpacity: 0.5,
-                strokeWeight: 2,
-                fillColor: '#FF0000',
-                fillOpacity: 0.25
-            });
-
-            farmPolygon.setMap($scope.alpacaMap);
         };
 
         $scope.mapLoaded = function() {

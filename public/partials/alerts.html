@@ -1,3 +1,10 @@
-<ul>
-    <li ng-repeat="alert in alerts" ng-bind="alert" ng-click="markAsRead(alert)"></li>
-</ul>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h2 class="">Alerts</h2>
+        <div class="well">
+            <ul>
+                <li ng-repeat="alert in alerts" ng-bind="alert" ng-click="markAsRead(alert)"></li>
+            </ul>
+        </div>
+    </div>
+</div>
