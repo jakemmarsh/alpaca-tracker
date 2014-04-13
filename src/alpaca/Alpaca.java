@@ -1,17 +1,35 @@
 package alpaca;
+import com.firebase.client.Firebase;
+
+import PacaTraca.PacaTraca;
 import PacaTraca.PacaTracaImpl;
+import TestDriversAndFactories.PacaTracaHardwareFactory;
+import TestDriversAndFactories.PacaTracaTestDriver;
 
 public class Alpaca {
 	
-	private PacaTracaImpl hardware;
-	private int trackerID;
-	private String name;
-	private float longitude;
-	private float latitude;
+	private PacaTraca hardware;
+	private String trackerID;
+	public String name;
+	public String dbRef;
+	private double longitude = 10;
+	private double latitude = 10;
 	
 	public Alpaca ()
 	{
-		hardware = new PacaTracaImpl ();
+		PacaTracaHardwareFactory pthf = new PacaTracaHardwareFactory ();
+		hardware = pthf.createPacaTraca (trackerID);
+	}
+	
+	public void updateDB ()
+	{
+		System.out.println (String.valueOf (hardware.getLongitudeDecimalDegrees ()));
+		
+		String.valueOf (hardware.getLongitudeDecimalDegrees ());
+		
+		Firebase dataRef = new Firebase (dbRef);
+		dataRef.child ("lng").setValue  (longitude);
+		dataRef.child ("lat").setValue  (latitude);
 	}
 	
 	public void setName (String name)
@@ -19,37 +37,38 @@ public class Alpaca {
 		this.name = name;
 	}
 	
-	public void setTrackerID (double id)
+	public void setDBRef (String location, int ID)
 	{
-		this.trackerID = (int) id;
+		System.out.println (location + "/" + ID);
+		this.dbRef = location + "/" + ID;
 	}
 	
-	public void Update ()
+	public void setTrackerID (Long id)
 	{
-		System.out.println (name);
+		this.trackerID = String.valueOf (id);
 	}
 	
-	public void setLongitude (float longitude)
+	public void setLongitude (double longitude)
 	{
 		this.longitude = longitude;
 	}
 	
-	public void setLatitude (float latitude)
+	public void setLatitude (double latitude)
 	{
 		this.latitude = latitude;
 	}
 	
-	public int getTrackerID ()
+	public String getTrackerID ()
 	{
 		return this.trackerID;
 	}
 	
-	public float getLongitude ()
+	public double getLongitude ()
 	{
 		return this.longitude;
 	}
 	
-	public float getLatitude ()
+	public double getLatitude ()
 	{
 		return this.latitude;
 	}

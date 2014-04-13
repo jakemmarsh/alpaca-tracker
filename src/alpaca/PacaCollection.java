@@ -7,6 +7,9 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.MutableData;
+import com.firebase.client.Transaction;
+import com.firebase.client.ValueEventListener;
 
 import alpaca.Alpaca;
 
@@ -24,116 +27,65 @@ import alpaca.Alpaca;
  * @author claytonpeterson
  *
  */
-public class PacaCollection implements Runnable{
+public class PacaCollection {
 	
-	// URL and reference to the Firebase database
+	/* URL and reference to the Firebase database */
 	private String   url;
 	private Firebase dataRef;
 	
-	// The working collection of alpacas
+	/* The working collection of alpacas */
 	private ArrayList <Alpaca> alpacas;
 	
 	public PacaCollection ()
 	{
-		alpacas = new ArrayList <Alpaca> ();
-		
 		url = "https://crackling-fire-2064.firebaseio.com/alpacas";
 		dataRef = new Firebase (url);
-		
-		dataRef.addChildEventListener (new ChildEventListener()
+        alpacas = new ArrayList <Alpaca> ();
+        
+        /* This adds a listener to the alpaca reference and creates
+         * an alpaca object for each alpaca stored in the online 
+         * database.
+         */
+		dataRef.addValueEventListener (new ValueEventListener () 
 		{
-		    @Override
-		    public void onChildAdded (DataSnapshot snapshot, String previousChildName)
-		    {
-		    	// Hash-map of alpaca's characteristics 
-		        HashMap alpaca = (HashMap) snapshot.getValue ();
-		   
-		        // Create alpaca object for local collection
-		        Alpaca newAlpaca = new Alpaca ();		        
-		        newAlpaca.setName      ((String) alpaca.get ("name"));
-		        newAlpaca.setTrackerID ((Long) alpaca.get("trackerID"));
-		        
-		        alpacas.add (newAlpaca);
-		        System.out.println (alpacas.size());
-		    }
+			@Override
+			public void onDataChange(DataSnapshot snapshot) 
+			{
+				ArrayList snap = (ArrayList) snapshot.getValue ();
+				
+				
+				for (int i = 0; i < snap.size (); i ++)
+				{
+					HashMap qualities = (HashMap) snap.get (i);
 
-		    @Override
-		    public void onChildChanged(DataSnapshot snapshot, String previousChildName) 
-		    {
-		    	System.out.println ("updating");
-		    }
-
-		    @Override
-		    public void onChildRemoved(DataSnapshot snapshot)
-		    {
-
-		    }
-
-		    @Override
-		    public void onChildMoved(DataSnapshot snapshot, String previousChildName)
-		    {
-
-		    }
+					Alpaca newAlpaca = new Alpaca ();
+					newAlpaca.setName      ((String) qualities.get ("name"));
+					newAlpaca.setLatitude  ((Double) qualities.get ("lat"));
+					newAlpaca.setLongitude ((Double) qualities.get ("lng"));
+					newAlpaca.setTrackerID ((Long)   qualities.get ("trackerID"));
+					newAlpaca.setDBRef     (url, i);
+					
+					alpacas.add (newAlpaca);
+					System.out.println ("Retrieving alpaca: " + newAlpaca.name);
+				}
+			}
 
 			@Override
 			public void onCancelled(FirebaseError arg0) 
-			{
-				System.out.println ("out");	
-			}
-		});		
+			{}
+		});
 	}
 	
-	/**
-	 * Prints information to the console detailing the
-	 * queried alpaca.
-	 * @param : ID that corresponds to given alpaca.
+	/* This method tells each of the alpaca objects to update their
+	 * information on the database. 
 	 */
-	public void info (int id)
+	public void update ()
 	{
-		Alpaca info = get (id);
-		if (info != null)
+		for (int i = 0; i < alpacas.size (); i ++)
 		{
-		//	System.out.println ("ID: " + info.getTrackerID());
-		//	System.out.println ("Longitude: " + info.getLongitude());
-		//	System.out.println ("Latitude: " + info.getLatitude());
+		//	System.out.println (i);
+			alpacas.get (i).updateDB ();	
 		}
-		System.out.println ();
-	}
-	
-	/**
-	 * Returns the alpaca object corresponding to the
-	 * given ID.
-	 * @param  : ID that corresponds to given alpaca.
-	 * @return : the alpaca object
-	 */
-	public Alpaca get (int id)
-	{
-		for (Alpaca a : alpacas)
-		{
-			if (a.getTrackerID () == id)
-				return a;
-		}
-		return null;
-	}
-	
-	public ArrayList <Alpaca> getCollection ()
-	{
-		return alpacas;
-	}
-	
-	/**
-	 * Query the number of alpacas
-	 * @return : the number of alpacas in the collection
-	 */
-	public int count ()
-	{
-		return alpacas.size ();
-	}
-
-	@Override
-	public void run() 
-	{
-		
 	}
 }
 

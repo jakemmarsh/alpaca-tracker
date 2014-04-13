@@ -1,9 +1,5 @@
-import java.util.HashMap;
 
-import alpaca.Alpaca;
-import alpaca.PacaAnalyzer;
 import alpaca.PacaCollection;
-import PacaTraca.*;
 import TestDriversAndFactories.PacaTracaTestDriver;
 
 /**
@@ -11,49 +7,43 @@ import TestDriversAndFactories.PacaTracaTestDriver;
  */
 public class Program {
 	
-	PacaTracaTestDriver testDriver = new PacaTracaTestDriver();
-	
-	//True if running, false to close the program.
-	private boolean isRunning;
-	
 	// The collection of alpacas
 	private PacaCollection collection;
-	
-	// The alpaca analyzer
-	private PacaAnalyzer analyzer;
-	
+
 	public Program ()
 	{
 		System.out.println ("Starting alpaca tracker");
 		collection = new PacaCollection ();
 	}
-	
-	/**
-	 * Runs the update loop.
-	 */
-	public void BeginUpdateLoop()
-	{
-		isRunning = true;
-		
-		while (isRunning)
-		{
-			Update ();
-		}
+    
+	/* This call starts the programs update function */
+	public void StartUpdate ()
+	{	
+		update ();
 	}
 	
-	/**
-	 * Update loop. Runs over and over until program ends.
+	/* This function updates each of the alpaca's statistics in 
+	 * one second intervals. 
 	 */
-	public void Update()
+	private void update ()
 	{
-		for (Alpaca a : collection.getCollection())
-			a.Update();
+		while (true)
+		{
+			collection.update ();
+			try 
+			{
+			    Thread.sleep(1000);
+			} catch (InterruptedException e) 
+			{
+			    e.printStackTrace();
+			}
+		}
 	}
 	
 	/**
 	 * Cleans up and then exits the program.
 	 */
-	public void Exit()
+	public void Exit ()
 	{
 		
 	}

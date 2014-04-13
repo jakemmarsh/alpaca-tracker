@@ -10,8 +10,8 @@ package PacaTraca;
 public class PacaTracaImpl implements PacaTraca {
 	
 	private String m_sensorID;
-	private float longitude;
-	private float latitude;
+	private float longitude = 0;
+	private float latitude = 0;
 	private float speed;
 	private float course;
 	private int numSatellites;
@@ -91,8 +91,8 @@ public class PacaTracaImpl implements PacaTraca {
 	 * @see com.pacatraca.PacaTraca#getLatitudeDecimalDegrees()
 	 */
 	@Override
-	public Float getLatitudeDecimalDegrees() {
-		// TODO Auto-generated method stub
+	public Float getLatitudeDecimalDegrees() 
+	{
 		return latitude;
 	}
 
@@ -101,8 +101,8 @@ public class PacaTracaImpl implements PacaTraca {
 	 * @see com.pacatraca.PacaTraca#getLongitudeDecimalDegrees()
 	 */
 	@Override
-	public Float getLongitudeDecimalDegrees() {
-		// TODO Auto-generated method stub
+	public Float getLongitudeDecimalDegrees() 
+	{
 		return longitude;
 	}
 
