@@ -18,6 +18,11 @@
 </div>
 <div class="row" style="margin-top: 20px;" ng-controller="detailCtrl" ng-show="focusedAlpaca">
     <div class="col-md-12 well">
-        <h2 class="text-center">Details about {{ focusedAlpaca.name }} here</h2>
+        <h2>Details about {{ focusedAlpaca.name }}:</h2>
+        <ul>
+            <li><strong>Tracker ID:</strong> {{focusedAlpaca.trackerID}}</li>
+            <li><strong>Lat:</strong> {{focusedAlpaca.lat}}</li>
+            <li><strong>Lng:</strong> {{focusedAlpaca.lng}}</li>
+        </ul>
     </div>
 </div>
