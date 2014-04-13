@@ -52,11 +52,30 @@ define(['./index'], function (controllers) {
                 });
 
                 farmPolygon.setMap($scope.alpacaMap);
+            },
+            updateMarkers = function(alpacas) {
+                var keys = alpacas.$getIndex();
+
+                for(var i = 0; i < keys.length; i++) {
+                    for(var j = 0; j < alpacaMarkers.length; j++) {
+                        if(alpacaMarkers[j].marker.title.toLowerCase() === alpacas[keys[i]].name.toLowerCase()) {
+                            alpacaMarkers[j].marker.setPosition(new google.maps.LatLng(alpacas[keys[i]].lat, alpacas[keys[i]].lng));
+                        }
+                    }
+                }
             };
 
         $rootScope.user = userService.user;
 
         $scope.alpacas = alpacaService;
+
+        alpacaService.$on("change", function() {
+            $scope.alpacas = alpacaService;
+            if($scope.focusedAlpaca) {
+                $scope.focusAlpaca($scope.focusedAlpaca.name);
+            }
+            updateMarkers($scope.alpacas);
+        });
 
         $scope.mapOptions = {
             center: new google.maps.LatLng(44.89, -68.67),
