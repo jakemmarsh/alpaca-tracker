@@ -1,6 +1,11 @@
 package alpaca;
 import java.util.*;
 
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+
 /**
  * @author Sylvia Allain, Jonathan Cole
  * 
@@ -20,9 +25,10 @@ public class PacaWorld {
 	private float altitudeCeiling = 8900;
 	private float temperatureFloor = -140f;
 	private float temperatureCeiling = 4000f;
+	private HashMap alert;
 
 	public PacaWorld() {
-		
+		alert = new HashMap();
 	}
 	
 	/**
@@ -31,9 +37,28 @@ public class PacaWorld {
 	 * @param type
 	 */
 	public void CreateAlert(Alpaca alp, PacaEvent.EventType type){
+		Firebase alertRef = new Firebase("https://crackling-fire-2064.firebaseio.com/alerts").push();
 		PacaEvent e = new PacaEvent(alp, type);
+		
+		// build hashmap of alert to store in Firebase
+		alert.put("alpacaID", alp.getTrackerID());
+		alert.put("read", e.readByUser);
+		alert.put("message", e.ToString());
+		alert.put("priority", e.priority.toString());
+
 		alerts.add(e);
-		//Add to firebase
+		
+		// save alert in Firebase
+		alertRef.setValue(alert, new Firebase.CompletionListener() {		
+			@Override
+			public void onComplete(FirebaseError error, Firebase arg1) {
+				if (error != null) {
+		            System.err.println("Data could not be saved: " + error.getMessage());
+		        } else {
+		            System.out.println("Data saved successfully.");
+		        }
+			}
+		});
 	}
 	
 	public void setLongitudeFloor(float floor) { this.longitudeFloor = floor; }

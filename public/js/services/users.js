@@ -2,7 +2,7 @@ define(['./index', 'cryptoJS'], function (services) {
   'use strict';
   // expand input and show post button on focus
   services.factory('userService', ['$q', '$http', '$firebase', function($q, $http, $firebase) {
-    var ref = new Firebase('https://crackling-fire-2064.firebaseio.com/auth'),
+    var ref = new Firebase('https://crackling-fire-2064.firebaseio.com/users'),
         usersDB = $firebase(ref);
 
     return {
@@ -68,9 +68,16 @@ define(['./index', 'cryptoJS'], function (services) {
                 salt = CryptoJS.lib.WordArray.random(128/8),
                 passKeyHash = CryptoJS.PBKDF2(newPassword, salt, { keySize: 512/32, iterations: 1000 }).toString(CryptoJS.enc.Base64);
 
-            usersDB.$child(this.user.username).$update({ salt: salt, hash: passKeyHash }).then(function() {
+            console.log('salt:', salt);
+            console.log('hash:', passKeyHash);
+
+            console.log('child before:', usersDB.$child(this.user.username));
+
+            usersDB.$child(this.user.username).$update({ 'salt': salt, 'hash': passKeyHash }).then(function() {
                 deferred.resolve();
             });
+
+            console.log('child after:', usersDB.$child(this.user.username));
 
             return deferred.promise;
         },

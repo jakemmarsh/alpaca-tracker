@@ -1,6 +1,6 @@
 define(['./index'], function (controllers) {
     'use strict';
-    controllers.controller('alertsCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+    controllers.controller('alertsCtrl', ['$scope', '$rootScope', 'alertService', function ($scope, $rootScope, alertService) {
 
         $scope.alerts = $rootScope.alerts;
 

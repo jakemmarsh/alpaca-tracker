@@ -3,7 +3,7 @@
         <h2 class="">Alerts</h2>
         <div class="well">
             <ul>
-                <li ng-repeat="alert in alerts" ng-bind="alert" ng-click="markAsRead(alert)"></li>
+                <li ng-repeat="alert in alerts" ng-bind="alert.message" ng-click="markAsRead(alert)"></li>
             </ul>
         </div>
     </div>
