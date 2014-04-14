@@ -269,4 +269,10 @@ public class PacaTracaTestHardware implements PacaTraca {
 	public void setFix( boolean fix ) {
 		this.fix = fix;
 	}
+
+	@Override
+	public void setIsRandom(boolean r) {
+		// TODO Auto-generated method stub
+		
+	}
 }

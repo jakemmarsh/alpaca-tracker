@@ -18,15 +18,19 @@ public class PacaAnalyzer {
 		this.pacaWorld = pacaWorld;
 	}
 	
-	public void analyze (ArrayList alpacas)
+	public void analyze (ArrayList<Alpaca> alpacas)
 	{
+		
 	}
 	
 	/**
 	 * @param latitude, longitude
 	 * @return whether the alpaca is out of bounds
 	 */
-	public String analyzeLocationBounds(float latitude, float longitude) {
+	public String analyzeLocationBounds(Alpaca alpaca) {
+		
+		float latitude = alpaca.hardware.getLatitudeDecimalDegrees();
+		float longitude = alpaca.hardware.getLongitudeDecimalDegrees();
 		
 		String state = "";
 		int roundWeight = 10000;
@@ -57,8 +61,13 @@ public class PacaAnalyzer {
 
 		if (propertyPolygon.contains(weightedLatitude, weightedLongitude))
 			state = "In bounds";
-		else
+		else {
+			
+			PacaAlert.EventType event = PacaAlert.EventType.OutOfBounds;
+			//pacaWorld.CreateAlert()
+			
 			state = "Out of bounds";
+		}
 		
 		return state;
 	}
@@ -67,7 +76,10 @@ public class PacaAnalyzer {
 	 * @param latitude, longitude
 	 * @return whether the alpaca is isolated
 	 */
-	public String analyzeLocationIsolation(float latitude, float longitude) {
+	public String analyzeLocationIsolation(Alpaca alpaca) {
+		
+		float latitude = alpaca.hardware.getLatitudeDecimalDegrees();
+		float longitude = alpaca.hardware.getLongitudeDecimalDegrees();
 		
 		String state = "";
 		
@@ -78,7 +90,9 @@ public class PacaAnalyzer {
 	 * @param speed
 	 * @return the type of movement
 	 */
-	public String analyzeSpeed(float speed){
+	public String analyzeSpeed(Alpaca alpaca){
+		
+		float speed = alpaca.hardware.getSpeed();
 		
 		float alpacaSpeedCeiling = 20f;
 		float alpacaRunningSpeedMin = 10f;
@@ -104,7 +118,10 @@ public class PacaAnalyzer {
 	 * @param course
 	 * @return direction the alpaca is travelling
 	 */
-	public String analyzeCourse(float course) {
+	public String analyzeCourse(Alpaca alpaca) {
+		
+		float course = alpaca.hardware.getCourse();
+		
 		String state = "";
 		
 		if (course < 0)
@@ -121,7 +138,10 @@ public class PacaAnalyzer {
 	 * @param number of satellites
 	 * @return string number of satellites
 	 */
-	public String analyzeNumSatellites(int numSatellites) {
+	public String analyzeNumSatellites(Alpaca alpaca) {
+		
+		int numSatellites = alpaca.hardware.getNumSatellites();
+		
 		String state = "";
 		
 		if (numSatellites < 0)
@@ -138,7 +158,10 @@ public class PacaAnalyzer {
 	 * @param heading
 	 * @return string heading
 	 */
-	public String analyzeHeading(float heading){
+	public String analyzeHeading(Alpaca alpaca){
+		
+		float heading = alpaca.hardware.getCompassHeading();
+		
 		String state = "";
 		
 		if (heading < 0)
@@ -155,7 +178,11 @@ public class PacaAnalyzer {
 	 * @param pitch, roll
 	 * @return type of position
 	 */
-	public String analyzePosition(float pitch, float roll){
+	public String analyzePosition(Alpaca alpaca){
+		
+		float pitch = alpaca.hardware.getPitch();
+		float roll = alpaca.hardware.getRoll();
+		
 		String state = "";
 		
 		if (pitch < 0 || pitch > 180 || roll < -90 || roll > 90)
@@ -172,7 +199,10 @@ public class PacaAnalyzer {
 	 * @param altitude
 	 * @return string altitude
 	 */
-	public String analyzeAltitude(float altitude) {
+	public String analyzeAltitude(Alpaca alpaca) {
+		
+		float altitude = alpaca.hardware.getAltitude();
+		
 		String state = "";
 		
 		if (altitude < pacaWorld.returnAltitudeFloor())
@@ -189,7 +219,10 @@ public class PacaAnalyzer {
 	 * @param signal quality
 	 * @return string signal quality
 	 */
-	public String analyzeSignalQuality(int signalQuality) {
+	public String analyzeSignalQuality(Alpaca alpaca) {
+		
+		int signalQuality = alpaca.hardware.getSignalQuality();
+		
 		String state = "";
 		int signalCeiling = 5;
 		
@@ -207,7 +240,10 @@ public class PacaAnalyzer {
 	 * @param temperature
 	 * @return health condition
 	 */
-	public String analyzeTemperature(float temperature) {
+	public String analyzeTemperature(Alpaca alpaca) {
+		
+		float temperature = alpaca.hardware.getTemperature();
+		
 		String state = "";
 		if (temperature < pacaWorld.returnTemperatureFloor())
 			state = "Error: Low temperature value";
@@ -223,7 +259,10 @@ public class PacaAnalyzer {
 	 * @param fix
 	 * @return string fix
 	 */
-	public String analyzeFix(boolean fix) {
+	public String analyzeFix(Alpaca alpaca) {
+		
+		boolean fix = alpaca.hardware.haveFix();
+		
 		String state = Boolean.toString(fix);
 		
 		return state;

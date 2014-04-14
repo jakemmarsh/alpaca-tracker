@@ -25,6 +25,8 @@ public class PacaTracaImpl implements PacaTraca {
 	private float temperature;
 	private boolean fix;
 	
+	private boolean isRandom = true;
+	
 	Random rand = new Random();
 	
 	/*
@@ -97,7 +99,8 @@ public class PacaTracaImpl implements PacaTraca {
 	@Override
 	public Float getLatitudeDecimalDegrees() {
 		// TODO Auto-generated method stub
-		latitude = getRandomLatitude();
+		if (isRandom)
+			latitude = getRandomLatitude();
 		return latitude;
 	}
 
@@ -108,7 +111,8 @@ public class PacaTracaImpl implements PacaTraca {
 	@Override
 	public Float getLongitudeDecimalDegrees() {
 		// TODO Auto-generated method stub
-		longitude = getRandomLongitude();
+		if (isRandom)
+			longitude = getRandomLongitude();
 		return longitude;
 	}
 
@@ -119,7 +123,8 @@ public class PacaTracaImpl implements PacaTraca {
 	@Override
 	public Float getSpeed() {
 		// TODO Auto-generated method stub
-		speed = getRandomSpeed();
+		if (isRandom)
+			speed = getRandomSpeed();
 		return speed;
 	}
 
@@ -130,7 +135,8 @@ public class PacaTracaImpl implements PacaTraca {
 	@Override
 	public Float getCourse() {
 		// TODO Auto-generated method stub
-		course = getRandomCourse();
+		if (isRandom)
+			course = getRandomCourse();
 		return course;
 	}
 
@@ -141,7 +147,8 @@ public class PacaTracaImpl implements PacaTraca {
 	@Override
 	public Float getAltitude() {
 		// TODO Auto-generated method stub
-		altitude = getRandomAltitude();
+		if (isRandom)
+			altitude = getRandomAltitude();
 		return altitude;
 	}
 
@@ -153,7 +160,8 @@ public class PacaTracaImpl implements PacaTraca {
 	public Integer getNumSatellites() {
 		// number of satellites GPS found
 		// TODO Auto-generated method stub
-		numSatellites = getRandomNumSatellites();
+		if (isRandom)
+			numSatellites = getRandomNumSatellites();
 		return numSatellites;
 	}
 
@@ -164,7 +172,8 @@ public class PacaTracaImpl implements PacaTraca {
 	@Override
 	public Boolean haveFix() {
 		// TODO Auto-generated method stub
-		fix = getRandomFix();
+		if (isRandom)
+			fix = getRandomFix();
 		return fix;
 	}
 
@@ -175,7 +184,8 @@ public class PacaTracaImpl implements PacaTraca {
 	@Override
 	public Integer getSignalQuality() {
 		// TODO Auto-generated method stub
-		signalQuality = getRandomSignalQuality();
+		if (isRandom)
+			signalQuality = getRandomSignalQuality();
 		return signalQuality;
 	}
 	
@@ -185,7 +195,8 @@ public class PacaTracaImpl implements PacaTraca {
 	 */
 	public Float getTemperature() {
 		// TODO Auto-generated method stub
-		temperature = getRandomTemperature();
+		if (isRandom)
+			temperature = getRandomTemperature();
 		return temperature;
 	}
 
@@ -196,7 +207,8 @@ public class PacaTracaImpl implements PacaTraca {
 	 */
 	public Float getRoll() {
 		// TODO Auto-generated method stub
-		roll = getRandomRoll();
+		if (isRandom)
+			roll = getRandomRoll();
 		return roll;
 	}
 
@@ -207,7 +219,8 @@ public class PacaTracaImpl implements PacaTraca {
 	 */
 	public Float getPitch() {
 		// TODO Auto-generated method stub
-		pitch = getRandomPitch();
+		if (isRandom)
+			pitch = getRandomPitch();
 		return pitch;
 	}
 
@@ -218,7 +231,8 @@ public class PacaTracaImpl implements PacaTraca {
 	 */
 	public Float getCompassHeading() {
 		// TODO Auto-generated method stub
-		heading = getRandomHeading();
+		if (isRandom)
+			heading = getRandomHeading();
 		return heading;
 	}
 
@@ -293,4 +307,62 @@ public class PacaTracaImpl implements PacaTraca {
 	private boolean getRandomFix() {
 		return true;
 	}
+	
+	
+	/**
+	 * Set data for testing
+	 */
+	
+	public void setLongitude( float longitude) {
+		this.longitude = longitude;
+	}
+	
+	public void setLatitude( float latitude ) {
+		this.latitude = latitude;
+	}
+	
+	public void setSpeed( float speed ) {
+		this.speed = speed;
+	}
+	
+	public void setCourse( float course ) {
+		this.course = course;
+	}
+	
+	public void setNumSatellites( int numSatellites ) {
+		this.numSatellites = numSatellites;
+	}
+	
+	public void setHeading( float heading ) {
+		this.heading = heading;
+	}
+	
+	public void setPitch( float pitch ) {
+		this.pitch = pitch;
+	}
+	
+	public void setRoll( float roll ) {
+		this.roll = roll;
+	}
+	
+	public void setAltitude( float altitude ) {
+		this.altitude = altitude;
+	}
+	
+	public void setSignalQuality( int signalQuality ) {
+		this.signalQuality = signalQuality;
+	}
+	
+	public void setTemperature( float temperature ) {
+		this.temperature = temperature;
+	}
+	
+	public void setFix( boolean fix ) {
+		this.fix = fix;
+	}
+	
+	public void setIsRandom(boolean r) {
+		this.isRandom = r;
+	}
+	
 }

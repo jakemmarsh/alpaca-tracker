@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 
 import static org.junit.Assert.*;
+import alpaca.Alpaca;
 import alpaca.PacaAnalyzer;
 import alpaca.PacaWorld;
 
@@ -19,14 +20,15 @@ public class PacaAnalyzerTest {
 	PacaWorld pacaWorld;
 	PacaAnalyzer analyzer;
 	PacaTracaTestHardwareFactory factory;
-	PacaTracaTestHardware hardware;
+	Alpaca fred;
 	
 	@Before
 	public void setUp() throws Exception {
 		pacaWorld = new PacaWorld();
 		analyzer = new PacaAnalyzer(pacaWorld);
 		factory = new PacaTracaTestHardwareFactory();
-		hardware = factory.createPacaTraca("Fred");
+		fred = new Alpaca();
+		fred.hardware.setIsRandom(false);
 	}
 	
 	/**
@@ -48,7 +50,7 @@ public class PacaAnalyzerTest {
 	
 	//Set Normal Case
 	@Ignore
-	private PacaTracaTestHardware NormalCaseAlpaca() {
+	private Alpaca NormalCaseAlpaca() {
 
 		float longitude = 108.0f;
 		float latitude = 80.4f;
@@ -63,20 +65,20 @@ public class PacaAnalyzerTest {
 		float temperature = 100.3f;
 		boolean fix = true;
 		
-		hardware.setLongitude(longitude);
-		hardware.setLatitude(latitude);
-		hardware.setSpeed(speed);
-		hardware.setCourse(course);
-		hardware.setNumSatellites(numSatellites);
-		hardware.setHeading(heading);
-		hardware.setPitch(pitch);
-		hardware.setRoll(roll);
-		hardware.setAltitude(altitude);
-		hardware.setSignalQuality(signalQuality);
-		hardware.setTemperature(temperature);
-		hardware.setFix(fix);
+		fred.hardware.setLongitude(longitude);
+		fred.hardware.setLatitude(latitude);
+		fred.hardware.setSpeed(speed);
+		fred.hardware.setCourse(course);
+		fred.hardware.setNumSatellites(numSatellites);
+		fred.hardware.setHeading(heading);
+		fred.hardware.setPitch(pitch);
+		fred.hardware.setRoll(roll);
+		fred.hardware.setAltitude(altitude);
+		fred.hardware.setSignalQuality(signalQuality);
+		fred.hardware.setTemperature(temperature);
+		fred.hardware.setFix(fix);
 
-		return hardware;
+		return fred;
 		
 	}
 	
@@ -84,21 +86,21 @@ public class PacaAnalyzerTest {
 	@Test
 	public void testCase1() {
 		
-		hardware = NormalCaseAlpaca();
+		fred = NormalCaseAlpaca();
 		
-		assertEquals("", analyzer.analyzeLocationBounds(hardware.getLatitudeDecimalDegrees(),hardware.getLongitudeDecimalDegrees()));
-		assertEquals("Alpaca running", analyzer.analyzeSpeed(hardware.getSpeed()));
-		assertEquals(Float.toString(hardware.getCourse()), analyzer.analyzeCourse(hardware.getCourse()));
+		assertEquals("", analyzer.analyzeLocationBounds(fred));
+		assertEquals("Alpaca running", analyzer.analyzeSpeed(fred));
+		assertEquals(Float.toString(fred.hardware.getCourse()), analyzer.analyzeCourse(fred));
 	}
 	
 	//High Longitude
 	@Test
 	public void testCase2() {
 		
-		hardware = NormalCaseAlpaca();
-		hardware.setLongitude(200f);
+		fred = NormalCaseAlpaca();
+		fred.hardware.setLongitude(200f);
 		
-		assertEquals("", analyzer.analyzeLocationBounds(hardware.getLatitudeDecimalDegrees(),hardware.getLongitudeDecimalDegrees()));
+		assertEquals("", analyzer.analyzeLocationBounds(fred));
 		
 	}
 	
@@ -106,10 +108,10 @@ public class PacaAnalyzerTest {
 	@Test
 	public void testCase3() {
 		
-		hardware = NormalCaseAlpaca();
-		hardware.setLongitude(-200f);
+		fred = NormalCaseAlpaca();
+		fred.hardware.setLongitude(-200f);
 		
-		assertEquals("", analyzer.analyzeLocationBounds(hardware.getLatitudeDecimalDegrees(),hardware.getLongitudeDecimalDegrees()));
+		assertEquals("", analyzer.analyzeLocationBounds(fred));
 		
 	}
 	
@@ -117,10 +119,10 @@ public class PacaAnalyzerTest {
 	@Test
 	public void testCase4() {
 		
-		hardware = NormalCaseAlpaca();
-		hardware.setLatitude(100f);
+		fred = NormalCaseAlpaca();
+		fred.hardware.setLatitude(100f);
 		
-		assertEquals("", analyzer.analyzeLocationBounds(hardware.getLatitudeDecimalDegrees(),hardware.getLongitudeDecimalDegrees()));
+		assertEquals("", analyzer.analyzeLocationBounds(fred));
 		
 	}
 	
@@ -128,10 +130,10 @@ public class PacaAnalyzerTest {
 	@Test
 	public void testCase5() {
 		
-		hardware = NormalCaseAlpaca();
-		hardware.setLatitude(-100f);
+		fred = NormalCaseAlpaca();
+		fred.hardware.setLatitude(-100f);
 		
-		assertEquals("", analyzer.analyzeLocationBounds(hardware.getLatitudeDecimalDegrees(),hardware.getLongitudeDecimalDegrees()));
+		assertEquals("", analyzer.analyzeLocationBounds(fred));
 		
 	}
 	
@@ -139,10 +141,10 @@ public class PacaAnalyzerTest {
 	@Test
 	public void testCase6() {
 		
-		hardware = NormalCaseAlpaca();
-		hardware.setSpeed(50f);
+		fred = NormalCaseAlpaca();
+		fred.hardware.setSpeed(50f);
 		
-		assertEquals("Error: High speed value", analyzer.analyzeSpeed(hardware.getSpeed()));
+		assertEquals("Error: High speed value", analyzer.analyzeSpeed(fred));
 		
 	}
 	
@@ -150,10 +152,10 @@ public class PacaAnalyzerTest {
 	@Test
 	public void testCase7() {
 		
-		hardware = NormalCaseAlpaca();
-		hardware.setSpeed(-5.0f);
+		fred = NormalCaseAlpaca();
+		fred.hardware.setSpeed(-5.0f);
 		
-		assertEquals("Error: Negative speed value", analyzer.analyzeSpeed(hardware.getSpeed()));
+		assertEquals("Error: Negative speed value", analyzer.analyzeSpeed(fred));
 		
 	}
 	
@@ -161,10 +163,9 @@ public class PacaAnalyzerTest {
 	@Test
 	public void testCase8() {
 		
-		hardware = NormalCaseAlpaca();
-		hardware.setCourse(400f);
-		
-		assertEquals("Error: High course value", analyzer.analyzeCourse(hardware.getCourse()));
+		fred = NormalCaseAlpaca();
+		fred.hardware.setCourse(400f);
+		assertEquals("Error: High course value", analyzer.analyzeCourse(fred));
 		
 	}
 	
@@ -172,10 +173,10 @@ public class PacaAnalyzerTest {
 	@Test
 	public void testCase9() {
 		
-		hardware = NormalCaseAlpaca();
-		hardware.setCourse(-100f);
+		fred = NormalCaseAlpaca();
+		fred.hardware.setCourse(-100f);
 		
-		assertEquals("Error: Negative course value", analyzer.analyzeCourse(hardware.getCourse()));
+		assertEquals("Error: Negative course value", analyzer.analyzeCourse(fred));
 		
 	}
 	
@@ -183,10 +184,10 @@ public class PacaAnalyzerTest {
 	@Test
 	public void testCase10() {
 		
-		hardware = NormalCaseAlpaca();
-		hardware.setNumSatellites(-5);
+		fred = NormalCaseAlpaca();
+		fred.hardware.setNumSatellites(-5);
 		
-		assertEquals("Error: Negative satellite number", analyzer.analyzeNumSatellites(hardware.getNumSatellites()));
+		assertEquals("Error: Negative satellite number", analyzer.analyzeNumSatellites(fred));
 		
 	}
 	
@@ -194,10 +195,10 @@ public class PacaAnalyzerTest {
 	@Test
 	public void testCase11() {
 		
-		hardware = NormalCaseAlpaca();
-		hardware.setHeading(400f);
+		fred = NormalCaseAlpaca();
+		fred.hardware.setHeading(400f);
 		
-		assertEquals("Error: High heading value", analyzer.analyzeHeading(hardware.getCompassHeading()));
+		assertEquals("Error: High heading value", analyzer.analyzeHeading(fred));
 		
 	}
 	
@@ -205,10 +206,10 @@ public class PacaAnalyzerTest {
 	@Test
 	public void testCase12() {
 		
-		hardware = NormalCaseAlpaca();
-		hardware.setHeading(-100f);
+		fred = NormalCaseAlpaca();
+		fred.hardware.setHeading(-100f);
 		
-		assertEquals("Error: Negative heading value", analyzer.analyzeHeading(hardware.getCompassHeading()));
+		assertEquals("Error: Negative heading value", analyzer.analyzeHeading(fred));
 		
 	}
 	
@@ -216,10 +217,10 @@ public class PacaAnalyzerTest {
 	@Test
 	public void testCase13() {
 		
-		hardware = NormalCaseAlpaca();
-		hardware.setPitch(200f);
+		fred = NormalCaseAlpaca();
+		fred.hardware.setPitch(200f);
 		
-		assertEquals("Error: Invalid pitch and roll values", analyzer.analyzePosition(hardware.getPitch(), hardware.getRoll()));
+		assertEquals("Error: Invalid pitch and roll values", analyzer.analyzePosition(fred));
 		
 	}
 	
@@ -227,10 +228,10 @@ public class PacaAnalyzerTest {
 	@Test
 	public void testCase14() {
 		
-		hardware = NormalCaseAlpaca();
-		hardware.setPitch(-20f);
+		fred = NormalCaseAlpaca();
+		fred.hardware.setPitch(-20f);
 		
-		assertEquals("Error: Invalid pitch and roll values", analyzer.analyzePosition(hardware.getPitch(), hardware.getRoll()));
+		assertEquals("Error: Invalid pitch and roll values", analyzer.analyzePosition(fred));
 		
 	}
 	
@@ -238,10 +239,10 @@ public class PacaAnalyzerTest {
 	@Test
 	public void testCase15() {
 		
-		hardware = NormalCaseAlpaca();
-		hardware.setRoll(200f);
+		fred = NormalCaseAlpaca();
+		fred.hardware.setRoll(200f);
 		
-		assertEquals("Error: Invalid pitch and roll values", analyzer.analyzePosition(hardware.getPitch(), hardware.getRoll()));
+		assertEquals("Error: Invalid pitch and roll values", analyzer.analyzePosition(fred));
 		
 	}
 	
@@ -249,10 +250,10 @@ public class PacaAnalyzerTest {
 	@Test
 	public void testCase16() {
 		
-		hardware = NormalCaseAlpaca();
-		hardware.setRoll(-200f);
+		fred = NormalCaseAlpaca();
+		fred.hardware.setRoll(-200f);
 		
-		assertEquals("Error: Invalid pitch and roll values", analyzer.analyzePosition(hardware.getPitch(), hardware.getRoll()));
+		assertEquals("Error: Invalid pitch and roll values", analyzer.analyzePosition(fred));
 		
 	}
 	
@@ -260,10 +261,10 @@ public class PacaAnalyzerTest {
 	@Test
 	public void testCase17() {
 		
-		hardware = NormalCaseAlpaca();
-		hardware.setAltitude(10000f);
+		fred = NormalCaseAlpaca();
+		fred.hardware.setAltitude(10000f);
 		
-		assertEquals("Error: High altitude value", analyzer.analyzeAltitude(hardware.getAltitude()));
+		assertEquals("Error: High altitude value", analyzer.analyzeAltitude(fred));
 		
 	}
 	
@@ -271,10 +272,10 @@ public class PacaAnalyzerTest {
 	@Test
 	public void testCase18() {
 		
-		hardware = NormalCaseAlpaca();
-		hardware.setAltitude(-200f);
+		fred = NormalCaseAlpaca();
+		fred.hardware.setAltitude(-200f);
 		
-		assertEquals("Error: Negative altitude value", analyzer.analyzeAltitude(hardware.getAltitude()));
+		assertEquals("Error: Negative altitude value", analyzer.analyzeAltitude(fred));
 		
 	}
 	
@@ -282,10 +283,10 @@ public class PacaAnalyzerTest {
 	@Test
 	public void testCase19() {
 		
-		hardware = NormalCaseAlpaca();
-		hardware.setSignalQuality(7);
+		fred = NormalCaseAlpaca();
+		fred.hardware.setSignalQuality(7);
 		
-		assertEquals("Error: High signal value", analyzer.analyzeSignalQuality(hardware.getSignalQuality()));
+		assertEquals("Error: High signal value", analyzer.analyzeSignalQuality(fred));
 		
 	}
 	
@@ -293,10 +294,10 @@ public class PacaAnalyzerTest {
 	@Test
 	public void testCase20() {
 		
-		hardware = NormalCaseAlpaca();
-		hardware.setSignalQuality(-3);
+		fred = NormalCaseAlpaca();
+		fred.hardware.setSignalQuality(-3);
 		
-		assertEquals("Error: Negative signal value", analyzer.analyzeSignalQuality(hardware.getSignalQuality()));
+		assertEquals("Error: Negative signal value", analyzer.analyzeSignalQuality(fred));
 		
 	}
 	
@@ -304,10 +305,10 @@ public class PacaAnalyzerTest {
 	@Test
 	public void testCase21() {
 		
-		hardware = NormalCaseAlpaca();
-		hardware.setTemperature(5000f);
+		fred = NormalCaseAlpaca();
+		fred.hardware.setTemperature(5000f);
 		
-		assertEquals("Error: High temperature value", analyzer.analyzeTemperature(hardware.getTemperature()));
+		assertEquals("Error: High temperature value", analyzer.analyzeTemperature(fred));
 		
 	}
 	
@@ -315,10 +316,10 @@ public class PacaAnalyzerTest {
 	@Test
 	public void testCase22() {
 		
-		hardware = NormalCaseAlpaca();
-		hardware.setTemperature(-300f);
+		fred = NormalCaseAlpaca();
+		fred.hardware.setTemperature(-300f);
 		
-		assertEquals("Error: Low temperature value", analyzer.analyzeTemperature(hardware.getTemperature()));
+		assertEquals("Error: Low temperature value", analyzer.analyzeTemperature(fred));
 		
 	}
 	

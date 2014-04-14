@@ -22,5 +22,23 @@ public interface PacaTraca {
 	public void setSeaLevelPressure( Float pressure ); // sensor pressure at sea level in hPa
 	public String getSensorID( ); // return the ID of this sensor/collar
 	public void setSensorID( String ID ); // set the value of this sensor's ID
+
+	
+	/**
+	 * Set data for testing
+	 */
+	public void setLongitude( float longitude);
+	public void setLatitude( float latitude );
+	public void setSpeed( float speed );
+	public void setCourse( float course );
+	public void setNumSatellites( int numSatellites );
+	public void setHeading( float heading );
+	public void setPitch( float pitch );
+	public void setRoll( float roll );
+	public void setAltitude( float altitude );
+	public void setSignalQuality( int signalQuality );
+	public void setTemperature( float temperature );
+	public void setFix( boolean fix );
+	public void setIsRandom( boolean r );
 }
 
