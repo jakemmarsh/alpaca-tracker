@@ -86,7 +86,7 @@ public class PacaAnalyzerTest {
 		
 		hardware = NormalCaseAlpaca();
 		
-		assertEquals("", analyzer.analyzeLocation(hardware.getLatitudeDecimalDegrees(),hardware.getLongitudeDecimalDegrees()));
+		assertEquals("", analyzer.analyzeLocationBounds(hardware.getLatitudeDecimalDegrees(),hardware.getLongitudeDecimalDegrees()));
 		assertEquals("Alpaca running", analyzer.analyzeSpeed(hardware.getSpeed()));
 		assertEquals(Float.toString(hardware.getCourse()), analyzer.analyzeCourse(hardware.getCourse()));
 	}
@@ -98,7 +98,7 @@ public class PacaAnalyzerTest {
 		hardware = NormalCaseAlpaca();
 		hardware.setLongitude(200f);
 		
-		assertEquals("", analyzer.analyzeLocation(hardware.getLatitudeDecimalDegrees(),hardware.getLongitudeDecimalDegrees()));
+		assertEquals("", analyzer.analyzeLocationBounds(hardware.getLatitudeDecimalDegrees(),hardware.getLongitudeDecimalDegrees()));
 		
 	}
 	
@@ -109,7 +109,7 @@ public class PacaAnalyzerTest {
 		hardware = NormalCaseAlpaca();
 		hardware.setLongitude(-200f);
 		
-		assertEquals("", analyzer.analyzeLocation(hardware.getLatitudeDecimalDegrees(),hardware.getLongitudeDecimalDegrees()));
+		assertEquals("", analyzer.analyzeLocationBounds(hardware.getLatitudeDecimalDegrees(),hardware.getLongitudeDecimalDegrees()));
 		
 	}
 	
@@ -120,7 +120,7 @@ public class PacaAnalyzerTest {
 		hardware = NormalCaseAlpaca();
 		hardware.setLatitude(100f);
 		
-		assertEquals("", analyzer.analyzeLocation(hardware.getLatitudeDecimalDegrees(),hardware.getLongitudeDecimalDegrees()));
+		assertEquals("", analyzer.analyzeLocationBounds(hardware.getLatitudeDecimalDegrees(),hardware.getLongitudeDecimalDegrees()));
 		
 	}
 	
@@ -131,7 +131,7 @@ public class PacaAnalyzerTest {
 		hardware = NormalCaseAlpaca();
 		hardware.setLatitude(-100f);
 		
-		assertEquals("", analyzer.analyzeLocation(hardware.getLatitudeDecimalDegrees(),hardware.getLongitudeDecimalDegrees()));
+		assertEquals("", analyzer.analyzeLocationBounds(hardware.getLatitudeDecimalDegrees(),hardware.getLongitudeDecimalDegrees()));
 		
 	}
 	

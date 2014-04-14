@@ -1,5 +1,7 @@
 package alpaca;
 
+import java.awt.Polygon;
+
 /**
  * @author Sylvia Allain
  * 
@@ -18,7 +20,26 @@ public class PacaAnalyzer {
 	 * @param latitude, longitude
 	 * @return whether the alpaca is out of bounds
 	 */
-	public String analyzeLocation(float latitude, float longitude) {
+	public String analyzeLocationBounds(float latitude, float longitude) {
+		String state = "";
+		
+		return state;
+	}
+
+	private static int[] xPoints = {10,10,100,200,200};
+	private static int[] yPoints = {10,200,100,200,10};
+	private static Polygon propertyBoundaries = new Polygon(xPoints, yPoints, 5);
+	
+	public static void main (String [] args) {
+		System.out.println(propertyBoundaries.contains(100,120));
+	}
+	
+	/**
+	 * @param latitude, longitude
+	 * @return whether the alpaca is isolated
+	 */
+	public String analyzeLocationIsolation(float latitude, float longitude) {
+		
 		String state = "";
 		
 		return state;
