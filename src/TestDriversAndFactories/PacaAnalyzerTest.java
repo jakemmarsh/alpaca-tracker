@@ -19,14 +19,14 @@ public class PacaAnalyzerTest {
 	
 	PacaWorld pacaWorld;
 	PacaAnalyzer analyzer;
-	PacaTracaTestHardwareFactory factory;
+	PacaTracaHardwareFactory factory;
 	Alpaca fred;
 	
 	@Before
 	public void setUp() throws Exception {
 		pacaWorld = new PacaWorld();
 		analyzer = new PacaAnalyzer(pacaWorld);
-		factory = new PacaTracaTestHardwareFactory();
+		factory = new PacaTracaHardwareFactory();
 		fred = new Alpaca();
 		fred.hardware.setIsRandom(false);
 	}

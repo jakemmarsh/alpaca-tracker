@@ -64,7 +64,7 @@ public class PacaAnalyzer {
 		else {
 			
 			PacaAlert.EventType event = PacaAlert.EventType.OutOfBounds;
-			//pacaWorld.CreateAlert()
+			pacaWorld.CreateAlert(alpaca, event);
 			
 			state = "Out of bounds";
 		}

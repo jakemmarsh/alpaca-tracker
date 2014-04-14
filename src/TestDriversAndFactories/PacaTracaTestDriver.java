@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Random;
 
 import PacaTraca.PacaTraca;
-
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -19,14 +18,14 @@ import org.junit.Test;
 
 public class PacaTracaTestDriver {
 
-	private HashMap< String, PacaTracaTestHardware > m_sensors = new HashMap< String, PacaTracaTestHardware >( );
-	private PacaTracaTestHardwareFactory factory = new PacaTracaTestHardwareFactory();
+	private HashMap< String, PacaTraca > m_sensors = new HashMap< String, PacaTraca >( );
+	private PacaTracaHardwareFactory factory = new PacaTracaHardwareFactory();
 	public List<String> sensorNames = new ArrayList<String>();
 	Random rand = new Random();
 
 	//Random Alpaca Data
-	public PacaTracaTestHardware createAlpacaHardware( String ID ) {
-		PacaTracaTestHardware hardware = factory.createPacaTraca(ID);
+	public PacaTraca createAlpacaHardware( String ID ) {
+		PacaTraca hardware = factory.createPacaTraca(ID);
 		m_sensors.put(ID, hardware);
 		sensorNames.add(ID);
 		return hardware;
@@ -47,7 +46,7 @@ public class PacaTracaTestDriver {
 			float temperature = getRandomTemperature(s);
 			boolean fix = getRandomFix(s);
 			
-			PacaTracaTestHardware hardware = m_sensors.get(s);
+			PacaTraca hardware = m_sensors.get(s);
 
 			hardware.setLongitude(longitude);
 			hardware.setLatitude(latitude);
