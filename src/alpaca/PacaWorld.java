@@ -21,6 +21,7 @@ public class PacaWorld {
 	
 	public List<PacaAlert> alerts = new ArrayList<PacaAlert>();
 	public ArrayList<float[]> farmCoordinates;
+	
 	private float longitudeFloor = -180f;
 	private float longitudeCeiling = 180f;
 	private int numSatellites = 100;
@@ -112,4 +113,5 @@ public class PacaWorld {
 	
 	public float returnTemperatureCeiling() { return temperatureCeiling; }
 	
+	public ArrayList<float[]> returnFarmCoordinates() { return farmCoordinates; };
 }

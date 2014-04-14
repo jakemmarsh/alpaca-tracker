@@ -27,17 +27,40 @@ public class PacaAnalyzer {
 	 * @return whether the alpaca is out of bounds
 	 */
 	public String analyzeLocationBounds(float latitude, float longitude) {
+		
 		String state = "";
+		int roundWeight = 10000;
+		
+		int weightedLatitude = (int)(latitude * roundWeight);
+		int weightedLongitude = (int)(longitude * roundWeight);
+		
+		ArrayList<float[]> farmCoordinates = pacaWorld.returnFarmCoordinates();
+
+	
+		int[] xPoints = new int[farmCoordinates.size()];
+		int[] yPoints = new int[farmCoordinates.size()];
+		
+		int i = 0;
+		int xCoor;
+		int yCoor;
+		for (float[] tuple : farmCoordinates) {
+			xCoor = (int) (tuple[0] * roundWeight);
+			yCoor = (int) (tuple[1] * roundWeight);
+			
+			xPoints[i] = xCoor;
+			yPoints[i] = yCoor;
+			
+			i ++;
+		}
+		
+		Polygon propertyPolygon = new Polygon(xPoints, yPoints, farmCoordinates.size());
+
+		if (propertyPolygon.contains(weightedLatitude, weightedLongitude))
+			state = "In bounds";
+		else
+			state = "Out of bounds";
 		
 		return state;
-	}
-
-	private static int[] xPoints = {10,10,100,200,200};
-	private static int[] yPoints = {10,200,100,200,10};
-	private static Polygon propertyBoundaries = new Polygon(xPoints, yPoints, 5);
-	
-	public static void main (String [] args) {
-		System.out.println(propertyBoundaries.contains(100,120));
 	}
 	
 	/**
