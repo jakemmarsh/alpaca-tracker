@@ -2,6 +2,8 @@ package alpaca;
 
 import java.awt.Polygon;
 
+import java.util.ArrayList;
+
 /**
  * @author Sylvia Allain
  * 
@@ -14,6 +16,10 @@ public class PacaAnalyzer {
 	public PacaAnalyzer(PacaWorld pacaWorld)
 	{
 		this.pacaWorld = pacaWorld;
+	}
+	
+	public void analyze (ArrayList alpacas)
+	{
 	}
 	
 	/**

@@ -4,12 +4,32 @@ define(['./index'], function (controllers) {
 
         $scope.alerts = $rootScope.alerts;
 
-        $scope.markAsRead = function(alert) {
-            for(var i = 0; i < $scope.alerts.length; i++) {
-                if($scope.alerts[i] === alert) {
-                    $scope.alerts.splice(i, 1);
+        var keys = $scope.alerts.$getIndex();
+        $scope.displayAlerts = [];
+        for(var i = 0; i < keys.length; i++) {
+            if($scope.alerts[keys[i]].read === false) {
+                var alert = angular.copy($scope.alerts[keys[i]]);
+                alert.key = keys[i];
+                $scope.displayAlerts.push(alert);
+            }
+        }
+
+        $scope.alerts.$on("change", function() {
+            var keys = $scope.alerts.$getIndex();
+
+            $scope.displayAlerts = [];
+
+            for(var i = 0; i < keys.length; i++) {
+                if($scope.alerts[keys[i]].read === false) {
+                    var alert = angular.copy($scope.alerts[keys[i]]);
+                    alert.key = keys[i];
+                    $scope.displayAlerts.push(alert);
                 }
             }
+        });
+
+        $scope.markAsRead = function(alert) {
+            $scope.alerts.$child(alert.key).$update({ read: true });
         };
 
     }]);

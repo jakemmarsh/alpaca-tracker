@@ -1,6 +1,7 @@
 
+import alpaca.PacaAnalyzer;
 import alpaca.PacaCollection;
-import TestDriversAndFactories.PacaTracaTestDriver;
+import alpaca.PacaWorld;
 
 /**
  * Handles program flow and initializes base-level code.
@@ -12,12 +13,16 @@ public class Program {
 	
 	// The collection of alpacas
 	private PacaCollection collection;
-
+	private PacaAnalyzer   analyzer; 
+	private PacaWorld      world;
+	
 	public Program ()
 	{
 		System.out.println ("Starting alpaca tracker");
 		updateSpeed = 2;
 		collection  = new PacaCollection ();
+		world       = new PacaWorld      ();
+		analyzer    = new PacaAnalyzer   (world);
 		update ();
 	}
 
@@ -30,8 +35,8 @@ public class Program {
 		{
 			try 
 			{			
-				System.out.println ("Update");
 				collection.update ();
+				analyzer.analyze  (collection.getAlpacas ());
 			    Thread.sleep (updateSpeed * 1000);
 			} 
 			catch (InterruptedException e) 
@@ -46,6 +51,6 @@ public class Program {
 	 */
 	public void Exit ()
 	{
-		
+		System.out.println ("Quiting alpaca tracker");
 	}
 }

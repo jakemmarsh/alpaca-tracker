@@ -95,8 +95,16 @@ public class PacaCollection {
 	{
 		for (int i = 0; i < alpacas.size (); i ++)
 		{
-			alpacas.get (i).updateDB ();	
+			Alpaca a = alpacas.get (i);			
+			Firebase dataRef = new Firebase (a.dbRef);
+			dataRef.child ("lat").setValue ((a.hardware.getLatitudeDecimalDegrees  ()));
+			dataRef.child ("lng").setValue ((a.hardware.getLongitudeDecimalDegrees ()));
 		}
+	}
+	
+	public ArrayList <Alpaca> getAlpacas ()
+	{
+		return alpacas; 
 	}
 }
 
