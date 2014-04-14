@@ -18,9 +18,15 @@ public class PacaAnalyzer {
 		this.pacaWorld = pacaWorld;
 	}
 	
-	public void analyze (ArrayList<Alpaca> alpacas)
-	{
-		
+	/**
+	 * Calls all analysis methods on a container of alpacas.
+	 * @param alpacas
+	 */
+	public void analyze (ArrayList<Alpaca> alpacas){
+		for(Alpaca a : alpacas){
+			analyzeLocationBounds(a);
+			analyzeLocationIsolation(a, alpacas);
+		}
 	}
 	
 	/**
@@ -73,15 +79,45 @@ public class PacaAnalyzer {
 	}
 	
 	/**
-	 * @param latitude, longitude
+	 * @author Jonathan Cole
+	 * Compares the alpaca specified against the list. If it's more than 10 feet away
+	 * from any other alpaca, it is considered isolated.
 	 * @return whether the alpaca is isolated
 	 */
-	public String analyzeLocationIsolation(Alpaca alpaca) {
-		
-		float latitude = alpaca.hardware.getLatitudeDecimalDegrees();
-		float longitude = alpaca.hardware.getLongitudeDecimalDegrees();
+	public String analyzeLocationIsolation(Alpaca alpaca, ArrayList<Alpaca> alpacaList) {
+		ArrayList<Alpaca> alpacas = alpacaList;
+		//remove the alpaca if it's in the list.
+		if(alpacas.contains(alpaca)){
+			alpacas.remove(alpaca);
+		}
+		float baseLatitude = alpaca.hardware.getLatitudeDecimalDegrees();
+		float baseLongitude = alpaca.hardware.getLongitudeDecimalDegrees();
 		
 		String state = "";
+		double lowestDistance = 1000000000;
+		for(Alpaca a : alpacas){
+			float alpLatitude = a.hardware.getLatitudeDecimalDegrees();
+			float alpLongitude = a.hardware.getLongitudeDecimalDegrees();
+			
+			//Get distance between points (baseLatitude, baseLongitude) and (alpLatitude, alpLongitude)
+			double t1 = Math.pow(alpLatitude - baseLatitude, 2);
+			double t2 = Math.pow(alpLongitude - baseLongitude, 2);
+			double distance = Math.sqrt(t1 + t2);
+			
+			if(distance < lowestDistance){
+				lowestDistance = distance;
+			}
+			
+		}
+		
+		//Create an alert if no alpacas are closer than maxAlpacaGroupDistance units away.
+		if(lowestDistance > pacaWorld.returnMaxAlpacaGroupDistance()){
+			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.Isolated);
+			state = "Alpaca is isolated";
+		}
+		else{
+			state = "Alpaca is grouped";
+		}
 		
 		return state;
 	}
