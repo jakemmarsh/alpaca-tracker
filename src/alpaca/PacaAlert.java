@@ -30,20 +30,24 @@ public class PacaAlert {
 		type = t;
 	}
 		
-	/** Returns a string in the form
-	 *  "Alpaca [name] [information]"
+	/**
+	 * @author Jonathan Cole
+	 * Returns a string in the form
+	 * "Alpaca [name] [information]"
 	 */
 	public String ToString(){
 		StringBuilder s = new StringBuilder();
-		s.append("Alpaca");
+		s.append(alpaca.name);
 		s.append(" ");
-		//s.append(alpaca.name);
-		s.append(" ");
+		//s.append("[");
+		//s.append(alpaca.getTrackerID());
+		//s.append("] ");
 		s.append(GetInfoPostfix());
 		return s.toString();
 	}
 	
 	/**
+	 * @author Jonathan Cole
 	 * Returns a string representing the English form of the current EventType.
 	 */
 	public String GetInfoPostfix(){
@@ -62,7 +66,7 @@ public class PacaAlert {
 				outStr = "is sick :(";
 				break;
 			case Isolated:
-				outStr = "is lonely :(";
+				outStr = "is isolated :(";
 				break;
 			case OutOfBounds:
 				outStr = "is out of bounds";

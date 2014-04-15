@@ -3,6 +3,7 @@ package alpaca;
 import java.awt.Polygon;
 
 import java.util.ArrayList;
+import helpers.Pair;
 
 /**
  * @author Sylvia Allain, Jonathan Cole
@@ -85,27 +86,23 @@ public class PacaAnalyzer {
 	 * @return whether the alpaca is isolated
 	 */
 	public String analyzeLocationIsolation(Alpaca alpaca, ArrayList<Alpaca> alpacaList) {
-		
-		float baseLatitude = alpaca.hardware.getLatitudeDecimalDegrees();
-		float baseLongitude = alpaca.hardware.getLongitudeDecimalDegrees();
-		
+		//get position on earth in feet from (0, 0)
+		Pair baseFeet = degreesToFeet(alpaca.hardware.getLatitudeDecimalDegrees(), alpaca.hardware.getLongitudeDecimalDegrees());
 		String state = "";
 		boolean firstLoop = true;
 		double lowestDistance = 0;
 		for(Alpaca a : alpacaList){
 			//Only run if the compared alpaca and the alpaca from the list are different.
 			if(a != alpaca){
-				float alpLatitude = a.hardware.getLatitudeDecimalDegrees();
-				float alpLongitude = a.hardware.getLongitudeDecimalDegrees();
-				
+				Pair alpFeet = degreesToFeet(a.hardware.getLatitudeDecimalDegrees(), a.hardware.getLongitudeDecimalDegrees());
 				//Get distance between points (baseLatitude, baseLongitude) and (alpLatitude, alpLongitude)
-				double t1 = Math.pow(alpLatitude - baseLatitude, 2);
-				double t2 = Math.pow(alpLongitude - baseLongitude, 2);
+				double t1 = Math.pow(alpFeet.x - baseFeet.x, 2);
+				double t2 = Math.pow(alpFeet.y - baseFeet.y, 2);
 				double distance = Math.sqrt(t1 + t2);
 				
 				if(distance < lowestDistance || firstLoop){
 					lowestDistance = distance;
-					if(firstLoop) firstLoop = false;
+					firstLoop = false;
 				}
 			}
 			
@@ -312,5 +309,22 @@ public class PacaAnalyzer {
 		String state = Boolean.toString(fix);
 		
 		return state;
+	}
+	
+	/**
+	 * @author Jonathan Cole
+	 * Converts decimal degrees to feet, assuming a spherical projection of coordinates.
+	 * TODO: Refactor into a more relevant class
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	public Pair degreesToFeet(float x, float y){
+		//60 nautical miles in a degree of latitude, 6076 feet in a nautical mile
+		float xFeet = x * 60 * 6076;
+		//A degree longitude is 60 nm at the equator and 0 nm at the poles.
+		float yFeet = ((float)Math.cos((double)y) * 60) * 6076;
+		Pair p = new Pair(xFeet, yFeet);
+		return p;
 	}
 }

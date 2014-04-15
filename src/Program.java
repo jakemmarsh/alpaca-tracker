@@ -8,8 +8,8 @@ import alpaca.PacaWorld;
  */
 public class Program {
 	
-	// An update speed in seconds
-	private int updateSpeed; 
+	// The analysis update speed in seconds
+	private int updateSpeed = 5; 
 	
 	// The collection of alpacas
 	private PacaCollection collection;
@@ -19,7 +19,6 @@ public class Program {
 	public Program ()
 	{
 		System.out.println ("Starting alpaca tracker");
-		updateSpeed = 2;
 		collection  = new PacaCollection ();
 		world       = new PacaWorld      ();
 		analyzer    = new PacaAnalyzer   (world);
