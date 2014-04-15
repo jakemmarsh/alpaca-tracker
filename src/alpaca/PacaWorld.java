@@ -29,6 +29,8 @@ public class PacaWorld {
 	private float altitudeCeiling = 8900;
 	private float temperatureFloor = -140f;
 	private float temperatureCeiling = 4000f;
+	//The maximum distance an alpaca can be from another before being considered isolated
+	private float maxAlpacaGroupDistance = 10f;
 	private HashMap alert;
 	
 	public PacaWorld() {
@@ -104,6 +106,8 @@ public class PacaWorld {
 	
 	public void setTemperatureCeiling(float ceiling) { this.temperatureCeiling = ceiling; }
 	
+	public void setMaxAlpacaGroupDistance(float distance) { this.maxAlpacaGroupDistance = distance; }
+	
 	public float returnLongitudeFloor() { return longitudeFloor; }
 	
 	public float returnLongitudeCeiling() { return longitudeCeiling; }
@@ -117,6 +121,8 @@ public class PacaWorld {
 	public float returnTemperatureFloor() { return temperatureFloor; }
 	
 	public float returnTemperatureCeiling() { return temperatureCeiling; }
+	
+	public float returnMaxAlpacaGroupDistance() { return maxAlpacaGroupDistance; }
 	
 	public ArrayList<float[]> returnFarmCoordinates() { return farmCoordinates; };
 }

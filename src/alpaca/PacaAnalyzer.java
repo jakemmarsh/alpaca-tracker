@@ -5,7 +5,7 @@ import java.awt.Polygon;
 import java.util.ArrayList;
 
 /**
- * @author Sylvia Allain
+ * @author Sylvia Allain, Jonathan Cole
  * 
  * Analyzes Alpaca objects on an ongoing basis or on-demand.
  */
@@ -18,9 +18,15 @@ public class PacaAnalyzer {
 		this.pacaWorld = pacaWorld;
 	}
 	
-	public void analyze (ArrayList<Alpaca> alpacas)
-	{
-		
+	/**
+	 * Calls all analysis methods on a container of alpacas.
+	 * @param alpacas
+	 */
+	public void analyze (ArrayList<Alpaca> alpacas){
+		for(Alpaca a : alpacas){
+			analyzeLocationBounds(a);
+			analyzeLocationIsolation(a, alpacas);
+		}
 	}
 	
 	/**
@@ -63,10 +69,7 @@ public class PacaAnalyzer {
 		if (propertyPolygon.contains(weightedLatitude, weightedLongitude))
 			state = "In bounds";
 		else {
-			
-			PacaAlert.EventType event = PacaAlert.EventType.OutOfBounds;
-			pacaWorld.CreateAlert(alpaca, event);
-			
+			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.OutOfBounds);
 			state = "Out of bounds";
 		}
 		
@@ -76,14 +79,46 @@ public class PacaAnalyzer {
 	/**
 	 * @author Sylvia Allain
 	 * @param latitude, longitude
+	 * @author Jonathan Cole
+	 * Compares the alpaca specified against the list. If it's more than 10 feet away
+	 * from any other alpaca, it is considered isolated.
 	 * @return whether the alpaca is isolated
 	 */
-	public String analyzeLocationIsolation(Alpaca alpaca) {
+	public String analyzeLocationIsolation(Alpaca alpaca, ArrayList<Alpaca> alpacaList) {
 		
-		float latitude = alpaca.hardware.getLatitudeDecimalDegrees();
-		float longitude = alpaca.hardware.getLongitudeDecimalDegrees();
+		float baseLatitude = alpaca.hardware.getLatitudeDecimalDegrees();
+		float baseLongitude = alpaca.hardware.getLongitudeDecimalDegrees();
 		
 		String state = "";
+		boolean firstLoop = true;
+		double lowestDistance = 0;
+		for(Alpaca a : alpacaList){
+			//Only run if the compared alpaca and the alpaca from the list are different.
+			if(a != alpaca){
+				float alpLatitude = a.hardware.getLatitudeDecimalDegrees();
+				float alpLongitude = a.hardware.getLongitudeDecimalDegrees();
+				
+				//Get distance between points (baseLatitude, baseLongitude) and (alpLatitude, alpLongitude)
+				double t1 = Math.pow(alpLatitude - baseLatitude, 2);
+				double t2 = Math.pow(alpLongitude - baseLongitude, 2);
+				double distance = Math.sqrt(t1 + t2);
+				
+				if(distance < lowestDistance || firstLoop){
+					lowestDistance = distance;
+					if(firstLoop) firstLoop = false;
+				}
+			}
+			
+		}
+		
+		//Create an alert if no alpacas are closer than maxAlpacaGroupDistance units away.
+		if(lowestDistance > pacaWorld.returnMaxAlpacaGroupDistance()){
+			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.Isolated);
+			state = "Alpaca is isolated";
+		}
+		else{
+			state = "Alpaca is grouped";
+		}
 		
 		return state;
 	}

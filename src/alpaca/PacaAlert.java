@@ -2,7 +2,7 @@ package alpaca;
 
 /**
  * @author Jonathan Cole
- *
+ * Framework for alerts sent to the frontend.
  */
 public class PacaAlert {
 	public boolean readByUser = false;
