@@ -23,106 +23,16 @@ public class PacaTracaTestDriver {
 	public List<String> sensorNames = new ArrayList<String>();
 	Random rand = new Random();
 
-	//Random Alpaca Data
+	/**
+	 * @author Sylvia Allain
+	 * @param ID
+	 * @return new alpaca hardware
+	 */
 	public PacaTraca createAlpacaHardware( String ID ) {
 		PacaTraca hardware = factory.createPacaTraca(ID);
 		m_sensors.put(ID, hardware);
 		sensorNames.add(ID);
 		return hardware;
-	}
-	
-	public void randomUpdateDummyTestSensors() {
-		for(String s : sensorNames){
-			float longitude = getRandomLongitude(s);
-			float latitude = getRandomLatitude(s);
-			float speed = getRandomSpeed(s);
-			float course = getRandomCourse(s);
-			int numSatellites = getRandomNumSatellites(s);
-			float heading = getRandomHeading(s);
-			float pitch = getRandomPitch(s);
-			float roll = getRandomRoll(s);
-			float altitude = getRandomAltitude(s);
-			int signalQuality = getRandomSignalQuality(s);
-			float temperature = getRandomTemperature(s);
-			boolean fix = getRandomFix(s);
-			
-			PacaTraca hardware = m_sensors.get(s);
-
-			hardware.setLongitude(longitude);
-			hardware.setLatitude(latitude);
-			hardware.setSpeed(speed);
-			hardware.setCourse(course);
-			hardware.setNumSatellites(numSatellites);
-			hardware.setHeading(heading);
-			hardware.setPitch(pitch);
-			hardware.setRoll(roll);
-			hardware.setAltitude(altitude);
-			hardware.setSignalQuality(signalQuality);
-			hardware.setTemperature(temperature);
-			hardware.setFix(fix);
-		}
-	}
-	
-	/**
-	 * @param ID
-	 * @return a random longitude coordinate between -68 and -69, roughly in Orono
-	 */
-	private float getRandomLongitude(String ID) {
-		int floor = 68;
-		int ceiling = 69;
-		
-		return rand.nextFloat() * (ceiling - floor) + floor;
-	}
-	
-	/**
-	 * @param ID
-	 * @return a random latitude coordinate between 44 and 45, roughly in Orono
-	 */
-	private float getRandomLatitude(String ID) {
-		int floor = 44;
-		int ceiling = 45;
-		
-		return rand.nextFloat() * (ceiling - floor) + floor;
-	}
-	
-	private float getRandomSpeed(String ID) {
-		return rand.nextFloat() * 15;
-	}
-	
-	private float getRandomCourse(String ID) {
-		return rand.nextFloat() * 360;
-	}
-	
-	private int getRandomNumSatellites(String ID) {
-		return rand.nextInt(5);
-	}
-	
-	private float getRandomHeading(String ID) {
-		return rand.nextFloat() * 360;
-	}
-	
-	private float getRandomPitch(String ID) {
-		return rand.nextFloat() * 180;
-	}
-	
-	private float getRandomRoll(String ID) {
-		return rand.nextFloat() * 180 - 90;
-	}
-	
-	private float getRandomAltitude(String ID) {
-		return rand.nextFloat() * 1000;
-	}
-	
-	private int getRandomSignalQuality(String ID) {
-		return rand.nextInt(5);
-	}
-	
-	private float getRandomTemperature(String ID) {
-		return rand.nextFloat() * 105;
-	}
-	
-	private boolean getRandomFix(String ID) {
-		return true;
 	}
 	
 	/**

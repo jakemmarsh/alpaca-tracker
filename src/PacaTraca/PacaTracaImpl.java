@@ -93,6 +93,7 @@ public class PacaTracaImpl implements PacaTraca {
 	}
 	
 	/**
+	 * @author Sylvia Allain
 	 * negative == South
 	 * @see com.pacatraca.PacaTraca#getLatitudeDecimalDegrees()
 	 */
@@ -105,6 +106,7 @@ public class PacaTracaImpl implements PacaTraca {
 	}
 
 	/**
+	 * @author Sylvia Allain
 	 * negative == West
 	 * @see com.pacatraca.PacaTraca#getLongitudeDecimalDegrees()
 	 */
@@ -117,6 +119,7 @@ public class PacaTracaImpl implements PacaTraca {
 	}
 
 	/**
+	 * @author Sylvia Allain
 	 * feet per second
 	 * @see com.pacatraca.PacaTraca#getSpeed()
 	 */
@@ -129,6 +132,7 @@ public class PacaTracaImpl implements PacaTraca {
 	}
 
 	/**
+	 * @author Sylvia Allain
 	 * decimal degrees
 	 * @see com.pacatraca.PacaTraca#getCourse()
 	 */
@@ -141,6 +145,7 @@ public class PacaTracaImpl implements PacaTraca {
 	}
 
 	/**
+	 * @author Sylvia Allain
 	 * @return feet from sea level
 	 * @see com.pacatraca.PacaTraca#getAltitude()
 	 */
@@ -153,6 +158,7 @@ public class PacaTracaImpl implements PacaTraca {
 	}
 
 	/**
+	 * @author Sylvia Allain
 	 * @return number of satellites GPS found
 	 * @see com.pacatraca.PacaTraca#getNumSatellites()
 	 */
@@ -166,6 +172,7 @@ public class PacaTracaImpl implements PacaTraca {
 	}
 
 	/**
+	 * @author Sylvia Allain
 	 * true if GPS has a fix on at least one satellite
 	 * @see com.pacatraca.PacaTraca#haveFix()
 	 */
@@ -178,6 +185,7 @@ public class PacaTracaImpl implements PacaTraca {
 	}
 
 	/**
+	 * @author Sylvia Allain
 	 * Returns a signal quality of 1-5. 5 is the best quality.
 	 * @see com.pacatraca.PacaTraca#getSignalQuality()
 	 */
@@ -191,6 +199,7 @@ public class PacaTracaImpl implements PacaTraca {
 	
 	@Override
 	/**
+	 * @author Sylvia Allain
 	 * @return The temperature in Fahrenheit
 	 */
 	public Float getTemperature() {
@@ -202,6 +211,7 @@ public class PacaTracaImpl implements PacaTraca {
 
 	@Override
 	/**
+	 * @author Sylvia Allain
 	 * Returns the motion sensor's roll reading
 	 * -rotate about y (-90 to 90 degrees)
 	 */
@@ -214,6 +224,7 @@ public class PacaTracaImpl implements PacaTraca {
 
 	@Override
 	/**
+	 * @author Sylvia Allain
 	 * Returns the motion sensor's pitch reading
 	 * -rotate about x degrees (0-180 degrees)
 	 */
@@ -226,6 +237,7 @@ public class PacaTracaImpl implements PacaTraca {
 
 	@Override
 	/**
+	 * @author Sylvia Allain
 	 * Returns the motion sensor's heading reading
 	 * -heading 0-360 degrees
 	 */
@@ -238,6 +250,7 @@ public class PacaTracaImpl implements PacaTraca {
 
 	@Override
 	/**
+	 * @author Sylvia Allain
 	 * I have no idea
 	 * sensor pressure at sea level in hPa
 	 */
@@ -247,6 +260,7 @@ public class PacaTracaImpl implements PacaTraca {
 	}	
 	
 	/**
+	 * @author Sylvia Allain
 	 * @param ID
 	 * @return a random longitude coordinate between -68 and -69, roughly in Orono
 	 */
@@ -258,6 +272,7 @@ public class PacaTracaImpl implements PacaTraca {
 	}
 	
 	/**
+	 * @author Sylvia Allain
 	 * @param ID
 	 * @return a random latitude coordinate between 44 and 45, roughly in Orono
 	 */
@@ -268,48 +283,89 @@ public class PacaTracaImpl implements PacaTraca {
 		return rand.nextFloat() * (ceiling - floor) + floor;
 	}
 	
+	/**
+	 * @author Sylvia Allain
+	 * @return random speed between 0 and 15
+	 */
 	private float getRandomSpeed() {
 		return rand.nextFloat() * 15;
 	}
 	
+	/**
+	 * @author Sylvia Allain
+	 * @return random course between 0 and 360
+	 */
 	private float getRandomCourse() {
 		return rand.nextFloat() * 360;
 	}
 	
+	/**
+	 * @author Sylvia Allain
+	 * @return random number of satellites between 0 and 5
+	 */
 	private int getRandomNumSatellites() {
-		return rand.nextInt(5);
+		return rand.nextInt(6);
 	}
 	
+	/**
+	 * @author Sylvia Allain
+	 * @return random heading between 0 and 360
+	 */
 	private float getRandomHeading() {
 		return rand.nextFloat() * 360;
 	}
 	
+	/**
+	 * @author Sylvia Allain
+	 * @return random pitch between 0 and 180
+	 */
 	private float getRandomPitch() {
 		return rand.nextFloat() * 180;
 	}
 	
+	/**
+	 * @author Sylvia Allain
+	 * @return random roll between -90 and 90
+	 */
 	private float getRandomRoll() {
 		return rand.nextFloat() * 180 - 90;
 	}
 	
+	/**
+	 * @author Sylvia Allain
+	 * @return random altitude between 0 and 1000
+	 */
 	private float getRandomAltitude() {
 		return rand.nextFloat() * 1000;
 	}
 	
+	/**
+	 * @author Sylvia Allain
+	 * @return random signal quality between 0 and 5
+	 */
 	private int getRandomSignalQuality() {
-		return rand.nextInt(5);
+		return rand.nextInt(6);
 	}
 	
+	/**
+	 * @author Sylvia Allain
+	 * @return random temperature between 0 and 105
+	 */
 	private float getRandomTemperature() {
 		return rand.nextFloat() * 105;
 	}
 	
+	/**
+	 * @author Sylvia Allain
+	 * @return boolean fix
+	 */
 	private boolean getRandomFix() {
 		return true;
 	}
 	
 	
 	/**
+	 * @author Sylvia Allain
 	 * Set data for testing
 	 */
 	

@@ -22,6 +22,11 @@ public class PacaAnalyzerTest {
 	PacaTracaHardwareFactory factory;
 	Alpaca fred;
 	
+	/**
+	 * @author Sylvia Allain
+	 * @throws Exception
+	 * initializes test variables
+	 */
 	@Before
 	public void setUp() throws Exception {
 		pacaWorld = new PacaWorld();
@@ -48,7 +53,11 @@ public class PacaAnalyzerTest {
 	 *
 	 */
 	
-	//Set Normal Case
+	/**
+	 * @author Sylvia Allain
+	 * @return alpaca
+	 * Set Normal Case
+	 */
 	@Ignore
 	private Alpaca NormalCaseAlpaca() {
 
@@ -82,7 +91,10 @@ public class PacaAnalyzerTest {
 		
 	}
 	
-	//Normal Case
+	/**
+	 * @author Sylvia Allain
+	 * Normal Case
+	 */
 	@Test
 	public void testCase1() {
 		
@@ -93,7 +105,10 @@ public class PacaAnalyzerTest {
 		assertEquals(Float.toString(fred.hardware.getCourse()), analyzer.analyzeCourse(fred));
 	}
 	
-	//High Longitude
+	/**
+	 * @author Sylvia Allain
+	 * High Longitude
+	 */
 	@Test
 	public void testCase2() {
 		
@@ -104,7 +119,10 @@ public class PacaAnalyzerTest {
 		
 	}
 	
-	//Low Longitude
+	/**
+	 * @author Sylvia Allain
+	 * Low Longitude
+	 */
 	@Test
 	public void testCase3() {
 		
@@ -115,7 +133,10 @@ public class PacaAnalyzerTest {
 		
 	}
 	
-	//High Latitude
+	/**
+	 * @author Sylvia Allain
+	 * High Latitude
+	 */
 	@Test
 	public void testCase4() {
 		
@@ -126,7 +147,10 @@ public class PacaAnalyzerTest {
 		
 	}
 	
-	//Low Latitude
+	/**
+	 * @author Sylvia Allain
+	 * Low Latitude
+	 */
 	@Test
 	public void testCase5() {
 		
@@ -137,7 +161,10 @@ public class PacaAnalyzerTest {
 		
 	}
 	
-	//High Speed
+	/**
+	 * @author Sylvia Allain
+	 * High Speed
+	 */
 	@Test
 	public void testCase6() {
 		
@@ -148,7 +175,10 @@ public class PacaAnalyzerTest {
 		
 	}
 	
-	//Low Speed
+	/**
+	 * @author Sylvia Allain
+	 * Low Speed
+	 */
 	@Test
 	public void testCase7() {
 		
@@ -159,7 +189,10 @@ public class PacaAnalyzerTest {
 		
 	}
 	
-	//High Course
+	/**
+	 * @author Sylvia Allain
+	 * High Course
+	 */
 	@Test
 	public void testCase8() {
 		
@@ -169,7 +202,10 @@ public class PacaAnalyzerTest {
 		
 	}
 	
-	//Low Course
+	/**
+	 * @author Sylvia Allain
+	 * Low Course
+	 */
 	@Test
 	public void testCase9() {
 		
@@ -180,7 +216,10 @@ public class PacaAnalyzerTest {
 		
 	}
 	
-	//Low NumSatelites
+	/**
+	 * @author Sylvia Allain
+	 * Low NumSatelites
+	 */
 	@Test
 	public void testCase10() {
 		
@@ -191,7 +230,10 @@ public class PacaAnalyzerTest {
 		
 	}
 	
-	//High Heading
+	/**
+	 * @author Sylvia Allain
+	 * High Heading
+	 */
 	@Test
 	public void testCase11() {
 		
@@ -202,7 +244,10 @@ public class PacaAnalyzerTest {
 		
 	}
 	
-	//Low Heading
+	/**
+	 * @author Sylvia Allain
+	 * Low Heading
+	 */
 	@Test
 	public void testCase12() {
 		
@@ -213,7 +258,10 @@ public class PacaAnalyzerTest {
 		
 	}
 	
-	//High Pitch
+	/**
+	 * @author Sylvia Allain
+	 * High Pitch
+	 */
 	@Test
 	public void testCase13() {
 		
@@ -224,7 +272,10 @@ public class PacaAnalyzerTest {
 		
 	}
 	
-	//Low Pitch
+	/**
+	 * @author Sylvia Allain
+	 * Low Pitch
+	 */
 	@Test
 	public void testCase14() {
 		
@@ -235,7 +286,10 @@ public class PacaAnalyzerTest {
 		
 	}
 	
-	//High Roll
+	/**
+	 * @author Sylvia Allain
+	 * High Roll
+	 */
 	@Test
 	public void testCase15() {
 		
@@ -246,7 +300,10 @@ public class PacaAnalyzerTest {
 		
 	}
 	
-	//Low Roll
+	/**
+	 * @author Sylvia Allain
+	 * Low Roll
+	 */
 	@Test
 	public void testCase16() {
 		
@@ -257,7 +314,10 @@ public class PacaAnalyzerTest {
 		
 	}
 	
-	//High Altitude
+	/**
+	 * @author Sylvia Allain
+	 * High Altitude
+	 */
 	@Test
 	public void testCase17() {
 		
@@ -268,7 +328,10 @@ public class PacaAnalyzerTest {
 		
 	}
 	
-	//Low Altitude
+	/**
+	 * @author Sylvia Allain
+	 * Low Altitude
+	 */
 	@Test
 	public void testCase18() {
 		
@@ -279,7 +342,10 @@ public class PacaAnalyzerTest {
 		
 	}
 	
-	//High Signal Quality
+	/**
+	 * @author Sylvia Allain
+	 * High Signal Quality
+	 */
 	@Test
 	public void testCase19() {
 		
@@ -290,7 +356,10 @@ public class PacaAnalyzerTest {
 		
 	}
 	
-	//Low Signal Quality
+	/**
+	 * @author Sylvia Allain
+	 * Low Signal Quality
+	 */
 	@Test
 	public void testCase20() {
 		
@@ -301,7 +370,10 @@ public class PacaAnalyzerTest {
 		
 	}
 	
-	//High Temperature
+	/**
+	 * @author Sylvia Allain
+	 * High Temperature
+	 */
 	@Test
 	public void testCase21() {
 		
@@ -312,7 +384,10 @@ public class PacaAnalyzerTest {
 		
 	}
 	
-	//Low Temperature
+	/**
+	 * @author Sylvia Allain
+	 * Low Temperature
+	 */
 	@Test
 	public void testCase22() {
 		

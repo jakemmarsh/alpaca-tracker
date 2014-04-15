@@ -24,6 +24,7 @@ public class PacaAnalyzer {
 	}
 	
 	/**
+	 * @author Sylvia Allain
 	 * @param latitude, longitude
 	 * @return whether the alpaca is out of bounds
 	 */
@@ -73,6 +74,7 @@ public class PacaAnalyzer {
 	}
 	
 	/**
+	 * @author Sylvia Allain
 	 * @param latitude, longitude
 	 * @return whether the alpaca is isolated
 	 */
@@ -87,6 +89,7 @@ public class PacaAnalyzer {
 	}
 	
 	/**
+	 * @author Sylvia Allain
 	 * @param speed
 	 * @return the type of movement
 	 */
@@ -115,6 +118,7 @@ public class PacaAnalyzer {
 	}
 	
 	/**
+	 * @author Sylvia Allain
 	 * @param course
 	 * @return direction the alpaca is travelling
 	 */
@@ -135,6 +139,7 @@ public class PacaAnalyzer {
 	}
 	
 	/**
+	 * @author Sylvia Allain
 	 * @param number of satellites
 	 * @return string number of satellites
 	 */
@@ -155,6 +160,7 @@ public class PacaAnalyzer {
 	}
 	
 	/**
+	 * @author Sylvia Allain
 	 * @param heading
 	 * @return string heading
 	 */
@@ -175,6 +181,7 @@ public class PacaAnalyzer {
 	}
 	
 	/**
+	 * @author Sylvia Allain
 	 * @param pitch, roll
 	 * @return type of position
 	 */
@@ -196,6 +203,7 @@ public class PacaAnalyzer {
 	}
 
 	/**
+	 * @author Sylvia Allain
 	 * @param altitude
 	 * @return string altitude
 	 */
@@ -216,6 +224,7 @@ public class PacaAnalyzer {
 	}
 	
 	/**
+	 * @author Sylvia Allain
 	 * @param signal quality
 	 * @return string signal quality
 	 */
@@ -237,6 +246,7 @@ public class PacaAnalyzer {
 	}
 	
 	/**
+	 * @author Sylvia Allain
 	 * @param temperature
 	 * @return health condition
 	 */
@@ -256,6 +266,7 @@ public class PacaAnalyzer {
 	}
 	
 	/**
+	 * @author Sylvia Allain
 	 * @param fix
 	 * @return string fix
 	 */

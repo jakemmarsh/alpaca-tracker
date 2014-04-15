@@ -85,6 +85,11 @@ public class PacaWorld {
 		});
 	}
 	
+	/**
+	 * @author Sylvia Allain
+	 * get and set methods
+	 */
+	
 	public void setLongitudeFloor(float floor) { this.longitudeFloor = floor; }
 	
 	public void setLongitudeCeiling(float ceiling) { this.longitudeCeiling = ceiling; }
