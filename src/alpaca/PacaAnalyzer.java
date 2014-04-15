@@ -5,7 +5,7 @@ import java.awt.Polygon;
 import java.util.ArrayList;
 
 /**
- * @author Sylvia Allain
+ * @author Sylvia Allain, Jonathan Cole
  * 
  * Analyzes Alpaca objects on an ongoing basis or on-demand.
  */
@@ -24,7 +24,7 @@ public class PacaAnalyzer {
 	 */
 	public void analyze (ArrayList<Alpaca> alpacas){
 		for(Alpaca a : alpacas){
-			analyzeLocationBounds(a);
+			//analyzeLocationBounds(a);
 			analyzeLocationIsolation(a, alpacas);
 		}
 	}
@@ -85,27 +85,28 @@ public class PacaAnalyzer {
 	 * @return whether the alpaca is isolated
 	 */
 	public String analyzeLocationIsolation(Alpaca alpaca, ArrayList<Alpaca> alpacaList) {
-		ArrayList<Alpaca> alpacas = alpacaList;
-		//remove the alpaca if it's in the list.
-		if(alpacas.contains(alpaca)){
-			alpacas.remove(alpaca);
-		}
+		
 		float baseLatitude = alpaca.hardware.getLatitudeDecimalDegrees();
 		float baseLongitude = alpaca.hardware.getLongitudeDecimalDegrees();
 		
 		String state = "";
-		double lowestDistance = 1000000000;
-		for(Alpaca a : alpacas){
-			float alpLatitude = a.hardware.getLatitudeDecimalDegrees();
-			float alpLongitude = a.hardware.getLongitudeDecimalDegrees();
-			
-			//Get distance between points (baseLatitude, baseLongitude) and (alpLatitude, alpLongitude)
-			double t1 = Math.pow(alpLatitude - baseLatitude, 2);
-			double t2 = Math.pow(alpLongitude - baseLongitude, 2);
-			double distance = Math.sqrt(t1 + t2);
-			
-			if(distance < lowestDistance){
-				lowestDistance = distance;
+		boolean firstLoop = true;
+		double lowestDistance = 0;
+		for(Alpaca a : alpacaList){
+			//Only run if the compared alpaca and the alpaca from the list are different.
+			if(a != alpaca){
+				float alpLatitude = a.hardware.getLatitudeDecimalDegrees();
+				float alpLongitude = a.hardware.getLongitudeDecimalDegrees();
+				
+				//Get distance between points (baseLatitude, baseLongitude) and (alpLatitude, alpLongitude)
+				double t1 = Math.pow(alpLatitude - baseLatitude, 2);
+				double t2 = Math.pow(alpLongitude - baseLongitude, 2);
+				double distance = Math.sqrt(t1 + t2);
+				
+				if(distance < lowestDistance || firstLoop){
+					lowestDistance = distance;
+					if(firstLoop) firstLoop = false;
+				}
 			}
 			
 		}
