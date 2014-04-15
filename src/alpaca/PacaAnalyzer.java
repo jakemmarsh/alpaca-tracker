@@ -24,7 +24,7 @@ public class PacaAnalyzer {
 	 */
 	public void analyze (ArrayList<Alpaca> alpacas){
 		for(Alpaca a : alpacas){
-			//analyzeLocationBounds(a);
+			analyzeLocationBounds(a);
 			analyzeLocationIsolation(a, alpacas);
 		}
 	}
@@ -68,10 +68,7 @@ public class PacaAnalyzer {
 		if (propertyPolygon.contains(weightedLatitude, weightedLongitude))
 			state = "In bounds";
 		else {
-			
-			PacaAlert.EventType event = PacaAlert.EventType.OutOfBounds;
-			pacaWorld.CreateAlert(alpaca, event);
-			
+			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.OutOfBounds);
 			state = "Out of bounds";
 		}
 		
