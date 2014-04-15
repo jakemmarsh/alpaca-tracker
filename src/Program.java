@@ -9,7 +9,7 @@ import alpaca.PacaWorld;
 public class Program {
 	
 	// The analysis update speed in seconds
-	private int updateSpeed = 5; 
+	private int updateSpeed = 10; 
 	
 	// The collection of alpacas
 	private PacaCollection collection;

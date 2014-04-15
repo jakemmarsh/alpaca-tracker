@@ -20,7 +20,7 @@ public class PacaAnalyzer {
 	}
 	
 	/**
-	 * Calls all analysis methods on a container of alpacas.
+	 * Calls all analysis methods across each member of a list of alpacas.
 	 * @param alpacas
 	 */
 	public void analyze (ArrayList<Alpaca> alpacas){
@@ -78,8 +78,6 @@ public class PacaAnalyzer {
 	}
 	
 	/**
-	 * @author Sylvia Allain
-	 * @param latitude, longitude
 	 * @author Jonathan Cole
 	 * Compares the alpaca specified against the list. If it's more than 10 feet away
 	 * from any other alpaca, it is considered isolated.
