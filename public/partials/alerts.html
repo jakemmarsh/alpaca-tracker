@@ -2,9 +2,10 @@
     <div class="col-md-8 col-md-offset-2">
         <h2 class="">Alerts</h2>
         <div class="well">
-            <ul>
-                <li ng-repeat="alert in displayAlerts" ng-bind="alert.message" ng-click="markAsRead(alert)"></li>
-            </ul>
+            <div class="alert alert-dismissable" ng-class="{'Normal':'alert-warning', 'High':'alert-danger'}[alert.priority]" ng-repeat="alert in displayAlerts">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="markAsRead(alert)">&times;</button>
+                <span ng-bind="alert.message"></span>
+            </div>
             <h2 class="text-success text-center" ng-hide="displayAlerts">There are no unread alerts!</h2>
         </div>
     </div>
