@@ -24,7 +24,7 @@ import alpaca.Alpaca;
  * [DB] -> [PacaCollection] = [x number of Alpaca objects]
  * [Alpaca object] -> [Update] -> [DB]
  * 
- * @author claytonpeterson
+ * @author Clayton Peterson
  *
  */
 public class PacaCollection {
@@ -88,8 +88,10 @@ public class PacaCollection {
 		});
 	}
 	
-	/* This method tells each of the alpaca objects to update their
+	/** 
+	 * This method tells each of the alpaca objects to update their
 	 * information on the database. 
+	 * @author Clayton Peterson
 	 */
 	public void update ()
 	{
@@ -102,6 +104,10 @@ public class PacaCollection {
 		}
 	}
 	
+	/**
+	 * @return the collection of alpacas
+	 * @author Clayton Peterson
+	 */
 	public ArrayList <Alpaca> getAlpacas ()
 	{
 		return alpacas; 

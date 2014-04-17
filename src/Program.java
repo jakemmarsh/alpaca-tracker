@@ -5,6 +5,7 @@ import alpaca.PacaWorld;
 
 /**
  * Handles program flow and initializes base-level code.
+ * @author Clayton Peterson, Jonathan Cole
  */
 public class Program {
 	
@@ -25,8 +26,9 @@ public class Program {
 		update ();
 	}
 
-	/* This function updates each of the alpaca's statistics in 
-	 * one second intervals. 
+	/**
+	 * This function updates each of the alpaca's statistics
+	 * to the database at a given time step in seconds.   
 	 */
 	private void update ()
 	{
