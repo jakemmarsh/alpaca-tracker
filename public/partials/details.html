@@ -1,0 +1,23 @@
+<div class="col-md-12 well text-center">
+    <h2 class="text-primary">Details about <span ng-bind="focusedAlpaca.name"></span></h2>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <dl class="dl-horizontal">
+                <dt ng-if="focusedAlpaca.trackerID !== NULL">Tracker ID</dt>
+                <dd ng-bind="focusedAlpaca.trackerID"></dd>
+                <dt ng-if="focusedAlpaca.temperature !== NULL">Temperature</dt>
+                <dd ng-bind="focusedAlpaca.temperature"></dd>
+                <dt ng-if="focusedAlpaca.heartrate !== NULL">Heartrate</dt>
+                <dd ng-bind="focusedAlpaca.heartrate"></dd>
+                <dt ng-if="focusedAlpaca.lat !== NULL">Latitude</dt>
+                <dd ng-bind="focusedAlpaca.lat"></dd>
+                <dt ng-if="focusedAlpaca.lng !== NULL">Longitude</dt>
+                <dd ng-bind="focusedAlpaca.lng"></dd>
+                <dt ng-if="focusedAlpaca.pitch !== NULL">Pitch</dt>
+                <dd ng-bind="focusedAlpaca.pitch"></dd>
+                <dt ng-if="focusedAlpaca.roll !== NULL">Roll</dt>
+                <dd ng-bind="focusedAlpaca.roll"></dd>
+            </dl>
+        </div>
+    </div>
+</div>
