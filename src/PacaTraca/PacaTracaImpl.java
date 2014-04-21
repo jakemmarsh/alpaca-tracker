@@ -24,10 +24,27 @@ public class PacaTracaImpl implements PacaTraca {
 	private int signalQuality;
 	private float temperature;
 	private boolean fix;
+	private float heartRate;
+	private int batteryLife;
 	
 	private boolean isRandom = true;
 	
 	Random rand = new Random();
+	
+	
+	public static void main(String[] args) {
+		
+		PacaTracaImpl p = new PacaTracaImpl();
+		
+		/*
+		System.out.println(p.getLongitudeDecimalDegrees());
+		System.out.println(p.getLongitudeDecimalDegrees());
+		System.out.println(p.getLongitudeDecimalDegrees());
+		System.out.println(p.getLongitudeDecimalDegrees());
+		System.out.println(p.getLongitudeDecimalDegrees());
+		*/
+	}
+	
 	
 	/*
 	 * protected default constructor
@@ -259,28 +276,55 @@ public class PacaTracaImpl implements PacaTraca {
 		
 	}	
 	
+	public int getBatteryLife() {
+		
+		if (isRandom)
+			batteryLife = getRandomBatteryLife();
+		return batteryLife;
+		
+	}
+	
+	public float getHeartRate() {
+		
+		if (isRandom)
+			heartRate = getRandomHeartRate();
+		return heartRate;
+		
+	}
+	
 	/**
 	 * @author Sylvia Allain
 	 * @param ID
 	 * @return a random longitude coordinate between -68 and -69, roughly in Orono
+	 * 
+	 * 1 degree longitude is approximately 42 miles at 45 degrees
 	 */
 	private float getRandomLongitude() {
 		int floor = 68;
 		int ceiling = 69;
 		
-		return -(rand.nextFloat() * (ceiling - floor) + floor);
+		if (longitude == 0.0f)
+			return -(rand.nextFloat() * (ceiling - floor) + floor);
+		else
+			return longitude += rand.nextFloat() * 0.0009f - 0.00045f;
+			
 	}
 	
 	/**
 	 * @author Sylvia Allain
 	 * @param ID
 	 * @return a random latitude coordinate between 44 and 45, roughly in Orono
+	 * 
+	 * 1 degree latitude is approximately 69 miles
 	 */
 	private float getRandomLatitude() {
 		int floor = 44;
 		int ceiling = 45;
 		
-		return rand.nextFloat() * (ceiling - floor) + floor;
+		if (latitude == 0.0f)
+			return rand.nextFloat() * (ceiling - floor) + floor;
+		else
+			return latitude += rand.nextFloat() * 0.0006f - 0.0003f;
 	}
 	
 	/**
@@ -361,6 +405,18 @@ public class PacaTracaImpl implements PacaTraca {
 	 */
 	private boolean getRandomFix() {
 		return true;
+	}
+	
+	private float getRandomHeartRate() {
+		
+		float baseHeartRate = 70;
+		
+		return rand.nextFloat() * 50f + baseHeartRate;
+	}
+	
+	private int getRandomBatteryLife() {
+		
+		return (int) (Math.random() * 100);
 	}
 	
 	
