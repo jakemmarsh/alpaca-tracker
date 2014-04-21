@@ -9,6 +9,7 @@ package PacaTraca;
 public interface PacaTraca {
 	public Float getLatitudeDecimalDegrees( ); // negative == South
 	public Float getLongitudeDecimalDegrees( ); // negative == West	
+	public Float getHeartRate( );
 	public Float getSpeed( ); // feet per second
 	public Float getCourse( ); // decimal degrees
 	public Float getAltitude( ); // feet
@@ -20,6 +21,8 @@ public interface PacaTraca {
 	public Float getPitch( ); // rotate about x degrees (0-180 degrees)
 	public Float getCompassHeading( ); // heading 0-360 degrees
 	public void setSeaLevelPressure( Float pressure ); // sensor pressure at sea level in hPa
+	public void setBatteryLife( int batteryLife );
+	public int getBatteryLife( );
 	public String getSensorID( ); // return the ID of this sensor/collar
 	public void setSensorID( String ID ); // set the value of this sensor's ID
 

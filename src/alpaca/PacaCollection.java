@@ -61,7 +61,16 @@ public class PacaCollection {
 					newAlpaca.setName      ((String) qualities.get ("name"));
 					newAlpaca.setLatitude  (String.valueOf (qualities.get ("lat")));
 					newAlpaca.setLongitude (String.valueOf (qualities.get ("lng")));
+					
+					// try/catch because type of "heartRate" varies between Long and Double in database
+					try {
+						newAlpaca.setHeartRate(((Long) qualities.get ("heartRate")).floatValue());
+					} catch (ClassCastException e) {
+						newAlpaca.setHeartRate(((Double) qualities.get ("heartRate")).floatValue());
+					}
+					
 					newAlpaca.setTrackerID (String.valueOf (qualities.get ("trackerID")));
+					newAlpaca.hardware.setBatteryLife(((Long) qualities.get ("trackerBatteryLife")).intValue());
 					newAlpaca.setDBRef     (url, i);
 			    	
 					if (alpacas.size() == 0)
@@ -101,6 +110,8 @@ public class PacaCollection {
 			Firebase dataRef = new Firebase (a.dbRef);
 			dataRef.child ("lat").setValue ((a.hardware.getLatitudeDecimalDegrees  ()));
 			dataRef.child ("lng").setValue ((a.hardware.getLongitudeDecimalDegrees ()));
+			dataRef.child ("heartRate").setValue ((a.hardware.getHeartRate ()));
+			dataRef.child ("trackerBatteryLife").setValue((a.hardware.getBatteryLife()));
 		}
 	}
 	
