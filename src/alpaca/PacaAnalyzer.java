@@ -77,7 +77,6 @@ public class PacaAnalyzer {
 	}
 	
 	/**
-	 * @author Sylvia Allain
 	 * @param latitude, longitude
 	 * @author Jonathan Cole
 	 * Compares the alpaca specified against the list. If it's more than 10 feet away
