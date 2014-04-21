@@ -61,9 +61,9 @@ public class PacaCollection {
 					newAlpaca.setName      ((String) qualities.get ("name"));
 					newAlpaca.setLatitude  (String.valueOf (qualities.get ("lat")));
 					newAlpaca.setLongitude (String.valueOf (qualities.get ("lng")));
-					newAlpaca.setHeartRate((Float) qualities.get ("heartRate")); 
+					newAlpaca.setHeartRate(((Long) qualities.get ("heartRate")).floatValue()); 
 					newAlpaca.setTrackerID (String.valueOf (qualities.get ("trackerID")));
-					newAlpaca.hardware.setBatteryLife(Integer.valueOf ((String) qualities.get ("trackerBatteryLife")));
+					newAlpaca.hardware.setBatteryLife(((Long) qualities.get ("trackerBatteryLife")).intValue());
 					newAlpaca.setDBRef     (url, i);
 			    	
 					if (alpacas.size() == 0)
