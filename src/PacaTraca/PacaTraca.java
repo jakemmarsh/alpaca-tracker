@@ -9,6 +9,7 @@ package PacaTraca;
 public interface PacaTraca {
 	public Float getLatitudeDecimalDegrees( ); // negative == South
 	public Float getLongitudeDecimalDegrees( ); // negative == West	
+	public Float getHeartRate( );
 	public Float getSpeed( ); // feet per second
 	public Float getCourse( ); // decimal degrees
 	public Float getAltitude( ); // feet

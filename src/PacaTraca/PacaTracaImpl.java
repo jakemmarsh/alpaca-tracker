@@ -88,6 +88,24 @@ public class PacaTracaImpl implements PacaTraca {
 		
 		return outStr;
 	}
+	
+	/**
+	 * @see com.pacatraca.getSensorID()
+	 */
+	@Override
+	public void setSensorID( String id ) {
+		// TODO Auto-generated method stub
+		this.m_sensorID = id;
+	}
+	
+	/**
+	 * Sets the battery level for this hardware.
+	 * @param batteryLife
+	 * @author Jake Marsh
+	 */
+	public void setBatteryLife( int batteryLife ) {
+		this.batteryLife = batteryLife;
+	}
 
 	/**
 	 * Returns the sensor ID for this hardware
@@ -98,15 +116,6 @@ public class PacaTracaImpl implements PacaTraca {
 		// return the ID of this sensor/collar
 		// TODO Auto-generated method stub
 		return m_sensorID;
-	}
-	
-	/**
-	 * @see com.pacatraca.getSensorID()
-	 */
-	@Override
-	public void setSensorID( String id ) {
-		// TODO Auto-generated method stub
-		this.m_sensorID = id;
 	}
 	
 	/**
@@ -284,7 +293,7 @@ public class PacaTracaImpl implements PacaTraca {
 		
 	}
 	
-	public float getHeartRate() {
+	public Float getHeartRate() {
 		
 		if (isRandom)
 			heartRate = getRandomHeartRate();
