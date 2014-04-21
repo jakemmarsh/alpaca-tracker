@@ -63,6 +63,7 @@ public class PacaCollection {
 					newAlpaca.setLongitude (String.valueOf (qualities.get ("lng")));
 					newAlpaca.setHeartRate((Float) qualities.get ("heartRate")); 
 					newAlpaca.setTrackerID (String.valueOf (qualities.get ("trackerID")));
+					newAlpaca.hardware.setBatteryLife(Integer.valueOf ((String) qualities.get ("trackerBatteryLife")));
 					newAlpaca.setDBRef     (url, i);
 			    	
 					if (alpacas.size() == 0)
@@ -103,6 +104,7 @@ public class PacaCollection {
 			dataRef.child ("lat").setValue ((a.hardware.getLatitudeDecimalDegrees  ()));
 			dataRef.child ("lng").setValue ((a.hardware.getLongitudeDecimalDegrees ()));
 			dataRef.child ("heartRate").setValue ((a.hardware.getHeartRate ()));
+			dataRef.child ("trackerBatteryLife").setValue((a.hardware.getBatteryLife()));
 		}
 	}
 	
