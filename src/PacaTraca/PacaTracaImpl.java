@@ -36,13 +36,7 @@ public class PacaTracaImpl implements PacaTraca {
 		
 		PacaTracaImpl p = new PacaTracaImpl();
 		
-		/*
-		System.out.println(p.getLongitudeDecimalDegrees());
-		System.out.println(p.getLongitudeDecimalDegrees());
-		System.out.println(p.getLongitudeDecimalDegrees());
-		System.out.println(p.getLongitudeDecimalDegrees());
-		System.out.println(p.getLongitudeDecimalDegrees());
-		*/
+	
 	}
 	
 	
@@ -267,8 +261,6 @@ public class PacaTracaImpl implements PacaTraca {
 
 	@Override
 	/**
-	 * @author Sylvia Allain
-	 * I have no idea
 	 * sensor pressure at sea level in hPa
 	 */
 	public void setSeaLevelPressure(Float pressure) {
@@ -296,10 +288,10 @@ public class PacaTracaImpl implements PacaTraca {
 	 * @author Sylvia Allain
 	 * @param ID
 	 * @return a random longitude coordinate between -68 and -69, roughly in Orono
-	 * 
-	 * 1 degree longitude is approximately 42 miles at 45 degrees
 	 */
 	private float getRandomLongitude() {
+		//1 degree longitude is approximately 42 miles at 45 degrees
+		
 		int floor = 68;
 		int ceiling = 69;
 		
@@ -314,10 +306,10 @@ public class PacaTracaImpl implements PacaTraca {
 	 * @author Sylvia Allain
 	 * @param ID
 	 * @return a random latitude coordinate between 44 and 45, roughly in Orono
-	 * 
-	 * 1 degree latitude is approximately 69 miles
 	 */
 	private float getRandomLatitude() {
+		//1 degree latitude is approximately 69 miles
+		
 		int floor = 44;
 		int ceiling = 45;
 		
@@ -332,7 +324,16 @@ public class PacaTracaImpl implements PacaTraca {
 	 * @return random speed between 0 and 15
 	 */
 	private float getRandomSpeed() {
-		return rand.nextFloat() * 15;
+		
+		int chanceOfStanding = 10;
+		
+		if (speed == 0.0f)
+			chanceOfStanding = 90;
+		
+		if (Math.random() * 100 < chanceOfStanding)
+			return 0f;
+		else
+			return rand.nextFloat() * 15;
 	}
 	
 	/**
@@ -380,7 +381,23 @@ public class PacaTracaImpl implements PacaTraca {
 	 * @return random altitude between 0 and 1000
 	 */
 	private float getRandomAltitude() {
-		return rand.nextFloat() * 1000;
+		//Orono altitude is 132
+		
+		float baseAltitude = 125f;
+		float altitudeRange = 14f;
+		
+		if (altitude == 0.0f)
+			return rand.nextFloat() * altitudeRange + baseAltitude;
+		else {
+			
+			altitude += rand.nextFloat() * 10f - 5f;
+			if (altitude < baseAltitude)
+				altitude = baseAltitude;
+			else if (altitude > baseAltitude + altitudeRange)
+				altitude = baseAltitude + altitudeRange;
+			return altitude;
+			
+		}
 	}
 	
 	/**
@@ -396,7 +413,32 @@ public class PacaTracaImpl implements PacaTraca {
 	 * @return random temperature between 0 and 105
 	 */
 	private float getRandomTemperature() {
-		return rand.nextFloat() * 105;
+		//normal alpaca temperature is 100.5 to 102.5 F
+		
+		float baseTemp = 100.5f;
+		float tempRange = 2f;
+		
+		int lowTempChance = 3;
+		int highTempChance = 3;
+		
+		if (temperature != 0.0f) {
+			//calculate chance of have low heart rate
+			if (temperature < baseTemp)
+				lowTempChance = 90;
+			else if (temperature > (baseTemp + tempRange))
+				highTempChance = 90;
+		}
+			
+		//low temperature
+		if ((int) (Math.random() * 100) < lowTempChance)
+			return rand.nextFloat() * baseTemp;
+		//high temperature
+		else if ((int) (Math.random() * 100) < highTempChance)
+			return rand.nextFloat() * 10f + baseTemp + tempRange;
+		//normal temperature
+		else
+			return rand.nextFloat() * tempRange + baseTemp;
+
 	}
 	
 	/**
@@ -407,16 +449,51 @@ public class PacaTracaImpl implements PacaTraca {
 		return true;
 	}
 	
+	/**
+	 * @author Sylvia Allain
+	 * @return float random heart rate
+	 */
 	private float getRandomHeartRate() {
 		
-		float baseHeartRate = 70;
+		//normal alpaca heart rate is 70 to 120 beats per minute
 		
-		return rand.nextFloat() * 50f + baseHeartRate;
+		float baseHeartRate = 70f;
+		float heartRateRange = 50f;
+		int lowHeartRateChance = 3;
+		int highHeartRateChance = 3;
+		
+		if (heartRate != 0.0f) {
+			//calculate chance of have low heart rate
+			if (heartRate < baseHeartRate)
+				lowHeartRateChance = 90;
+			else if (heartRate > (baseHeartRate + heartRateRange))
+				highHeartRateChance = 90;
+		}
+			
+		//low heart rate
+		if ((int) (Math.random() * 100) < lowHeartRateChance)
+			return rand.nextFloat() * baseHeartRate;
+		//high heart rate
+		else if ((int) (Math.random() * 100) < highHeartRateChance)
+			return rand.nextFloat() * 30f + baseHeartRate + heartRateRange;
+		//normal heart rate
+		else
+			return rand.nextFloat() * heartRateRange + baseHeartRate;
 	}
 	
+	/**
+	 * @author Sylvia Allain
+	 * @return float random battery life
+	 */
 	private int getRandomBatteryLife() {
+		int chanceOfDraining = 10;
 		
-		return (int) (Math.random() * 100);
+		if (batteryLife == 0)
+			return (int) (Math.random() * 100);
+		else if ((int) (Math.random() * 100) < chanceOfDraining)
+			return batteryLife - 1;
+		else
+			return batteryLife;
 	}
 	
 	
