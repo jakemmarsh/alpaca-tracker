@@ -5,6 +5,8 @@
             <dl class="dl-horizontal">
                 <dt ng-if="focusedAlpaca.trackerID !== NULL">Tracker ID</dt>
                 <dd ng-bind="focusedAlpaca.trackerID"></dd>
+                <dt ng-if="focusedAlpaca.trackerBatteryLife !== NULL">Tracker Battery Life</dt>
+                <dd ng-bind="focusedAlpaca.trackerBatteryLife"></dd>
                 <dt ng-if="focusedAlpaca.temperature !== NULL">Temperature</dt>
                 <dd ng-bind="focusedAlpaca.temperature"></dd>
                 <dt ng-if="focusedAlpaca.heartRate !== NULL">Heart Rate</dt>

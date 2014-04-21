@@ -97,7 +97,9 @@ define(['./index'], function (controllers) {
                     name: names[i],
                     trackerID: i,
                     lat: 44.89+(i*0.01),
-                    lng: -68.67+(i*0.01)
+                    lng: -68.67+(i*0.01),
+                    trackerBatteryLife: 100,
+                    heartRate: parseFloat(75.0)
                 };
                 $scope.alpacas.$save(i);
             }
