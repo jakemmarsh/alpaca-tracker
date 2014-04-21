@@ -5,11 +5,12 @@ import alpaca.PacaWorld;
 
 /**
  * Handles program flow and initializes base-level code.
+ * @author Clayton Peterson, Jonathan Cole
  */
 public class Program {
 	
-	// An update speed in seconds
-	private int updateSpeed; 
+	// The analysis update speed in seconds
+	private int updateSpeed = 10; 
 	
 	// The collection of alpacas
 	private PacaCollection collection;
@@ -19,15 +20,15 @@ public class Program {
 	public Program ()
 	{
 		System.out.println ("Starting alpaca tracker");
-		updateSpeed = 2;
 		collection  = new PacaCollection ();
 		world       = new PacaWorld      ();
 		analyzer    = new PacaAnalyzer   (world);
 		update ();
 	}
 
-	/* This function updates each of the alpaca's statistics in 
-	 * one second intervals. 
+	/**
+	 * This function updates each of the alpaca's statistics
+	 * to the database at a given time step in seconds.   
 	 */
 	private void update ()
 	{

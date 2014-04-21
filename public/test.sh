@@ -1,2 +1,4 @@
-python -m SimpleHTTPServer &
-python -mwebbrowser "http://localhost:8000" &
+python -m SimpleHTTPServer & P=$!
+trap "kill $P" INT EXIT
+python -m webbrowser "http://localhost:8000"
+wait

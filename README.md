@@ -3,26 +3,6 @@ alpaca-tracker
 
 An application created as a class project for COS420 (Software Engineering) at the University of Maine. Intended to serve as both a frontend and backend application used to manage and track alpaca herds.
 
-##Notes
-
-#####General
-
-#####Jon
-
-I've created the first commit through Eclipse using EGit. The basic workflow after configuration is:
-* Pull from repository
-* Do work
-* Commit and push changes
-
-I think I want the program to be structured in a way that's similar to Unity. That is, there are
-Update, Init, and Exit methods, and a class that controls program flow that implements these.
-
-#####Clay
-
-#####Sylvia
-
-#####Jake
-
 ##Firebase
 
 This application utilizes [Firebase](https://www.firebase.com/) to maintain data between the frontend and backend, as well as update in real-time. The frontend utilizes the [AngularFire](https://github.com/firebase/angularFire) library. The following guides describe the use of Firebase:
