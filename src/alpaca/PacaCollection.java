@@ -61,6 +61,7 @@ public class PacaCollection {
 					newAlpaca.setName      ((String) qualities.get ("name"));
 					newAlpaca.setLatitude  (String.valueOf (qualities.get ("lat")));
 					newAlpaca.setLongitude (String.valueOf (qualities.get ("lng")));
+					newAlpaca.setHeartRate((Float) qualities.get ("heartRate")); 
 					newAlpaca.setTrackerID (String.valueOf (qualities.get ("trackerID")));
 					newAlpaca.setDBRef     (url, i);
 			    	
@@ -101,6 +102,7 @@ public class PacaCollection {
 			Firebase dataRef = new Firebase (a.dbRef);
 			dataRef.child ("lat").setValue ((a.hardware.getLatitudeDecimalDegrees  ()));
 			dataRef.child ("lng").setValue ((a.hardware.getLongitudeDecimalDegrees ()));
+			dataRef.child ("heartRate").setValue ((a.hardware.getHeartRate ()));
 		}
 	}
 	
