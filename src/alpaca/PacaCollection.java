@@ -7,6 +7,7 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.GenericTypeIndicator;
 import com.firebase.client.MutableData;
 import com.firebase.client.Transaction;
 import com.firebase.client.ValueEventListener;
@@ -20,8 +21,12 @@ import alpaca.Alpaca;
  * used to update the information of the alpaca in the 
  * database. 
  * 
- * Process representation
+ * Process representations
+ * 
+ * Loading
  * [DB] -> [PacaCollection] = [x number of Alpaca objects]
+ * 
+ * Updating
  * [Alpaca object] -> [Update] -> [DB]
  * 
  * @author Clayton Peterson
@@ -36,65 +41,58 @@ public class PacaCollection {
 	/* The working collection of alpacas */
 	private ArrayList <Alpaca> alpacas;
 	
+	// =================================================================================
 	public PacaCollection ()
 	{
 		url = "https://crackling-fire-2064.firebaseio.com/alpacas";
 		dataRef = new Firebase (url);
         alpacas = new ArrayList <Alpaca> ();
         
-        /* This adds a listener to the alpaca reference and creates
-         * an alpaca object for each alpaca stored in the online 
-         * database.
-         */
-		dataRef.addValueEventListener (new ValueEventListener () 
-		{
+        loadAlpacasFromDatabase ();
+	}
+	
+	/**
+	 * @author clayton peterson
+	 */
+	// =================================================================================
+	private void loadAlpacasFromDatabase ()
+	{
+		dataRef.addListenerForSingleValueEvent (new ValueEventListener() 
+		{    
 			@Override
-			public void onDataChange(DataSnapshot snapshot) 
-			{
-				ArrayList snap = (ArrayList) snapshot.getValue ();
+		    public void onDataChange (DataSnapshot snapshot) 
+		    {
+				ArrayList <?> database = (ArrayList <?>) snapshot.getValue ();
 				
-				for (int i = 0; i < snap.size (); i ++)
-				{
-					HashMap qualities = (HashMap) snap.get (i);
-										
-					Alpaca newAlpaca = new Alpaca ();
-					newAlpaca.setName      ((String) qualities.get ("name"));
-					newAlpaca.setLatitude  (String.valueOf (qualities.get ("lat")));
-					newAlpaca.setLongitude (String.valueOf (qualities.get ("lng")));
-					
-					// try/catch because type of "heartRate" varies between Long and Double in database
-					try {
-						newAlpaca.setHeartRate(((Long) qualities.get ("heartRate")).floatValue());
-					} catch (ClassCastException e) {
-						newAlpaca.setHeartRate(((Double) qualities.get ("heartRate")).floatValue());
-					}
-					
-					newAlpaca.setTrackerID (String.valueOf (qualities.get ("trackerID")));
-					newAlpaca.hardware.setBatteryLife(((Long) qualities.get ("trackerBatteryLife")).intValue());
-					newAlpaca.setDBRef     (url, i);
-			    	
-					if (alpacas.size() == 0)
-					{
-						alpacas.add (newAlpaca);
-					}
-					else 
-					{
-						boolean in = false;
-						for (int x = 0; x < alpacas.size (); x++)
-						{
-							if (newAlpaca.name == alpacas.get (x).name)
-								in = true;
-						}
-						if (in == false)
-							alpacas.add (newAlpaca);
-					}
-				}
-			}
+		        for (int ID = 0; ID < database.size (); ID++)
+		        {
+		        	HashMap <?,?> alpacaDetails = (HashMap <?, ?>) database.get (ID);	
+		        	alpacas.add (createAlpaca (ID, alpacaDetails));
+		        }
+		    }
 
 			@Override
-			public void onCancelled(FirebaseError arg0) 
-			{}
+			public void onCancelled (FirebaseError arg0) 
+			{
+				System.out.println ("Error loading from database");
+			}
 		});
+	}
+	
+	// =================================================================================
+	private Alpaca createAlpaca (int ID, HashMap <?,?> alpacaDetails)
+	{
+		Alpaca out = new Alpaca ();
+		out.setDBRef     (url, ID);
+		out.setName      ((alpacaDetails.get ("name")).toString());
+		out.setTrackerID ((alpacaDetails.get ("trackerID")).toString());
+		out.setLatitude  ((alpacaDetails.get ("lat")).toString());
+		out.setLongitude ((alpacaDetails.get ("lng")).toString());
+		out.setHeartRate ((alpacaDetails.get ("heartRate").toString()));
+		out.hardware.setBatteryLife (((Long)
+    			alpacaDetails.get ("trackerBatteryLife")).intValue());
+		
+		return out;
 	}
 	
 	/** 
@@ -102,20 +100,17 @@ public class PacaCollection {
 	 * information on the database. 
 	 * @author Clayton Peterson
 	 */
+	// =================================================================================
 	public void update ()
 	{
 		for (int i = 0; i < alpacas.size (); i ++)
 		{
 			Alpaca a = alpacas.get (i);			
 			Firebase dataRef = new Firebase (a.dbRef);
-			dataRef.child ("lat").setValue (a.hardware.getLatitudeDecimalDegrees  ());
-			dataRef.child ("lng").setValue (a.hardware.getLongitudeDecimalDegrees ());
-			dataRef.child ("heartRate").setValue (a.hardware.getHeartRate ());
-			dataRef.child ("trackerBatteryLife").setValue (a.hardware.getBatteryLife ());
-			//dataRef.child ("altitude").setValue (a.hardware.getAltitude ());
-			//dataRef.child ("pitch").setValue (a.hardware.getPitch ());
-			//dataRef.child ("roll").setValue (a.hardware.getRoll ());
-			//dataRef.child("heading").setValue (a.hardware.getCourse ());
+			dataRef.child ("lat").setValue ((a.hardware.getLatitudeDecimalDegrees  ()));
+			dataRef.child ("lng").setValue ((a.hardware.getLongitudeDecimalDegrees ()));
+			dataRef.child ("heartRate").setValue ((a.hardware.getHeartRate ()));
+			dataRef.child ("trackerBatteryLife").setValue((a.hardware.getBatteryLife()));
 		}
 	}
 	
@@ -123,6 +118,7 @@ public class PacaCollection {
 	 * @return the collection of alpacas
 	 * @author Clayton Peterson
 	 */
+	// =================================================================================
 	public ArrayList <Alpaca> getAlpacas ()
 	{
 		return alpacas; 

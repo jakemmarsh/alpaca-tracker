@@ -16,7 +16,7 @@ public class Alpaca {
 	public  String   dbRef;
 	private String   longitude;
 	private String   latitude;
-	private Float    heartRate;
+	private String   heartRate;
 	
 	public Alpaca ()
 	{
@@ -81,9 +81,9 @@ public class Alpaca {
 	 * @param heartRate
 	 * @author Jake Marsh
 	 */
-	public void setHeartRate (Float heartRate)
+	public void setHeartRate (String heartRate)
 	{
-		this.heartRate = heartRate;
+		 this.heartRate = heartRate;
 	}
 	
 	/**
@@ -119,7 +119,7 @@ public class Alpaca {
 	 */
 	public Float getHeartRate ()
 	{
-		return this.heartRate;
+		return Float.parseFloat (this.heartRate);
 	}
 	
 	/**

@@ -28,7 +28,7 @@ public class Program {
 
 	/**
 	 * This function updates each of the alpaca's statistics
-	 * to the database at a given time step in seconds.   
+	 * to the database according to a given time step in seconds.   
 	 */
 	private void update ()
 	{
@@ -52,6 +52,6 @@ public class Program {
 	 */
 	public void Exit ()
 	{
-		System.out.println ("Quiting alpaca tracker");
+		System.out.println ("Exiting alpaca tracker");
 	}
 }
