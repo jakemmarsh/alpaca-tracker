@@ -239,7 +239,7 @@ public class PacaAnalyzerTest {
 		fred = NormalCaseAlpaca();
 		fred.hardware.setPitch(200f);
 		
-		assertEquals("Error: Invalid pitch and roll values", analyzer.analyzePosition(fred));
+		assertEquals("Error: Invalid pitch and roll values", analyzer.analyzeOrientation(fred));
 		
 	}
 	
@@ -253,7 +253,7 @@ public class PacaAnalyzerTest {
 		fred = NormalCaseAlpaca();
 		fred.hardware.setPitch(-20f);
 		
-		assertEquals("Error: Invalid pitch and roll values", analyzer.analyzePosition(fred));
+		assertEquals("Error: Invalid pitch and roll values", analyzer.analyzeOrientation(fred));
 		
 	}
 	
@@ -267,7 +267,7 @@ public class PacaAnalyzerTest {
 		fred = NormalCaseAlpaca();
 		fred.hardware.setRoll(200f);
 		
-		assertEquals("Error: Invalid pitch and roll values", analyzer.analyzePosition(fred));
+		assertEquals("Error: Invalid pitch and roll values", analyzer.analyzeOrientation(fred));
 		
 	}
 	
@@ -281,7 +281,7 @@ public class PacaAnalyzerTest {
 		fred = NormalCaseAlpaca();
 		fred.hardware.setRoll(-200f);
 		
-		assertEquals("Error: Invalid pitch and roll values", analyzer.analyzePosition(fred));
+		assertEquals("Error: Invalid pitch and roll values", analyzer.analyzeOrientation(fred));
 		
 	}
 	

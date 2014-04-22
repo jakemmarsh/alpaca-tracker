@@ -14,23 +14,25 @@
         </div>
         <div class="col-md-8 text-center">
             <h2 class="text-primary" style="margin-top: 0;">Details about <span ng-bind="focusedAlpaca.name"></span></h2>
-            <dl class="dl-horizontal col-md-6 col-md-offset-3" ng-if="focusedAlpaca.hasFix">
+            <dl class="dl-horizontal col-md-6 col-md-offset-3">
                 <dt ng-if="focusedAlpaca.temperature !== NULL">Temperature</dt>
                 <dd ng-if="focusedAlpaca.temperature !== NULL" ng-bind="(focusedAlpaca.temperature | number: 2) + '&deg; F'"></dd>
                 <dt ng-if="focusedAlpaca.heartRate !== NULL">Heart Rate</dt>
                 <dd ng-if="focusedAlpaca.heartRate !== NULL" ng-bind-html="(focusedAlpaca.heartRate | number: 2) + ' BPM'"></dd>
-                <dt ng-if="focusedAlpaca.lat !== NULL && focusedAlpaca.lng !== NULL">Location</dt>
-                <dd ng-if="focusedAlpaca.lat !== NULL && focusedAlpaca.lng !== NULL" ng-bind-html="'(' + (focusedAlpaca.lat | number: 2) + ', ' + (focusedAlpaca.lng | number: 2) + ')'"></dd>
+                <dt ng-if="(focusedAlpaca.lat !== NULL && focusedAlpaca.lng !== NULL) || !focusedAlpaca.hasFix">Location</dt>
+                <dd ng-if="focusedAlpaca.lat !== NULL && focusedAlpaca.lng !== NULL && focusedAlpaca.hasFix" ng-bind-html="'(' + (focusedAlpaca.lat | number: 2) + ', ' + (focusedAlpaca.lng | number: 2) + ')'"></dd>
+                <dd ng-if="!focusedAlpaca.hasFix"><strong class="text-danger">N/A</strong></dd>
                 <dt ng-if="focusedAlpaca.heading !== NULL">Heading</dt>
                 <dd ng-if="focusedAlpaca.heading !== NULL" ng-bind-html="(focusedAlpaca.heading | number: 2) + '&deg;'"></dd>
-                <dt ng-if="focusedAlpaca.altitude !== NULL">Altitude</dt>
-                <dd ng-if="focusedAlpaca.altitude !== NULL" ng-bind-html="(focusedAlpaca.altitude | number: 2) + ' ft'"></dd>
+                <dt ng-if="focusedAlpaca.altitude !== NULL || !focusedAlpaca.hasFix">Altitude</dt>
+                <dd ng-if="focusedAlpaca.altitude !== NULL && focusedAlpaca.hasFix" ng-bind-html="(focusedAlpaca.altitude | number: 2) + ' ft'"></dd>
+                <dd ng-if="!focusedAlpaca.hasFix"><strong class="text-danger">N/A</strong></dd>
                 <dt ng-if="focusedAlpaca.pitch !== NULL">Pitch</dt>
                 <dd ng-if="focusedAlpaca.pitch !== NULL" ng-bind-html="(focusedAlpaca.pitch | number: 2) + '&deg;'"></dd>
                 <dt ng-if="focusedAlpaca.roll !== NULL">Roll</dt>
                 <dd ng-if="focusedAlpaca.roll !== NULL" ng-bind-html="(focusedAlpaca.roll | number: 2) + '&deg;'"></dd>
             </dl>
-            <h4 class="text-danger" ng-if="!focusedAlpaca.hasFix">There are no satellites with a fix on <span ng-bind="focusedAlpaca.name"></span>!</h4>
+            <h4 class="text-danger col-md-12">There are no satellites with a fix on <span ng-bind="focusedAlpaca.name"></span>!</h4>
         </div>
         <div class="col-md-2 text-right text-muted">
             <span ng-if="focusedAlpaca.trackerID !== NULL"><strong>Tracker ID:</strong> <span ng-bind="focusedAlpaca.trackerID"></span></span>

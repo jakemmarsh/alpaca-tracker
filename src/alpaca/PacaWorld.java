@@ -125,6 +125,14 @@ public class PacaWorld{
 		}
 	}
 	
+	/**
+	 * @author Jonathan Cole
+	 * Removes an event from the specified alpaca's internal list.
+	 * Call this when an analysis method is successful to tell the system
+	 * that an alert no longer applies. This is not reflected in the frontend.
+	 * @param alp
+	 * @param type
+	 */
 	public void RemoveAlert(Alpaca alp, PacaAlert.EventType type){
 		PacaAlert e = new PacaAlert(alp, type);
 		alp.alerts.remove(e);
