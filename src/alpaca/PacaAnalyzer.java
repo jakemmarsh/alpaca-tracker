@@ -50,13 +50,14 @@ public class PacaAnalyzer {
 		
 		ArrayList<float[]> farmCoordinates = pacaWorld.returnFarmCoordinates();
 
-	
+		
 		int[] xPoints = new int[farmCoordinates.size()];
 		int[] yPoints = new int[farmCoordinates.size()];
 		
 		int i = 0;
 		int xCoor;
 		int yCoor;
+
 		for (float[] tuple : farmCoordinates) {
 			xCoor = (int) (tuple[0] * roundWeight);
 			yCoor = (int) (tuple[1] * roundWeight);
@@ -77,7 +78,6 @@ public class PacaAnalyzer {
 			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.OutOfBounds);
 			state = "Out of bounds";
 		}
-		
 		return state;
 	}
 	

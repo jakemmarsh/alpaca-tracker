@@ -38,9 +38,6 @@ public class PacaWorld{
 	public PacaWorld() {
 		farmCoordinates = new ArrayList<float[]>();
 		
-		//DEFAULT BOUNDARIES
-		defaultBoundaries(farmCoordinates);
-		
 		String farmUrl = "https://crackling-fire-2064.firebaseio.com/farm/boundaries";
 		Firebase farmRef = new Firebase(farmUrl);
 		farmRef.addValueEventListener(new ValueEventListener() {
@@ -63,26 +60,35 @@ public class PacaWorld{
 		});
 	}
 	
-	public void defaultBoundaries(ArrayList<float[]> farmCoordinates) {
+	public void defaultBoundaries() {
+		ArrayList<float[]> farmCoordinates = new ArrayList<float[]>();
+		
 		float[] coordinate1 = new float[2];
 		coordinate1[0] = 44.010f;
 		coordinate1[1] = 68.010f;
+		farmCoordinates.add(coordinate1);
 		
 		float[] coordinate2 = new float[2];
 		coordinate2[0] = 44.010f;
 		coordinate2[1] = 68.200f;
+		farmCoordinates.add(coordinate2);
 		
 		float[] coordinate3 = new float[2];
 		coordinate3[0] = 44.100f;
 		coordinate3[1] = 68.100f;
+		farmCoordinates.add(coordinate3);
 		
 		float[] coordinate4 = new float[2];
 		coordinate4[0] = 44.200f;
 		coordinate4[1] = 68.200f;
+		farmCoordinates.add(coordinate4);
 		
 		float[] coordinate5 = new float[2];
 		coordinate5[0] = 44.200f;
 		coordinate5[1] = 68.010f;
+		farmCoordinates.add(coordinate5);
+		
+		this.farmCoordinates = farmCoordinates;
 	}
 	
 	/**

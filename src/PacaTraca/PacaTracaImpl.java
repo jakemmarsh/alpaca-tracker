@@ -286,8 +286,8 @@ public class PacaTracaImpl implements PacaTraca {
 	private float getRandomLongitude() {
 		//1 degree longitude is approximately 42 miles at 45 degrees
 		
-		int floor = 68;
-		int ceiling = 69;
+		float floor = 68.5f;
+		float ceiling = 68.51f;
 		
 		if (longitude == 0.0f)
 			return -(rand.nextFloat() * (ceiling - floor) + floor);
@@ -304,8 +304,8 @@ public class PacaTracaImpl implements PacaTraca {
 	private float getRandomLatitude() {
 		//1 degree latitude is approximately 69 miles
 		
-		int floor = 44;
-		int ceiling = 45;
+		float floor = 44.7f;
+		float ceiling = 44.71f;
 		
 		if (latitude == 0.0f)
 			return rand.nextFloat() * (ceiling - floor) + floor;

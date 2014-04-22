@@ -1,5 +1,7 @@
 package TestDriversAndFactories;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -60,8 +62,8 @@ public class PacaAnalyzerTest {
 	@Ignore
 	private Alpaca NormalCaseAlpaca() {
 
-		float longitude = 108.0f;
-		float latitude = 80.4f;
+		float longitude = 44.02f;
+		float latitude = 68.02f;
 		float speed = 10.3f;
 		float course = 123.3f;
 		int numSatellites = 3;
