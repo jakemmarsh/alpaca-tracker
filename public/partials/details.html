@@ -1,8 +1,8 @@
 <div class="col-md-12 well">
     <div class="row">
         <div class="col-md-2 text-muted">
-            <span class="text-muted" ng-if="focusedAlpaca.trackerBatteryLife !== NULL && focusedAlpaca.hasFix">Tracker Battery Life:</span>
-            <div class="progress" style="margin-bottom: 10px;" ng-if="focusedAlpaca.trackerBatteryLife !== NULL && focusedAlpaca.hasFix">
+            <span class="text-muted" ng-if="focusedAlpaca.trackerBatteryLife !== NULL">Tracker Battery Life:</span>
+            <div class="progress" style="margin-bottom: 10px;" ng-if="focusedAlpaca.trackerBatteryLife !== NULL">
                 <div class="progress-bar" role="progressbar" aria-valuenow="{{focusedAlpaca.trackerBatteryLife}}" aria-valuemin="0" aria-valuemax="100" style="width: {{focusedAlpaca.trackerBatteryLife}}%;">
                     {{focusedAlpaca.trackerBatteryLife}}%
                 </div>
