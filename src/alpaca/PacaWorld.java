@@ -30,7 +30,7 @@ public class PacaWorld {
 	private float temperatureFloor = -140f;
 	private float temperatureCeiling = 4000f;
 	//The maximum distance an alpaca can be from another before being considered isolated
-	private float maxAlpacaGroupDistance = 10f;
+	private float maxAlpacaGroupDistance = 30f;
 	private HashMap alert = new HashMap();
 	
 	public PacaWorld() {
