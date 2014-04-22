@@ -107,9 +107,9 @@ public class PacaWorld {
 			@Override
 			public void onComplete(FirebaseError error, Firebase arg1) {
 				if (error != null) {
-		            System.err.println("Data could not be saved: " + error.getMessage());
+		            System.err.println("[CreateAlert] Data could not be saved: " + error.getMessage());
 		        } else {
-		            System.out.println("Data saved successfully.");
+		            System.out.println("[CreateAlert] Data saved successfully.");
 		        }
 			}
 		});

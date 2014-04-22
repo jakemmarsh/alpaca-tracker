@@ -19,7 +19,7 @@ public class Program {
 	
 	public Program ()
 	{
-		System.out.println ("Starting alpaca tracker");
+		System.out.println ("[Program] Starting alpaca tracker");
 		collection  = new PacaCollection ();
 		world       = new PacaWorld      ();
 		analyzer    = new PacaAnalyzer   (world);
@@ -52,6 +52,6 @@ public class Program {
 	 */
 	public void Exit ()
 	{
-		System.out.println ("Exiting alpaca tracker");
+		System.out.println ("[Program] Exiting alpaca tracker");
 	}
 }
