@@ -103,7 +103,10 @@ define(['./index'], function (controllers) {
                     pitch: parseFloat(0.0),
                     roll: parseFloat(0.0),
                     altitude: parseFloat(8.0),
-                    temperature: parseFloat(98.0)
+                    temperature: parseFloat(98.0),
+                    hasFix: true,
+                    numSatellites: 1,
+                    signalQuality: 4
                 };
                 $scope.alpacas.$save(i);
             }

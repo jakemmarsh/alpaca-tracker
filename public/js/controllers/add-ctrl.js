@@ -23,6 +23,9 @@ define(['./index'], function (controllers) {
             alpaca.roll = parseFloat(0.0);
             alpaca.altitude = parseFloat(8.0);
             alpaca.temperature = parseFloat(98.0);
+            alpaca.hasFix = true;
+            alpaca.numSatellites = 1;
+            alpaca.signalQuality = 4;
 
             $scope.alpacas[maxKey] = alpaca;
 
