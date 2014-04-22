@@ -16,7 +16,10 @@ public class PacaAlert {
 		Sick,
 		Isolated,
 		OutOfBounds,
-		BatteryLow
+		BatteryLow,
+		LowSatellites,
+		HeartRateLow,
+		HeartRateHigh
 	};
 	public EventType type;
 	
@@ -74,6 +77,15 @@ public class PacaAlert {
 				break;
 			case BatteryLow:
 				outStr = "has a low battery level";
+				break;
+			case LowSatellites:
+				outStr = "has too few satellites";
+				break;
+			case HeartRateLow:
+				outStr = "has a low heart rate";
+				break;
+			case HeartRateHigh:
+				outStr = "has a high heart rate";
 				break;
 		}
 		return outStr;
