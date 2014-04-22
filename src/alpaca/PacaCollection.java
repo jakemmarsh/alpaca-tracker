@@ -107,8 +107,8 @@ public class PacaCollection {
 			Firebase dataRef = new Firebase (a.getDatabaseRef());
 			
 			// Location
-			dataRef.child ("lat").setValue   (a.hardware.getLatitudeDecimalDegrees());
-			dataRef.child ("lng").setValue   (a.hardware.getLongitudeDecimalDegrees());
+			dataRef.child ("lat").setValue (a.hardware.getLatitudeDecimalDegrees ());
+			dataRef.child ("lng").setValue (a.hardware.getLongitudeDecimalDegrees ());
 			
 			// Movement
 			dataRef.child ("speed").setValue (a.hardware.getSpeed ());
@@ -120,11 +120,14 @@ public class PacaCollection {
 			dataRef.child ("pitch").setValue (a.hardware.getPitch ());
 
 			// Vitals
-			dataRef.child ("heartRate").setValue (a.hardware.getHeartRate());
-			dataRef.child ("temperature").setValue(a.hardware.getTemperature ());
-
+			dataRef.child ("heartRate").setValue (a.hardware.getHeartRate ());
+			dataRef.child ("temperature").setValue (a.hardware.getTemperature ());
 			
-			dataRef.child ("trackerBatteryLife").setValue((a.hardware.getBatteryLife()));
+			// Tracker details
+			dataRef.child ("trackerBatteryLife").setValue (a.hardware.getBatteryLife ());
+			dataRef.child ("hasFix").setValue (a.hardware.haveFix());
+			dataRef.child ("numSatellites").setValue (a.hardware.getNumSatellites ());
+			dataRef.child ("signalQuality").setValue (a.hardware.getSignalQuality ());
 		}
 	}
 
