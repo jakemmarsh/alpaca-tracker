@@ -207,11 +207,11 @@ public class PacaAnalyzer {
 	}
 	
 	/**
-	 * @author Sylvia Allain
+	 * @author Sylvia Allain, Jonathan Cole
 	 * @param pitch, roll
 	 * @return type of position
 	 */
-	public String analyzePosition(Alpaca alpaca){
+	public String analyzeOrientation(Alpaca alpaca){
 		
 		float pitch = alpaca.hardware.getPitch();
 		float roll = alpaca.hardware.getRoll();
