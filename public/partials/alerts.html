@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="well">
-            <div class="alert alert-dismissable" ng-class="{'Normal':'alert-warning', 'High':'alert-danger'}[alert.priority]" ng-repeat="alert in displayAlerts">
+            <div class="alert alert-dismissable" ng-class="{'Normal':'alert-info', 'Warning':'alert-warning', 'Critical':'alert-danger'}[alert.priority]" ng-repeat="alert in displayAlerts">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="markAsRead(alert)">&times;</button>
                 <span ng-bind="alert.message"></span>
             </div>
