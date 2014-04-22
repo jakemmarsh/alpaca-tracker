@@ -30,7 +30,9 @@ public class PacaWorld {
 	private float temperatureFloor = -140f;
 	private float temperatureCeiling = 4000f;
 	//The maximum distance an alpaca can be from another before being considered isolated
-	private float maxAlpacaGroupDistance = 10f;
+	private float maxAlpacaGroupDistance = 30f;
+	//The threshold for low battery alerts. A number from 0 - 100.
+	private float lowBatteryWarningThreshold = 20.0f;
 	private HashMap alert = new HashMap();
 	
 	public PacaWorld() {
@@ -114,8 +116,8 @@ public class PacaWorld {
 	}
 	
 	/**
-	 * @author Sylvia Allain
-	 * get and set methods
+	 * @author Sylvia Allain, Jonathan Cole
+	 * getters / setters
 	 */
 	
 	public void setLongitudeFloor(float floor) { this.longitudeFloor = floor; }
@@ -134,6 +136,8 @@ public class PacaWorld {
 	
 	public void setMaxAlpacaGroupDistance(float distance) { this.maxAlpacaGroupDistance = distance; }
 	
+	public void setLowBatteryWarningThreshold(float threshold) { this.lowBatteryWarningThreshold = threshold; }
+	
 	public float returnLongitudeFloor() { return longitudeFloor; }
 	
 	public float returnLongitudeCeiling() { return longitudeCeiling; }
@@ -149,6 +153,8 @@ public class PacaWorld {
 	public float returnTemperatureCeiling() { return temperatureCeiling; }
 	
 	public float returnMaxAlpacaGroupDistance() { return maxAlpacaGroupDistance; }
+	
+	public float returnLowBatteryWarningThreshold() { return lowBatteryWarningThreshold; }
 	
 	public ArrayList<float[]> returnFarmCoordinates() { return farmCoordinates; };
 }

@@ -15,7 +15,8 @@ public class PacaAlert {
 		Dead,
 		Sick,
 		Isolated,
-		OutOfBounds
+		OutOfBounds,
+		BatteryLow
 	};
 	public EventType type;
 	
@@ -70,6 +71,9 @@ public class PacaAlert {
 				break;
 			case OutOfBounds:
 				outStr = "is out of bounds";
+				break;
+			case BatteryLow:
+				outStr = "has a low battery level";
 				break;
 		}
 		return outStr;
