@@ -19,7 +19,8 @@ public class PacaAlert {
 		BatteryLow,
 		LowSatellites,
 		HeartRateLow,
-		HeartRateHigh
+		HeartRateHigh,
+		lowSignal
 	};
 	public EventType type;
 	

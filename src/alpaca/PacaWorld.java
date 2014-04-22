@@ -35,6 +35,8 @@ public class PacaWorld{
 	private float lowBatteryWarningThreshold = 20.0f;
 	private float heartRateFloor = 70;
 	private float heartRateCeiling = 120;
+	//The amount of signal at or below which an alert is thrown. A number from 1 - 5.
+	private int lowSignalThreshold = 1;
 	private HashMap alert = new HashMap();
 	
 	public PacaWorld() {
@@ -163,6 +165,8 @@ public class PacaWorld{
 	
 	public void setLowBatteryWarningThreshold(float threshold) { this.lowBatteryWarningThreshold = threshold; }
 	
+	public void setLowSignalThreshold(int threshold) { this.lowSignalThreshold = threshold; }
+	
 	public void setHeartRateFloor(float floor) { this.heartRateFloor = floor; }
 	
 	public void setHeartRateCeiling(float ceiling) { this.heartRateCeiling = ceiling; }
@@ -188,6 +192,8 @@ public class PacaWorld{
 	public float returnHeartRateFloor(){ return heartRateFloor; }
 	
 	public float returnHeartRateCeiling(){ return heartRateCeiling; }
+	
+	public int returnLowSignalThreshold(){ return lowSignalThreshold; }
 	
 	public ArrayList<float[]> returnFarmCoordinates() { return farmCoordinates; };
 }

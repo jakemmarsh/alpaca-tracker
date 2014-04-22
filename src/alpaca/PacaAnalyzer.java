@@ -28,6 +28,8 @@ public class PacaAnalyzer {
 			analyzeLocationBounds(a);
 			analyzeIsolation(a, alpacas);
 			analyzeBattery(a);
+			analyzeHeartRate(a);
+			analyzeSignalQuality(a);
 			
 		}
 	}
@@ -201,10 +203,12 @@ public class PacaAnalyzer {
 		String state = "";
 		if(alpaca.hardware.getBatteryLife() < pacaWorld.returnLowBatteryWarningThreshold()){
 			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.BatteryLow);
+			alpaca.lowBattery = true;
 			state = "Alpaca battery is low";
 		}
 		else{
 			pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.BatteryLow);
+			alpaca.lowBattery = false;
 			state = "Alpaca battery is nominal";
 		}
 		return state;
@@ -254,7 +258,7 @@ public class PacaAnalyzer {
 	}
 	
 	/**
-	 * @author Sylvia Allain
+	 * @author Sylvia Allain, Jonathan Cole
 	 * @param signal quality
 	 * @return string signal quality
 	 */
@@ -265,12 +269,26 @@ public class PacaAnalyzer {
 		String state = "";
 		int signalCeiling = 5;
 		
-		if (signalQuality < 0)
+		if (signalQuality < 0){
 			state = "Error: Negative signal value";
-		else if (signalQuality > 5)
+		}
+		else if (signalQuality > 5){
 			state = "Error: High signal value";
-		else
+		}
+		else{
 			state = Integer.toString(signalQuality);
+		}
+		
+		//Signal is too low
+		if(signalQuality < pacaWorld.returnLowSignalThreshold()){
+			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.lowSignal);
+			alpaca.lowSignal = true;
+		}
+		//Signal is fine
+		else{
+			pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.lowSignal);
+			alpaca.lowSignal = false;
+		}
 		
 		return state;
 	}
