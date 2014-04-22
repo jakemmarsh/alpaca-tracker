@@ -32,5 +32,13 @@ define(['./index'], function (controllers) {
             $scope.alerts.$child(alert.key).$update({ read: true });
         };
 
+        $scope.markAllAsRead = function() {
+            var keys = $scope.alerts.$getIndex();
+
+            for(var i = 0; i < keys.length; i++) {
+                $scope.alerts.$child(keys[i]).$update({ read: true });
+            }
+        };
+
     }]);
 });
