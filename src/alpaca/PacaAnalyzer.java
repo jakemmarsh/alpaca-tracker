@@ -195,27 +195,6 @@ public class PacaAnalyzer {
 	
 	/**
 	 * @author Sylvia Allain
-	 * @param heading
-	 * @return string heading
-	 */
-	public String analyzeHeading(Alpaca alpaca){
-		
-		float heading = alpaca.hardware.getCompassHeading();
-		
-		String state = "";
-		
-		if (heading < 0)
-			state = "Error: Negative heading value";
-		else if (heading > 360)
-			state = "Error: High heading value";
-		else
-			state = Float.toString(heading);
-		
-		return state;
-	}
-	
-	/**
-	 * @author Sylvia Allain
 	 * @param pitch, roll
 	 * @return type of position
 	 */

@@ -37,7 +37,7 @@ public class PacaAlert {
 	 */
 	public String ToString(){
 		StringBuilder s = new StringBuilder();
-		s.append(alpaca.name);
+		s.append(alpaca.getName ());
 		s.append(" ");
 		//s.append("[");
 		//s.append(alpaca.getTrackerID());

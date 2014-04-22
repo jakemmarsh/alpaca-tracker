@@ -19,7 +19,6 @@ public interface PacaTraca {
 	public Float getTemperature( ); //fahrenheit
 	public Float getRoll( ); // rotate about y (-90 to 90 degrees)
 	public Float getPitch( ); // rotate about x degrees (0-180 degrees)
-	public Float getCompassHeading( ); // heading 0-360 degrees
 	public void setSeaLevelPressure( Float pressure ); // sensor pressure at sea level in hPa
 	public void setBatteryLife( int batteryLife );
 	public int getBatteryLife( );
@@ -35,7 +34,6 @@ public interface PacaTraca {
 	public void setSpeed( float speed );
 	public void setCourse( float course );
 	public void setNumSatellites( int numSatellites );
-	public void setHeading( float heading );
 	public void setPitch( float pitch );
 	public void setRoll( float roll );
 	public void setAltitude( float altitude );

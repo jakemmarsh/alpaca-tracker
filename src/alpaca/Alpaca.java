@@ -12,28 +12,17 @@ public class Alpaca {
 	
 	public PacaTraca hardware;
 	private String   trackerID;
-	public  String   name;
-	public  String   dbRef;
-	private String   longitude;
-	private String   latitude;
-	private Float    heartRate;
+	private String   name;
+	private String   dbRef;
 	
 	public Alpaca ()
 	{
 		PacaTracaHardwareFactory pthf = new PacaTracaHardwareFactory ();
 		hardware = pthf.createPacaTraca (trackerID);
 	}
-
-	/**
-	 * Sets the name of the alpaca
-	 * @param name
-	 * @author Clayton Peterson
-	 */
-	public void setName (String name)
-	{
-		this.name = name;
-	}
 	
+	// =================================================================================
+    // Setters 
 	/**
 	 * Sets a reference to the alpaca's database
 	 * location
@@ -47,6 +36,16 @@ public class Alpaca {
 	}
 	
 	/**
+	 * Sets the name of the alpaca
+	 * @param name
+	 * @author Clayton Peterson 
+	 */
+	public void setName (String name)
+	{
+		this.name = name;
+	}
+	
+	/**
 	 * Sets the tracker ID of the alpaca
 	 * @param id
 	 * @author Clayton Peterson
@@ -56,70 +55,15 @@ public class Alpaca {
 		this.trackerID = String.valueOf (id);
 	}
 	
+	// =================================================================================
+	// Getters
 	/**
-	 * Sets the longitude of the alpaca
-	 * @param longitude
-	 * @author Clayton Peterson
+	 * @return A reference to the alpacas data 
+	 * @author Clayton Peterson 
 	 */
-	public void setLongitude (String longitude)
+	public String getDatabaseRef ()
 	{
-		this.longitude = longitude;
-	}
-	
-	/**
-	 * Sets the latitude of the alpaca
-	 * @param latitude
-	 * @author Clayton Peterson
-	 */
-	public void setLatitude (String latitude)
-	{
-		this.latitude = latitude;
-	}
-	
-	/**
-	 * Sets the heartRate of the alpaca
-	 * @param heartRate
-	 * @author Jake Marsh
-	 */
-	public void setHeartRate (Float heartRate)
-	{
-		this.heartRate = heartRate;
-	}
-	
-	/**
-	 * @return The alpaca's tracker ID
-	 * @author Clayton Peterson
-	 */
-	public String getTrackerID ()
-	{
-		return this.trackerID;
-	}
-	
-	/**
-	 * @return The alpaca's longitude
-	 * @author Clayton Peterson
-	 */
-	public String getLongitude ()
-	{
-		return this.longitude;
-	}
-	
-	/**
-	 * @return The alpaca's latitude
-	 * @author Clayton Peterson
-	 */
-	public String getLatitude ()
-	{
-		return this.latitude;
-	}
-	
-	/**
-	 * @return The alpaca's heartRate
-	 * @author Jake Marsh
-	 */
-	public Float getHeartRate ()
-	{
-		return this.heartRate;
+		return this.dbRef;
 	}
 	
 	/**
@@ -129,5 +73,14 @@ public class Alpaca {
 	public String getName ()
 	{
 		return name;
+	}
+	
+	/**
+	 * @return The alpaca's tracker ID
+	 * @author Clayton Peterson
+	 */
+	public String getTrackerID ()
+	{
+		return this.trackerID;
 	}
 }

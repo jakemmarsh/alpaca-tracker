@@ -44,7 +44,6 @@ public class PacaAnalyzerTest {
 	 *  0 <= speed <= 20 mph
 	 *  0 <= course <= 360
 	 *  0 <= numSatellites
-	 *  0 <= heading <= 360
 	 *  0 <= pitch <= 180
 	 *  -90 <= roll <= 90
 	 *  0 <= altitude <= 8900
@@ -66,7 +65,6 @@ public class PacaAnalyzerTest {
 		float speed = 10.3f;
 		float course = 123.3f;
 		int numSatellites = 3;
-		float heading = 32.8f;
 		float pitch = 93.1f;
 		float roll = -22.0f;
 		float altitude = 1023.3f;
@@ -79,7 +77,6 @@ public class PacaAnalyzerTest {
 		fred.hardware.setSpeed(speed);
 		fred.hardware.setCourse(course);
 		fred.hardware.setNumSatellites(numSatellites);
-		fred.hardware.setHeading(heading);
 		fred.hardware.setPitch(pitch);
 		fred.hardware.setRoll(roll);
 		fred.hardware.setAltitude(altitude);
@@ -227,34 +224,6 @@ public class PacaAnalyzerTest {
 		fred.hardware.setNumSatellites(-5);
 		
 		assertEquals("Error: Negative satellite number", analyzer.analyzeNumSatellites(fred));
-		
-	}
-	
-	/**
-	 * @author Sylvia Allain
-	 * High Heading
-	 */
-	@Test
-	public void testCase11() {
-		
-		fred = NormalCaseAlpaca();
-		fred.hardware.setHeading(400f);
-		
-		assertEquals("Error: High heading value", analyzer.analyzeHeading(fred));
-		
-	}
-	
-	/**
-	 * @author Sylvia Allain
-	 * Low Heading
-	 */
-	@Test
-	public void testCase12() {
-		
-		fred = NormalCaseAlpaca();
-		fred.hardware.setHeading(-100f);
-		
-		assertEquals("Error: Negative heading value", analyzer.analyzeHeading(fred));
 		
 	}
 	

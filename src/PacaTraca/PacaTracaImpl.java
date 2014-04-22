@@ -17,7 +17,6 @@ public class PacaTracaImpl implements PacaTraca {
 	private float speed;
 	private float course;
 	private int numSatellites;
-	private float heading;
 	private float pitch;
 	private float roll;
 	private float altitude;
@@ -74,7 +73,6 @@ public class PacaTracaImpl implements PacaTraca {
 		outStr += "Temperature (F): " + getTemperature().toString() + "\n";
 		outStr += "Speed: " + getSpeed().toString() + "\n";
 		outStr += "Has satellite fix: " + haveFix().toString() + "\n";
-		outStr += "Heading: " + getCompassHeading().toString() + "\n";
 		outStr += "Pitch: " + getPitch().toString() + "\n";
 		outStr += "Roll: " + getRoll() + "\n";
 		outStr += "Has satellite fix: " + haveFix().toString() + "\n";
@@ -257,19 +255,6 @@ public class PacaTracaImpl implements PacaTraca {
 
 	@Override
 	/**
-	 * @author Sylvia Allain
-	 * Returns the motion sensor's heading reading
-	 * -heading 0-360 degrees
-	 */
-	public Float getCompassHeading() {
-		// TODO Auto-generated method stub
-		if (isRandom)
-			heading = getRandomHeading();
-		return heading;
-	}
-
-	@Override
-	/**
 	 * sensor pressure at sea level in hPa
 	 */
 	public void setSeaLevelPressure(Float pressure) {
@@ -359,14 +344,6 @@ public class PacaTracaImpl implements PacaTraca {
 	 */
 	private int getRandomNumSatellites() {
 		return rand.nextInt(6);
-	}
-	
-	/**
-	 * @author Sylvia Allain
-	 * @return random heading between 0 and 360
-	 */
-	private float getRandomHeading() {
-		return rand.nextFloat() * 360;
 	}
 	
 	/**
@@ -529,10 +506,6 @@ public class PacaTracaImpl implements PacaTraca {
 	
 	public void setNumSatellites( int numSatellites ) {
 		this.numSatellites = numSatellites;
-	}
-	
-	public void setHeading( float heading ) {
-		this.heading = heading;
 	}
 	
 	public void setPitch( float pitch ) {
