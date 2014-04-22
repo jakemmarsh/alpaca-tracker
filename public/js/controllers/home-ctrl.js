@@ -99,7 +99,11 @@ define(['./index'], function (controllers) {
                     lat: 44.89+(i*0.01),
                     lng: -68.67+(i*0.01),
                     trackerBatteryLife: 100,
-                    heartRate: parseFloat(75.0)
+                    heartRate: parseFloat(75.0),
+                    pitch: parseFloat(0.0),
+                    roll: parseFloat(0.0),
+                    altitude: parseFloat(8.0),
+                    temperature: parseFloat(98.0)
                 };
                 $scope.alpacas.$save(i);
             }

@@ -19,6 +19,10 @@ define(['./index'], function (controllers) {
             alpaca.trackerID = parseInt(alpaca.trackerID);
             alpaca.heartRate = parseFloat(0.0);
             alpaca.trackerBatteryLife = parseInt(100);
+            alpaca.pitch = parseFloat(0.0);
+            alpaca.roll = parseFloat(0.0);
+            alpaca.altitude = parseFloat(8.0);
+            alpaca.temperature = parseFloat(98.0);
 
             $scope.alpacas[maxKey] = alpaca;
 
