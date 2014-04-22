@@ -108,10 +108,14 @@ public class PacaCollection {
 		{
 			Alpaca a = alpacas.get (i);			
 			Firebase dataRef = new Firebase (a.dbRef);
-			dataRef.child ("lat").setValue ((a.hardware.getLatitudeDecimalDegrees  ()));
-			dataRef.child ("lng").setValue ((a.hardware.getLongitudeDecimalDegrees ()));
-			dataRef.child ("heartRate").setValue ((a.hardware.getHeartRate ()));
-			dataRef.child ("trackerBatteryLife").setValue((a.hardware.getBatteryLife()));
+			dataRef.child ("lat").setValue (a.hardware.getLatitudeDecimalDegrees  ());
+			dataRef.child ("lng").setValue (a.hardware.getLongitudeDecimalDegrees ());
+			dataRef.child ("heartRate").setValue (a.hardware.getHeartRate ());
+			dataRef.child ("trackerBatteryLife").setValue (a.hardware.getBatteryLife ());
+			//dataRef.child ("altitude").setValue (a.hardware.getAltitude ());
+			//dataRef.child ("pitch").setValue (a.hardware.getPitch ());
+			//dataRef.child ("roll").setValue (a.hardware.getRoll ());
+			//dataRef.child("heading").setValue (a.hardware.getCourse ());
 		}
 	}
 	
