@@ -78,4 +78,21 @@ public class PacaAlert {
 		}
 		return outStr;
 	}
+	
+	@Override
+	/**
+	 * Override method to compare by value rather than by reference.
+	 */
+	public boolean equals(Object obj){
+		if (obj == null)
+            return false;
+        if (obj == this)
+            return true;
+        if (!(obj instanceof PacaAlert))
+            return false;
+        
+        PacaAlert other = (PacaAlert) obj;
+        return (other.readByUser == readByUser && other.alpaca == alpaca && other.priority == priority && other.type == type);
+		
+	}
 }

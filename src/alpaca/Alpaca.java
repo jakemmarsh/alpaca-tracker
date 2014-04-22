@@ -2,6 +2,8 @@ package alpaca;
 import PacaTraca.PacaTraca;
 import TestDriversAndFactories.PacaTracaHardwareFactory;
 
+import java.util.ArrayList;
+
 /**
  * This class represents an alpaca. Alpaca's have a tracker ID and 
  * a referenced hardware object. 
@@ -14,6 +16,7 @@ public class Alpaca {
 	private String   trackerID;
 	private String   name;
 	private String   dbRef;
+	public ArrayList<PacaAlert> alerts = new ArrayList<PacaAlert>();
 	
 	public Alpaca ()
 	{

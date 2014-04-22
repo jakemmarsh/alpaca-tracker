@@ -69,8 +69,10 @@ public class PacaAnalyzer {
 		
 		Polygon propertyPolygon = new Polygon(xPoints, yPoints, farmCoordinates.size());
 
-		if (propertyPolygon.contains(weightedLatitude, weightedLongitude))
+		if (propertyPolygon.contains(weightedLatitude, weightedLongitude)){
+			pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.OutOfBounds);
 			state = "In bounds";
+		}
 		else {
 			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.OutOfBounds);
 			state = "Out of bounds";
@@ -102,7 +104,6 @@ public class PacaAnalyzer {
 					firstLoop = false;
 				}
 			}
-			
 		}
 		
 		//Create an alert if no alpacas are closer than maxAlpacaGroupDistance units away.
@@ -111,6 +112,7 @@ public class PacaAnalyzer {
 			state = "Alpaca is isolated";
 		}
 		else{
+			pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.Isolated);
 			state = "Alpaca is grouped";
 		}
 		

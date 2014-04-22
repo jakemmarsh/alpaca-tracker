@@ -17,7 +17,7 @@ import com.firebase.client.ValueEventListener;
  * Variables will be pulled from FireBase, and set by the 
  * User Preference interface.
  */
-public class PacaWorld {
+public class PacaWorld{
 	
 	public List<PacaAlert> alerts = new ArrayList<PacaAlert>();
 	public ArrayList<float[]> farmCoordinates;
@@ -91,28 +91,37 @@ public class PacaWorld {
 	 * @param type
 	 */
 	public void CreateAlert(Alpaca alp, PacaAlert.EventType type){
-		Firebase alertRef = new Firebase("https://crackling-fire-2064.firebaseio.com/alerts").push();
 		PacaAlert e = new PacaAlert(alp, type);
-		
-		// build hashmap of alert to store in Firebase
-		alert.put("alpacaID", alp.getTrackerID());
-		alert.put("read", e.readByUser);
-		alert.put("message", e.ToString());
-		alert.put("priority", e.priority.toString());
-
-		alerts.add(e);
-		
-		// save alert in Firebase
-		alertRef.setValue(alert, new Firebase.CompletionListener() {		
-			@Override
-			public void onComplete(FirebaseError error, Firebase arg1) {
-				if (error != null) {
-		            System.err.println("[CreateAlert] Data could not be saved: " + error.getMessage());
-		        } else {
-		            System.out.println("[CreateAlert] Data saved successfully.");
-		        }
-			}
-		});
+		//Only add the alert if the alpaca doesn't already have one raised.
+		if(!alp.alerts.contains(e)){
+			Firebase alertRef = new Firebase("https://crackling-fire-2064.firebaseio.com/alerts").push();
+			
+			// build hashmap of alert to store in Firebase
+			alert.put("alpacaID", alp.getTrackerID());
+			alert.put("read", e.readByUser);
+			alert.put("message", e.ToString());
+			alert.put("priority", e.priority.toString());
+	
+			alerts.add(e);
+			alp.alerts.add(e);
+			
+			// save alert in Firebase
+			alertRef.setValue(alert, new Firebase.CompletionListener() {		
+				@Override
+				public void onComplete(FirebaseError error, Firebase arg1) {
+					if (error != null) {
+			            System.err.println("[CreateAlert] Data could not be saved: " + error.getMessage());
+			        } else {
+			            System.out.println("[CreateAlert] Data saved successfully.");
+			        }
+				}
+			});
+		}
+	}
+	
+	public void RemoveAlert(Alpaca alp, PacaAlert.EventType type){
+		PacaAlert e = new PacaAlert(alp, type);
+		alp.alerts.remove(e);
 	}
 	
 	/**
