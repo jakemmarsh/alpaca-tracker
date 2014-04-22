@@ -12,7 +12,7 @@ define(['./index'], function (controllers) {
                         marker = new google.maps.Marker({
                             title: alpaca.name,
                             position: new google.maps.LatLng(alpaca.lat, alpaca.lng),
-                            icon: 'http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png'
+                            icon: '../../img/alpaca.png'
                         }),
                         contentString = '<h5>' + alpaca.name + '</h5>',
                         infowindow = new google.maps.InfoWindow({
@@ -158,11 +158,11 @@ define(['./index'], function (controllers) {
             // change color of corresponding map marker and open its infowindow
             for(var j = 0; j < alpacaMarkers.length; j++) {
                 if(alpacaMarkers[j].marker.title.toLowerCase() === alpacaName) {
-                    alpacaMarkers[j].marker.setIcon('http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png');
+                    alpacaMarkers[j].marker.setIcon('../../img/alpaca-focused.png');
                     alpacaMarkers[j].infowindow.open($scope.alpacaMap, alpacaMarkers[j].marker);
                 }
                 else {
-                    alpacaMarkers[j].marker.setIcon('http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png');
+                    alpacaMarkers[j].marker.setIcon('../../img/alpaca.png');
                     alpacaMarkers[j].infowindow.close();
                 }
             }
