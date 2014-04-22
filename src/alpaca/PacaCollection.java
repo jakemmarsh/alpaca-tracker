@@ -3,13 +3,9 @@ package alpaca;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.firebase.client.GenericTypeIndicator;
-import com.firebase.client.MutableData;
-import com.firebase.client.Transaction;
 import com.firebase.client.ValueEventListener;
 
 import alpaca.Alpaca;
@@ -41,7 +37,9 @@ public class PacaCollection {
 	/* The working collection of alpacas */
 	private ArrayList <Alpaca> alpacas;
 	
-	// =================================================================================
+	/** =================================================================================
+	 * @author clayton peterson 
+	 */
 	public PacaCollection ()
 	{
 		url = "https://crackling-fire-2064.firebaseio.com/alpacas";
@@ -51,10 +49,9 @@ public class PacaCollection {
         loadAlpacasFromDatabase ();
 	}
 	
-	/**
-	 * @author clayton peterson
+	/** =================================================================================
+	 * @author clayton peterson 
 	 */
-	// =================================================================================
 	private void loadAlpacasFromDatabase ()
 	{
 		dataRef.addListenerForSingleValueEvent (new ValueEventListener() 
@@ -79,46 +76,62 @@ public class PacaCollection {
 		});
 	}
 	
-	// =================================================================================
+	/** =================================================================================
+	 * @param ID
+	 * @param alpacaDetails
+	 * @return
+	 * @author clayton peterson 
+	 */
 	private Alpaca createAlpaca (int ID, HashMap <?,?> alpacaDetails)
 	{
 		Alpaca out = new Alpaca ();
 		out.setDBRef     (url, ID);
 		out.setName      ((alpacaDetails.get ("name")).toString());
 		out.setTrackerID ((alpacaDetails.get ("trackerID")).toString());
-		out.setLatitude  ((alpacaDetails.get ("lat")).toString());
-		out.setLongitude ((alpacaDetails.get ("lng")).toString());
-		out.setHeartRate ((alpacaDetails.get ("heartRate").toString()));
 		out.hardware.setBatteryLife (((Long)
     			alpacaDetails.get ("trackerBatteryLife")).intValue());
 		
 		return out;
 	}
 	
-	/** 
+	/** =================================================================================
 	 * This method tells each of the alpaca objects to update their
 	 * information on the database. 
-	 * @author Clayton Peterson
+	 * @author clayton peterson 
 	 */
-	// =================================================================================
 	public void update ()
 	{
 		for (int i = 0; i < alpacas.size (); i ++)
 		{
 			Alpaca a = alpacas.get (i);			
-			Firebase dataRef = new Firebase (a.dbRef);
-			dataRef.child ("lat").setValue ((a.hardware.getLatitudeDecimalDegrees  ()));
-			dataRef.child ("lng").setValue ((a.hardware.getLongitudeDecimalDegrees ()));
-			dataRef.child ("heartRate").setValue ((a.hardware.getHeartRate ()));
+			Firebase dataRef = new Firebase (a.getDatabaseRef());
+			
+			// Location
+			dataRef.child ("lat").setValue   (a.hardware.getLatitudeDecimalDegrees());
+			dataRef.child ("lng").setValue   (a.hardware.getLongitudeDecimalDegrees());
+			
+			// Movement
+			dataRef.child ("speed").setValue (a.hardware.getSpeed ());
+			dataRef.child ("course").setValue (a.hardware.getCourse ());
+			
+			// Flying 
+			dataRef.child ("altitude").setValue (a.hardware.getAltitude ());
+			dataRef.child ("roll").setValue (a.hardware.getRoll ());
+			dataRef.child ("pitch").setValue (a.hardware.getPitch ());
+
+			// Vitals
+			dataRef.child ("heartRate").setValue (a.hardware.getHeartRate());
+			dataRef.child ("temperature").setValue(a.hardware.getTemperature ());
+
+			
 			dataRef.child ("trackerBatteryLife").setValue((a.hardware.getBatteryLife()));
 		}
 	}
-	
-	/**
+
+	/** =================================================================================
 	 * @return the collection of alpacas
-	 * @author Clayton Peterson
+	 * @author clayton peterson 
 	 */
-	// =================================================================================
 	public ArrayList <Alpaca> getAlpacas ()
 	{
 		return alpacas; 
