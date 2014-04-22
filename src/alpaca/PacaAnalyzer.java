@@ -26,7 +26,9 @@ public class PacaAnalyzer {
 	public void analyze (ArrayList<Alpaca> alpacas){
 		for(Alpaca a : alpacas){
 			analyzeLocationBounds(a);
-			analyzeLocationIsolation(a, alpacas);
+			analyzeIsolation(a, alpacas);
+			analyzeBattery(a);
+			
 		}
 	}
 	
@@ -84,7 +86,7 @@ public class PacaAnalyzer {
 	 * from any other alpaca, it is considered isolated.
 	 * @return whether the alpaca is isolated
 	 */
-	public String analyzeLocationIsolation(Alpaca alpaca, ArrayList<Alpaca> alpacaList) {
+	public String analyzeIsolation(Alpaca alpaca, ArrayList<Alpaca> alpacaList) {
 		//get position on earth in feet from (0, 0)
 		Pair baseCoords = new Pair(alpaca.hardware.getLatitudeDecimalDegrees(), alpaca.hardware.getLongitudeDecimalDegrees());
 		String state = "";
@@ -183,6 +185,20 @@ public class PacaAnalyzer {
 		else
 			state = Integer.toString(numSatellites);
 		
+		return state;
+	}
+	
+	/**
+	 * @author Jonathan Cole
+	 * Throws an alert if the specified alpaca's battery life is low.
+	 * Threshold is defined PacaWorld as lowBatteryWarningThreshold.
+	 */
+	public String analyzeBattery(Alpaca alpaca){
+		String state = "Alpaca battery is nominal";
+		if(alpaca.hardware.getBatteryLife() < pacaWorld.returnLowBatteryWarningThreshold()){
+			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.BatteryLow);
+			state = "Alpaca battery is low";
+		}
 		return state;
 	}
 	
