@@ -88,10 +88,9 @@ public class PacaAnalyzer {
 	 * from any other alpaca, it is considered isolated.
 	 * @return whether the alpaca is isolated
 	 */
-	public String analyzeIsolation(Alpaca alpaca, ArrayList<Alpaca> alpacaList) {
+	public void analyzeIsolation(Alpaca alpaca, ArrayList<Alpaca> alpacaList) {
 		//get position on earth in feet from (0, 0)
 		Pair baseCoords = new Pair(alpaca.hardware.getLatitudeDecimalDegrees(), alpaca.hardware.getLongitudeDecimalDegrees());
-		String state = "";
 		boolean firstLoop = true;
 		double lowestDistance = 0;
 		for(Alpaca a : alpacaList){
@@ -108,15 +107,14 @@ public class PacaAnalyzer {
 		
 		//Create an alert if no alpacas are closer than maxAlpacaGroupDistance units away.
 		if(lowestDistance > pacaWorld.returnMaxAlpacaGroupDistance()){
+			//Alpaca is isolated
 			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.Isolated);
-			state = "Alpaca is isolated";
 		}
 		else{
+			//Alpaca is grouped
 			pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.Isolated);
-			state = "Alpaca is grouped";
 		}
 		
-		return state;
 	}
 	
 	/**
@@ -196,10 +194,14 @@ public class PacaAnalyzer {
 	 * Threshold is defined PacaWorld as lowBatteryWarningThreshold.
 	 */
 	public String analyzeBattery(Alpaca alpaca){
-		String state = "Alpaca battery is nominal";
+		String state = "";
 		if(alpaca.hardware.getBatteryLife() < pacaWorld.returnLowBatteryWarningThreshold()){
 			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.BatteryLow);
 			state = "Alpaca battery is low";
+		}
+		else{
+			pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.BatteryLow);
+			state = "Alpaca battery is nominal";
 		}
 		return state;
 	}
