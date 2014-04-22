@@ -32,7 +32,7 @@
                 <dt ng-if="focusedAlpaca.roll !== NULL">Roll</dt>
                 <dd ng-if="focusedAlpaca.roll !== NULL" ng-bind-html="(focusedAlpaca.roll | number: 2) + '&deg;'"></dd>
             </dl>
-            <h4 class="text-danger col-md-12">There are no satellites with a fix on <span ng-bind="focusedAlpaca.name"></span>!</h4>
+            <h4 class="text-danger col-md-12" ng-if="!focusedAlpaca.hasFix">There are no satellites with a fix on <span ng-bind="focusedAlpaca.name"></span>!</h4>
         </div>
         <div class="col-md-2 text-right text-muted">
             <span ng-if="focusedAlpaca.trackerID !== NULL"><strong>Tracker ID:</strong> <span ng-bind="focusedAlpaca.trackerID"></span></span>
