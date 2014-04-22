@@ -22,10 +22,14 @@
                 <dd ng-bind="focusedAlpaca.temperature"></dd>
                 <dt ng-if="focusedAlpaca.heartRate !== NULL">Heart Rate</dt>
                 <dd ng-bind-html="focusedAlpaca.heartRate | number: 2"></dd>
+                <dt ng-if="focusedAlpaca.heading !== NULL">Heading</dt>
+                <dd ng-bind-html="focusedAlpaca.heading | number: 2"></dd>
                 <dt ng-if="focusedAlpaca.lat !== NULL">Latitude</dt>
                 <dd ng-bind-html="focusedAlpaca.lat | number: 2"></dd>
                 <dt ng-if="focusedAlpaca.lng !== NULL">Longitude</dt>
                 <dd ng-bind-html="focusedAlpaca.lng | number: 2"></dd>
+                <dt ng-if="focusedAlpaca.altitude !== NULL">Altitude</dt>
+                <dd ng-bind-html="focusedAlpaca.altitude | number: 2"></dd>
                 <dt ng-if="focusedAlpaca.pitch !== NULL">Pitch</dt>
                 <dd ng-bind-html="focusedAlpaca.pitch | number: 2"></dd>
                 <dt ng-if="focusedAlpaca.roll !== NULL">Roll</dt>
