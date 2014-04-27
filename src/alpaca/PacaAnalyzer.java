@@ -277,6 +277,9 @@ public class PacaAnalyzer {
 	 * @return health condition
 	 */
 	public String analyzeTemperature(Alpaca alpaca) {
+		//normal alpaca temperature is 100.5 to 102.5 F
+		float alpacaHighTemp = 102.5f;
+		float alpacaLowTemp = 100.5f;
 		
 		float temperature = alpaca.hardware.getTemperature();
 		
@@ -285,8 +288,20 @@ public class PacaAnalyzer {
 			state = "Error: Low temperature value";
 		else if (temperature > pacaWorld.returnTemperatureCeiling())
 			state = "Error: High temperature value";
-		else
+		else if (temperature > alpacaHighTemp) {
+			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.TemperatureHigh);
+			state = "Alpaca is sick";
+		}
+		else if (temperature < alpacaLowTemp) {
+			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.TemperatureLow);
+			state = "Alpaca is sick";
+		}
+		else {
+			pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.TemperatureHigh);
+			pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.TemperatureLow);
 			state = Float.toString(temperature);
+		}
+		
 		
 		return state;
 	}
