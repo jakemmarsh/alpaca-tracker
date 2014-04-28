@@ -272,7 +272,7 @@ public class PacaAnalyzer {
 		if (signalQuality < 0){
 			state = "Error: Negative signal value";
 		}
-		else if (signalQuality > 5){
+		else if (signalQuality > signalCeiling){
 			state = "Error: High signal value";
 		}
 		else{
