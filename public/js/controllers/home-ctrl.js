@@ -1,6 +1,10 @@
 define(['./index'], function (controllers) {
     'use strict';
     controllers.controller('homeCtrl', ['$scope', '$rootScope', '$location', 'alpacaService', 'userService', 'farmService', 'alertService', function ($scope, $rootScope, $location, alpacaService, userService, farmService, alertService) {
+        $rootScope.user = userService.user;
+
+        $scope.alpacas = alpacaService;
+
         var alpacaMarkers = [],
             alpacasPlaced = false,
             boundariesDrawn = false,
@@ -8,11 +12,13 @@ define(['./index'], function (controllers) {
                 var keys = alpacas.$getIndex();
 
                 for(var i = 0; i < keys.length; i++) {
-                    var alpaca = alpacas[keys[i]],
-                        marker = new google.maps.Marker({
+                    var alpaca = alpacas[keys[i]];
+
+
+                    var marker = new google.maps.Marker({
                             title: alpaca.name,
                             position: new google.maps.LatLng(alpaca.lat, alpaca.lng),
-                            icon: '../../img/alpaca.png'
+                            icon: getIconUrl(alpaca.name)
                         }),
                         contentString = '<h5>' + alpaca.name + '</h5>',
                         infowindow = new google.maps.InfoWindow({
@@ -63,11 +69,34 @@ define(['./index'], function (controllers) {
                         }
                     }
                 }
+            },
+            getIconUrl = function(alpacaName) {
+                var keys = $scope.alpacas.$getIndex(),
+                    iconUrl;
+
+                alpacaName = alpacaName.toLowerCase();
+
+                for(var i = 0; i < keys.length; i++) {
+                    var alpaca = $scope.alpacas[keys[i]];
+
+                    if(alpaca.name.toLowerCase() === alpacaName) {
+                        if(alpaca.alertPriority === 1) {
+                            iconUrl = '../../img/alert-normal.png';
+                        }
+                        else if(alpaca.alertPriority === 2) {
+                            iconUrl = '../../img/alert-warning.png';
+                        }
+                        else if(alpaca.alertPriority === 3) {
+                            iconUrl = '../../img/alert-critical.png';
+                        }
+                        else {
+                            iconUrl = '../../img/alpaca.png';
+                        }
+
+                        return iconUrl;
+                    }
+                }
             };
-
-        $rootScope.user = userService.user;
-
-        $scope.alpacas = alpacaService;
 
         alpacaService.$on("change", function() {
             $scope.alpacas = alpacaService;
@@ -143,9 +172,9 @@ define(['./index'], function (controllers) {
         };
 
         $scope.focusAlpaca = function(alpacaName) {
-            alpacaName = alpacaName.toLowerCase();
-
             var keys = $scope.alpacas.$getIndex();
+
+            alpacaName = alpacaName.toLowerCase();
 
             // focus on corresponding alpaca
             for(var i = 0; i < keys.length; i++) {
@@ -162,7 +191,7 @@ define(['./index'], function (controllers) {
                     alpacaMarkers[j].infowindow.open($scope.alpacaMap, alpacaMarkers[j].marker);
                 }
                 else {
-                    alpacaMarkers[j].marker.setIcon('../../img/alpaca.png');
+                    alpacaMarkers[j].marker.setIcon(getIconUrl(alpacaMarkers[j].marker.title));
                     alpacaMarkers[j].infowindow.close();
                 }
             }
