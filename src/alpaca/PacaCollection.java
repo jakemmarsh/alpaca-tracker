@@ -2,10 +2,13 @@ package alpaca;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.GenericTypeIndicator;
 import com.firebase.client.ValueEventListener;
 
 import alpaca.Alpaca;
@@ -45,34 +48,41 @@ public class PacaCollection {
 		url = "https://crackling-fire-2064.firebaseio.com/alpacas";
 		dataRef = new Firebase (url);
         alpacas = new ArrayList <Alpaca> ();
-        
-        loadAlpacasFromDatabase ();
+         
+        checkForDatabaseChange ();
 	}
 	
 	/** =================================================================================
-	 * @author clayton peterson 
+	 * This sets up a listener for the alpaca database and creates an alpaca
+	 * object whenever an alpaca is added on the frontend. 
+	 * @author clayton peterson
 	 */
-	private void loadAlpacasFromDatabase ()
+	private void checkForDatabaseChange ()
 	{
-		dataRef.addListenerForSingleValueEvent (new ValueEventListener() 
-		{    
+		dataRef.addChildEventListener (new ChildEventListener () {
+		    
 			@Override
-		    public void onDataChange (DataSnapshot snapshot) 
-		    {
-				ArrayList <?> database = (ArrayList <?>) snapshot.getValue ();
-				
-		        for (int ID = 0; ID < database.size (); ID++)
-		        {
-		        	HashMap <?,?> alpacaDetails = (HashMap <?, ?>) database.get (ID);	
-		        	alpacas.add (createAlpaca (ID, alpacaDetails));
-		        }
+		    public void onChildAdded (DataSnapshot snapshot, String previousChildName) 
+			{
+		        int ID = Integer.parseInt (snapshot.getName ());
+		        GenericTypeIndicator <Map <String, Object>> t = 
+		        		new GenericTypeIndicator<Map<String, Object>>() {}; 
+		        HashMap <?,?> alpacaDetails = (HashMap <?,?>) snapshot.getValue (t);
+		        
+	        	alpacas.add (createAlpaca (ID, alpacaDetails));
 		    }
 
+		    @Override
+		    public void onChildChanged(DataSnapshot snapshot, String previousChildName) { }
+
+		    @Override
+		    public void onChildRemoved(DataSnapshot snapshot) { }
+		    
+		    @Override
+		    public void onChildMoved(DataSnapshot snapshot, String previousChildName) { }
+		    
 			@Override
-			public void onCancelled (FirebaseError arg0) 
-			{
-				System.out.println ("Error loading from database");
-			}
+			public void onCancelled(FirebaseError arg0) { }
 		});
 	}
 	
@@ -88,9 +98,6 @@ public class PacaCollection {
 		out.setDBRef     (url, ID);
 		out.setName      ((alpacaDetails.get ("name")).toString());
 		out.setTrackerID ((alpacaDetails.get ("trackerID")).toString());
-		out.hardware.setBatteryLife (((Long)
-    			alpacaDetails.get ("trackerBatteryLife")).intValue());
-		
 		return out;
 	}
 	
