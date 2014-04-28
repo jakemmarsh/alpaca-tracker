@@ -281,12 +281,12 @@ public class PacaAnalyzer {
 		
 		//Signal is too low
 		if(signalQuality < pacaWorld.returnLowSignalThreshold()){
-			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.lowSignal);
+			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.LowSignal);
 			alpaca.alertPriority = 1;
 		}
 		//Signal is fine
 		else{
-			pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.lowSignal);
+			pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.LowSignal);
 			alpaca.alertPriority = 0;
 		}
 		
