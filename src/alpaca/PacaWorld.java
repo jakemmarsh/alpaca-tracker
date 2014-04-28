@@ -33,6 +33,10 @@ public class PacaWorld{
 	private float maxAlpacaGroupDistance = 30f;
 	//The threshold for low battery alerts. A number from 0 - 100.
 	private float lowBatteryWarningThreshold = 20.0f;
+	private float heartRateFloor = 70;
+	private float heartRateCeiling = 120;
+	//The amount of signal at or below which an alert is thrown. A number from 1 - 5.
+	private int lowSignalThreshold = 1;
 	private HashMap alert = new HashMap();
 	
 	public PacaWorld() {
@@ -96,8 +100,9 @@ public class PacaWorld{
 	 * @param alp
 	 * @param type
 	 */
-	public void CreateAlert(Alpaca alp, PacaAlert.EventType type){
+	public void CreateAlert (Alpaca alp, PacaAlert.EventType type){
 		PacaAlert e = new PacaAlert(alp, type);
+
 		//Only add the alert if the alpaca doesn't already have one raised.
 		if(!alp.alerts.contains(e)){
 			Firebase alertRef = new Firebase("https://crackling-fire-2064.firebaseio.com/alerts").push();
@@ -161,6 +166,12 @@ public class PacaWorld{
 	
 	public void setLowBatteryWarningThreshold(float threshold) { this.lowBatteryWarningThreshold = threshold; }
 	
+	public void setLowSignalThreshold(int threshold) { this.lowSignalThreshold = threshold; }
+	
+	public void setHeartRateFloor(float floor) { this.heartRateFloor = floor; }
+	
+	public void setHeartRateCeiling(float ceiling) { this.heartRateCeiling = ceiling; }
+	
 	public float returnLongitudeFloor() { return longitudeFloor; }
 	
 	public float returnLongitudeCeiling() { return longitudeCeiling; }
@@ -178,6 +189,12 @@ public class PacaWorld{
 	public float returnMaxAlpacaGroupDistance() { return maxAlpacaGroupDistance; }
 	
 	public float returnLowBatteryWarningThreshold() { return lowBatteryWarningThreshold; }
+	
+	public float returnHeartRateFloor(){ return heartRateFloor; }
+	
+	public float returnHeartRateCeiling(){ return heartRateCeiling; }
+	
+	public int returnLowSignalThreshold(){ return lowSignalThreshold; }
 	
 	public ArrayList<float[]> returnFarmCoordinates() { return farmCoordinates; };
 }

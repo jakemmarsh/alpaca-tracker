@@ -23,7 +23,7 @@ public class PacaTracaImpl implements PacaTraca {
 	private int signalQuality;
 	private float temperature;
 	private boolean fix;
-	private float heartRate;
+	private float heartRate = 115f;
 	private int batteryLife;
 	
 	private boolean isRandom = true;
@@ -33,9 +33,8 @@ public class PacaTracaImpl implements PacaTraca {
 	
 	public static void main(String[] args) {
 		
-		PacaTracaImpl p = new PacaTracaImpl();
-		
-	
+		//PacaTracaImpl p = new PacaTracaImpl();
+
 	}
 	
 	
@@ -324,7 +323,7 @@ public class PacaTracaImpl implements PacaTraca {
 		if (speed == 0.0f)
 			chanceOfStanding = 90;
 		
-		if (Math.random() * 100 < chanceOfStanding)
+		if (Math.random() * 100 <= chanceOfStanding)
 			return 0f;
 		else
 			return rand.nextFloat() * 15;
@@ -408,7 +407,7 @@ public class PacaTracaImpl implements PacaTraca {
 		int highTempChance = 3;
 		
 		if (temperature != 0.0f) {
-			//calculate chance of have low heart rate
+			//calculate chance of have low temperature
 			if (temperature < baseTemp)
 				lowTempChance = 90;
 			else if (temperature > (baseTemp + tempRange))
@@ -416,10 +415,10 @@ public class PacaTracaImpl implements PacaTraca {
 		}
 			
 		//low temperature
-		if ((int) (Math.random() * 100) < lowTempChance)
+		if ((int) (Math.random() * 100) <= lowTempChance)
 			return rand.nextFloat() * baseTemp;
 		//high temperature
-		else if ((int) (Math.random() * 100) < highTempChance)
+		else if ((int) (Math.random() * 100) <= highTempChance)
 			return rand.nextFloat() * 10f + baseTemp + tempRange;
 		//normal temperature
 		else
@@ -445,22 +444,32 @@ public class PacaTracaImpl implements PacaTraca {
 		
 		float baseHeartRate = 70f;
 		float heartRateRange = 50f;
-		int lowHeartRateChance = 3;
-		int highHeartRateChance = 3;
+		int lowHeartRateChance = 2;
+		int highHeartRateChance = 2;
+		float deadChance = .1f;
 		
 		if (heartRate != 0.0f) {
 			//calculate chance of have low heart rate
-			if (heartRate < baseHeartRate)
+			if (heartRate < baseHeartRate) {
 				lowHeartRateChance = 90;
-			else if (heartRate > (baseHeartRate + heartRateRange))
+				deadChance = 1f;
+			}
+			else if (heartRate > (baseHeartRate + heartRateRange)) {
 				highHeartRateChance = 90;
+				deadChance = 1f;
+			}
 		}
-			
+		else {
+			deadChance = 100;
+		}
+		//dead
+		if ((Math.random() * 100) < deadChance)
+			return 0f;
 		//low heart rate
-		if ((int) (Math.random() * 100) < lowHeartRateChance)
-			return rand.nextFloat() * baseHeartRate;
+		else if ((Math.random() * 100) <= lowHeartRateChance)
+			return rand.nextFloat() * baseHeartRate + 1;
 		//high heart rate
-		else if ((int) (Math.random() * 100) < highHeartRateChance)
+		else if ((Math.random() * 100) <= highHeartRateChance)
 			return rand.nextFloat() * 30f + baseHeartRate + heartRateRange;
 		//normal heart rate
 		else
@@ -476,7 +485,7 @@ public class PacaTracaImpl implements PacaTraca {
 		
 		if (batteryLife == 0)
 			return (int) (Math.random() * 100);
-		else if ((int) (Math.random() * 100) < chanceOfDraining)
+		else if ((int) (Math.random() * 100) <= chanceOfDraining)
 			return batteryLife - 1;
 		else
 			return batteryLife;

@@ -6,7 +6,7 @@ import helpers.Pair;
 import helpers.GPSTranslator;
 
 /**
- * @author Sylvia Allain, Jonathan Cole
+ * @author Sylvia Allain, Jonathan Cole, Clay Peterson
  * 
  * Analyzes Alpaca objects on an ongoing basis or on-demand.
  */
@@ -28,6 +28,8 @@ public class PacaAnalyzer {
 			analyzeLocationBounds(a);
 			analyzeIsolation(a, alpacas);
 			analyzeBattery(a);
+			analyzeHeartRate(a);
+			analyzeSignalQuality(a);
 			
 		}
 	}
@@ -72,10 +74,12 @@ public class PacaAnalyzer {
 
 		if (propertyPolygon.contains(weightedLatitude, weightedLongitude)){
 			pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.OutOfBounds);
+			alpaca.alertPriority = 0;
 			state = "In bounds";
 		}
 		else {
 			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.OutOfBounds);
+			alpaca.alertPriority = 3;
 			state = "Out of bounds";
 		}
 		return state;
@@ -109,10 +113,12 @@ public class PacaAnalyzer {
 		if(lowestDistance > pacaWorld.returnMaxAlpacaGroupDistance()){
 			//Alpaca is isolated
 			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.Isolated);
+			alpaca.alertPriority = 2;
 		}
 		else{
 			//Alpaca is grouped
 			pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.Isolated);
+			alpaca.alertPriority = 0;
 		}
 		
 	}
@@ -197,10 +203,12 @@ public class PacaAnalyzer {
 		String state = "";
 		if(alpaca.hardware.getBatteryLife() < pacaWorld.returnLowBatteryWarningThreshold()){
 			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.BatteryLow);
+			alpaca.alertPriority = 1;
 			state = "Alpaca battery is low";
 		}
 		else{
 			pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.BatteryLow);
+			alpaca.alertPriority = 0;
 			state = "Alpaca battery is nominal";
 		}
 		return state;
@@ -250,7 +258,7 @@ public class PacaAnalyzer {
 	}
 	
 	/**
-	 * @author Sylvia Allain
+	 * @author Sylvia Allain, Jonathan Cole
 	 * @param signal quality
 	 * @return string signal quality
 	 */
@@ -261,12 +269,26 @@ public class PacaAnalyzer {
 		String state = "";
 		int signalCeiling = 5;
 		
-		if (signalQuality < 0)
+		if (signalQuality < 0){
 			state = "Error: Negative signal value";
-		else if (signalQuality > 5)
+		}
+		else if (signalQuality > signalCeiling){
 			state = "Error: High signal value";
-		else
+		}
+		else{
 			state = Integer.toString(signalQuality);
+		}
+		
+		//Signal is too low
+		if(signalQuality < pacaWorld.returnLowSignalThreshold()){
+			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.lowSignal);
+			alpaca.alertPriority = 1;
+		}
+		//Signal is fine
+		else{
+			pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.lowSignal);
+			alpaca.alertPriority = 0;
+		}
 		
 		return state;
 	}
@@ -277,6 +299,9 @@ public class PacaAnalyzer {
 	 * @return health condition
 	 */
 	public String analyzeTemperature(Alpaca alpaca) {
+		//normal alpaca temperature is 100.5 to 102.5 F
+		float alpacaHighTemp = 102.5f;
+		float alpacaLowTemp = 100.5f;
 		
 		float temperature = alpaca.hardware.getTemperature();
 		
@@ -285,8 +310,20 @@ public class PacaAnalyzer {
 			state = "Error: Low temperature value";
 		else if (temperature > pacaWorld.returnTemperatureCeiling())
 			state = "Error: High temperature value";
-		else
+		else if (temperature > alpacaHighTemp) {
+			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.TemperatureHigh);
+			state = "Alpaca is sick";
+		}
+		else if (temperature < alpacaLowTemp) {
+			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.TemperatureLow);
+			state = "Alpaca is sick";
+		}
+		else {
+			pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.TemperatureHigh);
+			pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.TemperatureLow);
 			state = Float.toString(temperature);
+		}
+		
 		
 		return state;
 	}
@@ -303,6 +340,45 @@ public class PacaAnalyzer {
 		String state = Boolean.toString(fix);
 		
 		return state;
+	}
+	
+	/**
+	 * TODO: add test
+	 * @author Jonathan Cole
+	 * @param alpaca
+	 */
+	public void analyzeHeartRate(Alpaca alpaca){
+		float heartRate = alpaca.hardware.getHeartRate();
+		//High heart rate
+		boolean isHigh = (heartRate > pacaWorld.returnHeartRateCeiling());
+		//Low heart rate
+		boolean isLow = (heartRate < pacaWorld.returnHeartRateFloor());
+		//Dead
+		boolean dead = (heartRate == 0);
+		
+		if(dead){
+			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.Dead);
+			alpaca.alertPriority = 3;
+		}
+		else{
+			if(isLow){
+				pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.HeartRateLow);
+				alpaca.alertPriority = 2;
+			}
+			else{
+				pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.HeartRateLow);
+				alpaca.alertPriority = 0;
+			}
+			if(isHigh){
+				pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.HeartRateHigh);
+				alpaca.alertPriority = 2;
+			}
+			else{
+				pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.HeartRateHigh);
+				alpaca.alertPriority = 0;
+			}
+		}
+		
 	}
 	
 }

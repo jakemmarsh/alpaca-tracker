@@ -5,13 +5,15 @@ import TestDriversAndFactories.PacaTracaHardwareFactory;
 import java.util.ArrayList;
 
 /**
- * This class represents an alpaca. Alpaca's have a tracker ID and 
+ * This class represents an alpaca. Alpacas have a tracker ID and 
  * a referenced hardware object. 
  * @author claytonpeterson
  *
  */
 public class Alpaca {
 	
+	
+	public int alertPriority;
 	public PacaTraca hardware;
 	private String   trackerID;
 	private String   name;
@@ -22,6 +24,7 @@ public class Alpaca {
 	{
 		PacaTracaHardwareFactory pthf = new PacaTracaHardwareFactory ();
 		hardware = pthf.createPacaTraca (trackerID);
+		alertPriority = 0;
 	}
 	
 	// =================================================================================
