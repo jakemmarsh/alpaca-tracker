@@ -9,7 +9,6 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.GenericTypeIndicator;
-import com.firebase.client.ValueEventListener;
 
 import alpaca.Alpaca;
 
@@ -135,6 +134,9 @@ public class PacaCollection {
 			dataRef.child ("hasFix").setValue (a.hardware.haveFix());
 			dataRef.child ("numSatellites").setValue (a.hardware.getNumSatellites ());
 			dataRef.child ("signalQuality").setValue (a.hardware.getSignalQuality ());
+			
+			// Alert 
+			dataRef.child ("alertPriority").setValue (a.alertPriority);
 		}
 	}
 

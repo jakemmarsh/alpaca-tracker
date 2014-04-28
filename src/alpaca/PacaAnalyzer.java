@@ -6,7 +6,7 @@ import helpers.Pair;
 import helpers.GPSTranslator;
 
 /**
- * @author Sylvia Allain, Jonathan Cole
+ * @author Sylvia Allain, Jonathan Cole, Clay Peterson
  * 
  * Analyzes Alpaca objects on an ongoing basis or on-demand.
  */
@@ -74,12 +74,12 @@ public class PacaAnalyzer {
 
 		if (propertyPolygon.contains(weightedLatitude, weightedLongitude)){
 			pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.OutOfBounds);
-			alpaca.outOfBounds = false;
+			alpaca.alertPriority = 0;
 			state = "In bounds";
 		}
 		else {
 			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.OutOfBounds);
-			alpaca.outOfBounds = true;
+			alpaca.alertPriority = 3;
 			state = "Out of bounds";
 		}
 		return state;
@@ -113,12 +113,12 @@ public class PacaAnalyzer {
 		if(lowestDistance > pacaWorld.returnMaxAlpacaGroupDistance()){
 			//Alpaca is isolated
 			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.Isolated);
-			alpaca.isolated = true;
+			alpaca.alertPriority = 2;
 		}
 		else{
 			//Alpaca is grouped
 			pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.Isolated);
-			alpaca.isolated = false;
+			alpaca.alertPriority = 0;
 		}
 		
 	}
@@ -203,12 +203,12 @@ public class PacaAnalyzer {
 		String state = "";
 		if(alpaca.hardware.getBatteryLife() < pacaWorld.returnLowBatteryWarningThreshold()){
 			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.BatteryLow);
-			alpaca.lowBattery = true;
+			alpaca.alertPriority = 1;
 			state = "Alpaca battery is low";
 		}
 		else{
 			pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.BatteryLow);
-			alpaca.lowBattery = false;
+			alpaca.alertPriority = 0;
 			state = "Alpaca battery is nominal";
 		}
 		return state;
@@ -282,12 +282,12 @@ public class PacaAnalyzer {
 		//Signal is too low
 		if(signalQuality < pacaWorld.returnLowSignalThreshold()){
 			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.lowSignal);
-			alpaca.lowSignal = true;
+			alpaca.alertPriority = 1;
 		}
 		//Signal is fine
 		else{
 			pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.lowSignal);
-			alpaca.lowSignal = false;
+			alpaca.alertPriority = 0;
 		}
 		
 		return state;
@@ -358,24 +358,24 @@ public class PacaAnalyzer {
 		
 		if(dead){
 			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.Dead);
-			alpaca.dead = true;
+			alpaca.alertPriority = 3;
 		}
 		else{
 			if(isLow){
 				pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.HeartRateLow);
-				alpaca.heartRateLow = true;
+				alpaca.alertPriority = 2;
 			}
 			else{
 				pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.HeartRateLow);
-				alpaca.heartRateLow = false;
+				alpaca.alertPriority = 0;
 			}
 			if(isHigh){
 				pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.HeartRateHigh);
-				alpaca.heartRateHigh = true;
+				alpaca.alertPriority = 2;
 			}
 			else{
 				pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.HeartRateHigh);
-				alpaca.heartRateHigh = false;
+				alpaca.alertPriority = 0;
 			}
 		}
 		

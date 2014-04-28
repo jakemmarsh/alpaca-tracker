@@ -100,8 +100,9 @@ public class PacaWorld{
 	 * @param alp
 	 * @param type
 	 */
-	public void CreateAlert(Alpaca alp, PacaAlert.EventType type){
+	public void CreateAlert (Alpaca alp, PacaAlert.EventType type){
 		PacaAlert e = new PacaAlert(alp, type);
+
 		//Only add the alert if the alpaca doesn't already have one raised.
 		if(!alp.alerts.contains(e)){
 			Firebase alertRef = new Firebase("https://crackling-fire-2064.firebaseio.com/alerts").push();
