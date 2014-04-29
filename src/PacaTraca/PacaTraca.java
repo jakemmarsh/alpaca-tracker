@@ -19,8 +19,6 @@ public interface PacaTraca {
 	public Float getTemperature( ); //fahrenheit
 	public Float getRoll( ); // rotate about y (-90 to 90 degrees)
 	public Float getPitch( ); // rotate about x degrees (0-180 degrees)
-	public void setSeaLevelPressure( Float pressure ); // sensor pressure at sea level in hPa
-	public void setBatteryLife( int batteryLife );
 	public int getBatteryLife( );
 	public String getSensorID( ); // return the ID of this sensor/collar
 	public void setSensorID( String ID ); // set the value of this sensor's ID
@@ -40,6 +38,9 @@ public interface PacaTraca {
 	public void setSignalQuality( int signalQuality );
 	public void setTemperature( float temperature );
 	public void setFix( boolean fix );
+	public void setBatteryLife( int batteryLife );
+	public void setHeartRate ( float heartRate );
+	public void setSeaLevelPressure( Float pressure ); // sensor pressure at sea level in hPa
 	public void setIsRandom( boolean r );
 }
 

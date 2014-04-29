@@ -97,7 +97,16 @@ public class PacaTracaImpl implements PacaTraca {
 	public void setBatteryLife( int batteryLife ) {
 		this.batteryLife = batteryLife;
 	}
-
+	
+	/**
+	 * Sets heart rate for this hardware.
+	 * @param heartRate
+	 * @author Sylvia Allain
+	 */
+	public void setHeartRate( float heartRate ) {
+		this.heartRate = heartRate;
+	}
+	
 	/**
 	 * Returns the sensor ID for this hardware
 	 * @see com.pacatraca.getSensorID()

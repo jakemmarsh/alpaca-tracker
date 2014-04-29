@@ -92,11 +92,13 @@ public class PacaAnalyzer {
 	 * from any other alpaca, it is considered isolated.
 	 * @return whether the alpaca is isolated
 	 */
-	public void analyzeIsolation(Alpaca alpaca, ArrayList<Alpaca> alpacaList) {
+	public String analyzeIsolation(Alpaca alpaca, ArrayList<Alpaca> alpacaList) {
 		//get position on earth in feet from (0, 0)
 		Pair baseCoords = new Pair(alpaca.hardware.getLatitudeDecimalDegrees(), alpaca.hardware.getLongitudeDecimalDegrees());
 		boolean firstLoop = true;
 		double lowestDistance = 0;
+		String state = "";
+		
 		for(Alpaca a : alpacaList){
 			//Only run if the compared alpaca and the alpaca from the list are different.
 			if(a != alpaca){
@@ -114,13 +116,15 @@ public class PacaAnalyzer {
 			//Alpaca is isolated
 			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.Isolated);
 			alpaca.isolated = true;
+			state = "Alpaca is isolated";
 		}
 		else{
 			//Alpaca is grouped
 			pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.Isolated);
 			alpaca.isolated = false;
+			state = "Alpaca is not isolated";
 		}
-		
+		return state;
 	}
 	
 	/**
@@ -344,10 +348,10 @@ public class PacaAnalyzer {
 	
 	/**
 	 * TODO: add test
-	 * @author Jonathan Cole
+	 * @author Jonathan Cole, Sylvia Allain
 	 * @param alpaca
 	 */
-	public void analyzeHeartRate(Alpaca alpaca){
+	public String analyzeHeartRate(Alpaca alpaca){
 		float heartRate = alpaca.hardware.getHeartRate();
 		//High heart rate
 		boolean isHigh = (heartRate > pacaWorld.returnHeartRateCeiling());
@@ -356,14 +360,19 @@ public class PacaAnalyzer {
 		//Dead
 		boolean dead = (heartRate == 0);
 		
+		String state = "";
+		
 		if(dead){
 			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.Dead);
 			alpaca.dead = true;
+			state = "Alpaca is dead";
 		}
 		else{
+			state = Float.toString(alpaca.hardware.getHeartRate());
 			if(isLow){
 				pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.HeartRateLow);
 				alpaca.heartRateLow = true;
+				state = "Low heart rate";
 			}
 			else{
 				pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.HeartRateLow);
@@ -372,13 +381,14 @@ public class PacaAnalyzer {
 			if(isHigh){
 				pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.HeartRateHigh);
 				alpaca.heartRateHigh = true;
+				state = "High heart rate";
 			}
 			else{
 				pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.HeartRateHigh);
 				alpaca.heartRateHigh = false;
 			}
 		}
-		
+		return state;
 	}
 	
 }
