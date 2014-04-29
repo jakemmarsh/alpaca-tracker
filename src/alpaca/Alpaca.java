@@ -12,18 +12,8 @@ import java.util.ArrayList;
  */
 public class Alpaca {
 	
-	public boolean dead = false;
-	public boolean sleeping = false;
-	public boolean isolated = false;
-	public boolean lowBattery = false;
-	public boolean lowSatellites = false;
-	public boolean lowSignal = false;
-	public boolean sick = false;
-	public boolean outOfBounds = false;
-	public boolean fever = false;
-	public boolean heartRateLow = false;
-	public boolean heartRateHigh = false;
 	
+	public int alertPriority;
 	public PacaTraca hardware;
 	private String   trackerID;
 	private String   name;
@@ -34,6 +24,7 @@ public class Alpaca {
 	{
 		PacaTracaHardwareFactory pthf = new PacaTracaHardwareFactory ();
 		hardware = pthf.createPacaTraca (trackerID);
+		alertPriority = 0;
 	}
 	
 	// =================================================================================

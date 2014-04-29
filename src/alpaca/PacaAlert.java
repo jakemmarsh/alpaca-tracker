@@ -20,7 +20,7 @@ public class PacaAlert {
 		LowSatellites,
 		HeartRateLow,
 		HeartRateHigh,
-		lowSignal
+		LowSignal
 	};
 	public EventType type;
 	
@@ -87,6 +87,9 @@ public class PacaAlert {
 				break;
 			case HeartRateHigh:
 				outStr = "has a high heart rate";
+				break;
+			case LowSignal:
+				outStr = "has a low signal";
 				break;
 		}
 		return outStr;
