@@ -116,14 +116,12 @@ public class PacaAnalyzer {
 			//Alpaca is isolated
 			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.Isolated);
 			alpaca.alertPriority = 2;
-			alpaca.isolated = true;
 			state = "Alpaca is isolated";
 		}
 		else{
 			//Alpaca is grouped
 			pacaWorld.RemoveAlert(alpaca, PacaAlert.EventType.Isolated);
 			alpaca.alertPriority = 0;
-			alpaca.isolated = false;
 			state = "Alpaca is not isolated";
 		}
 		return state;
@@ -367,7 +365,6 @@ public class PacaAnalyzer {
 		if(dead){
 			pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.Dead);
 			alpaca.alertPriority = 3;
-			alpaca.dead = true;
 			state = "Alpaca is dead";
 		}
 		else{
@@ -375,7 +372,6 @@ public class PacaAnalyzer {
 			if(isLow){
 				pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.HeartRateLow);
 				alpaca.alertPriority = 2;
-				alpaca.heartRateLow = true;
 				state = "Low heart rate";
 			}
 			else{
@@ -385,7 +381,6 @@ public class PacaAnalyzer {
 			if(isHigh){
 				pacaWorld.CreateAlert(alpaca, PacaAlert.EventType.HeartRateHigh);
 				alpaca.alertPriority = 2;
-				alpaca.heartRateHigh = true;
 				state = "High heart rate";
 			}
 			else{
